@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Feature policy examples</title>
+  <style>
+    iframe {
+      border: none;
+      width: 500px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+
+<img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">
+
+<video src="https://clips.vorwaerts-gmbh.de/big_buck_bunny.webm" autoplay></video>
+
+<div>
+<button onclick="goFullscreen()">use fullscreen</button>
+<button onclick="doSyncXhr()">use sync XHR</button>
+<button onclick="doMidi()">use MIDI</button>
+<button onclick="doGeolocation()">use geolocation</button>
+<button onclick="doUSB()">use usb</button>
+<button onclick="doCameraMic()">use camera/mic</button>
+<button onclick="doPaymenRequest()">use payment request</button>
+</div>
+
+<div id="map"></div>
+
+<script>
+// https://chromium.googlesource.com/chromium/src.git/+/832440db5c586d1bdeedfd01489e43d09de36aa9
+console.log('Allowed features:', document.policy.allowedFeatures());
+
+function doSyncXhr() {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', 'test.json', false);
+  xhr.onloadend = e => console.log(JSON.parse(e.target.responseText));
+  xhr.send();
+}
+
+async function doMidi() {
+  await navigator.requestMIDIAccess();
+}
+
+function doGeolocation() {
+  //document.policy.allowsFeature('geolocation')
+  // document.policy.allowsFeature('geolocation', 'https://google-developers.appspot.com/')
+  console.log('who can use geolocation', document.policy.getAllowlistForFeature('geolocation'));
+
+  navigator.geolocation.getCurrentPosition(position => {
+    console.log(position.coords.latitude, position.coords.longitude);
+  }, err => {
+    console.error(err);
+  });
+
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://google-developers.appspot.com/maps/documentation/javascript/examples/full/map-geolocation';
+  document.querySelector('#map').appendChild(iframe);
+}
+
+function goFullscreen() {
+  // if (!document.policy.allowsFeature('fullscreen')) {
+  //   throw "Page does not allow 'fullscreen' through Feature Policy.";
+  // }
+  // if (document.fullscreenElement) {
+  //   document.exitFullscreen();
+  //   return;
+  // }
+  document.body.requestFullscreen();
+}
+
+async function doUSB() {
+  await navigator.usb.requestDevice({filters: [{vendorId: 0x2341}]});
+}
+
+function doVibration() {
+  window.navigator.vibrate(200);
+}
+
+async function doCameraMic() {
+  const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
+}
+
+function doPaymenRequest() {
+  new PaymentRequest([{supportedMethods: 'basic-card'}], {
+    total: {
+      label: 'Total',
+      amount:{
+        currency: 'USD',
+        value: 0
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+.details {
+  background: var(--md-blue-grey-50);
+  border-radius: 5px;
+  padding: var(--default-padding-4x);
+}
+.details .trylinks {
+  position: absolute;
+  right: 0;
+}
+.details .trylinks a {
+  margin-left: var(--default-padding-2x);
+  text-transform: uppercase;
+  font-size: 18px;
+  border-radius: 3px;
+  padding: var(--default-padding) var(--default-padding-2x);
+  background: white;
+  text-decoration: none;
+}
+.details summary {
+  position: relative;
+  color: var(--title-color);
+  font-size: var(--default-padding-3x);
+}
+.details  ul {
+  list-style: none;
+  padding: 0;
+}
+.details li {
+  margin-bottom: 8px;
+}
+.details .policyname {
+  font-weight: 600;
+}
+.details-info label {
+  width: 100px;
+  display: inline-block;
+  font-weight: 600;
+}

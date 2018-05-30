@@ -1,0 +1,16 @@
+{
+  "name": "featurepolicy",
+  "version": "1.0.0",
+  "main": "server.js",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=8"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "lit-html": "^0.10.0"
+  },
+  "scripts": {
+    "start": "node --experimental-modules server.mjs"
+  }
+}

@@ -1,0 +1,98 @@
+:root {
+  --app-drawer-width: 256px;
+  --app-primary-color: #E91E63;
+  --app-secondary-color: #293237;
+  --app-dark-text-color: var(--app-secondary-color);
+  --app-light-text-color: white;
+  --app-section-even-color: #f7f7f7;
+  --app-section-odd-color: white;
+  --app-header-background-color: white;
+  --app-header-text-color: var(--app-dark-text-color);
+  --app-header-selected-color: var(--app-primary-color);
+  --app-drawer-background-color: var(--app-secondary-color);
+  --app-drawer-text-color: var(--app-light-text-color);
+  --app-drawer-selected-color: #78909C;
+
+  --title-color: var(--md-blue-grey-900);
+  --md-blue-grey-50: #ECEFF1;
+  --md-blue-grey-100: #CFD8DC;
+  --md-blue-grey-200: #B0BEC5;
+  --md-blue-grey-300: #90A4AE;
+  --md-blue-grey-400: #78909C;
+  --md-blue-grey-500: #607D8B;
+  --md-blue-grey-700: #455A64;
+  --md-blue-grey-900: #263238;
+  --default-padding: 8px;
+  --default-padding-2x: 16px;
+  --default-padding-3x: 24px;
+  --default-padding-4x: 32px;
+}
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Google Sans", "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+  font-weight: 300;
+  height: 100vh;
+  color: var(--md-blue-grey-700);
+}
+a {
+  color: inherit;
+}
+h1, h2, h3 {
+  margin: 0;
+  font-weight: inherit;
+}
+.drawer-list {
+  color: var(--app-drawer-text-color);
+  position: fixed;
+  width: var(--app-drawer-width);
+  height: 100%;
+  padding: var(--default-padding-4x);
+  background: var(--app-drawer-background-color);
+  line-height: 40px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.drawer-list header {
+  line-height: 1;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: space-between;
+  margin-bottom: var(--default-padding-3x);
+}
+.drawer-list .drawer-title {
+  font-size: 20px;
+}
+.drawer-list .drawer-subtitle {
+  font-size: 37px;
+  text-indent: -2px;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+.drawer-list header img {
+  width: 56px;
+  height: 56px;
+}
+.drawer-list a {
+  font-size: 18px;
+  text-decoration: none;
+}
+.main-view {
+  padding-left: var(--app-drawer-width);
+}
+.main-view iframe {
+  width: 100%;
+  height: 100vh;
+  border: none;
+}
+.policy-id {
+  white-space: nowrap;
+  color: var(--md-blue-grey-400);
+}

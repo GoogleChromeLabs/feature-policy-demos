@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Feature Policy: unsized-media example</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Product+Sans">
+  <style>
+    :root {
+      --title-color: var(--md-blue-grey-900);
+      --md-blue-grey-50: #ECEFF1;
+      --md-blue-grey-100: #CFD8DC;
+      --md-blue-grey-200: #B0BEC5;
+      --md-blue-grey-300: #90A4AE;
+      --md-blue-grey-400: #78909C;
+      --md-blue-grey-500: #607D8B;
+      --md-blue-grey-700: #455A64;
+      --md-blue-grey-900: #263238;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 32px;
+      font-family: 'Product Sans', 'Roboto', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      color: var(--md-blue-grey-700);
+    }
+    h1, h2, h3, h4 {
+      padding: 0;
+      margin: 0;
+      font-weight: inherit;
+      color: var(--title-color);
+    }
+    a {
+      color: currentcolor;
+    }
+    .height {
+      height: 400px;
+    }
+    .sized {
+      width: 300px;
+      height: 300px;
+    }
+    img {
+      border-radius: 3px;
+    }
+    .round {
+      shape-outside: circle();
+      shape-margin: 16px;
+      border-radius: 50%;
+    }
+    .right {
+      float: right;
+    }
+    .left {
+      float: left;
+    }
+    .center {
+      text-align: center;
+    }
+    .trylinks {
+      position: absolute;
+      right: 0;
+    }
+    .trylinks a {
+      margin-left: 16px;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 18px;
+    }
+    details {
+      background: var(--md-blue-grey-50);
+      border-radius: 5px;
+      padding: 16px;
+    }
+    summary {
+      position: relative;
+      color: var(--title-color);
+      font-size: 24px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<details class="details">
+  <summary>
+    <span>Feature Policy: unsized-media</span>
+    <span class="trylinks">
+      <a href="unsized-media.html?enable">Enable</a>
+      <a href="unsized-media.html">Disable</a>
+    </span>
+  </summary>
+  <ul>
+    <li><b>What:</b> this <a href="https://www.chromestatus.com/feature/5694225681219584" target="_blank">Feature Policy</a> allows
+    developers to enforce that image/video elements have explicit dimensions.
+    If dimensions aren't specified, the browser sets a default size of 300x150
+    when this policy is active.</li>
+    <li><b>Why</b>: reduce the layout work the browser has to perform.</li>
+    <li><b>Example</b>: <code>FeaturePolicy: unsized-media 'none'</code></li>
+  </ul>
+</details>
+
+<!-- <p class="center"><b>Instructions</b>: click the links above to load the page with the policy on/off. When it's active, you won't see the page re-layout as images load.</p> -->
+
+<!--
+When no dimensions are specified (either via style attr, width/height attr, or class):
+1. unsized-media on: image/video will have an intrinsic size. Causes re-layout.
+2. unsized-media off: image/video will have a default size of 300x150. No re-layout.
+
+When one dimension is specified (via a class, width="200", style="width:200px").
+1. unsized-media off: image/video will be one of the specified dimension
+   and the intrinsic ratio. Causes a re-layout.
+2. unsized-media on: image/video will be one of the default dimensions (300x150)
+   and the specified dimension. No re-layout.
+
+When both dimension are specified, unsized-media has no effect. The image will
+be sized to the specified dimensions and no re-layout will occur.
+-->
+<img src="http://lorempixel.com/800/200/animals/1" width="100%">
+
+<p>Lorem ipsum dolor sit amet, pretium urna faucibus etiam enim sollicitudin,
+sagittis phasellus nec suspendisse aenean. Orci nec nam ipsum lobortis ipsum,
+at nunc, semper in suscipit sem et, mauris amet amet accumsan risus quis, urna
+quam. Lacus mi elit lectus tortor nec enim, sed ornare est praesent est id ut,
+mi at. Vestibulum varius, diam posuere tristique est adipiscing, proin quam orci,
+nunc tincidunt purus accumsan erat, nec amet magna donec. Consectetuer vivamus
+pharetra nulla vivamus, quam sit conubia ligula turpis, condimentum purus mauris
+felis scelerisque id. Tincidunt nullam tristique mattis sit vivamus viverra,
+velit orci convallis, suspendisse urna sed. </p>
+
+<img src="http://lorempixel.com/300/300/animals/2" class="round right sized" style="margin-left:16px;">
+
+<img src="http://lorempixel.com/200/200/animals/" class="left" style="margin-right:16px;">
+
+<p>Lorem ipsum dolor sit amet, pretium urna faucibus etiam enim sollicitudin,
+sagittis phasellus nec suspendisse aenean. Orci nec nam ipsum lobortis ipsum,
+at nunc, semper in suscipit sem et, mauris amet amet accumsan risus quis, urna
+quam. Lacus mi elit lectus tortor nec enim, sed ornare est praesent est id ut,
+mi at. Vestibulum varius, diam posuere tristique est adipiscing, proin quam orci,
+nunc tincidunt purus accumsan erat, nec amet magna donec. Consectetuer vivamus
+pharetra nulla vivamus, quam sit conubia ligula turpis, condimentum purus mauris
+felis scelerisque id. Tincidunt nullam tristique mattis sit vivamus viverra,
+velit orci convallis, suspendisse urna sed.</p>
+
+<p>Lorem ipsum dolor sit amet, pretium urna faucibus etiam enim sollicitudin,
+sagittis phasellus nec suspendisse aenean. Orci nec nam ipsum lobortis ipsum,
+at nunc, semper in suscipit sem et, mauris amet amet accumsan risus quis, urna
+quam. Lacus mi elit lectus tortor nec enim, sed ornare est praesent est id ut,
+mi at. Vestibulum varius, diam posuere tristique est adipiscing, proin quam orci,
+nunc tincidunt purus accumsan erat, nec amet magna donec. Consectetuer vivamus
+pharetra nulla vivamus, quam sit conubia ligula turpis, condimentum purus mauris
+felis scelerisque id. Tincidunt nullam tristique mattis sit vivamus viverra,
+velit orci convallis, suspendisse urna sed.</p>
+
+<!-- No dimensions -->
+<div class="center">
+  <video src="https://clips.vorwaerts-gmbh.de/big_buck_bunny.webm" autoplay controls></video>
+</div>
+
+<p>Lorem ipsum dolor sit amet, pretium urna faucibus etiam enim sollicitudin,
+sagittis phasellus nec suspendisse aenean. Orci nec nam ipsum lobortis ipsum,
+at nunc, semper in suscipit sem et, mauris amet amet accumsan risus quis, urna
+quam. Lacus mi elit lectus tortor nec enim, sed ornare est praesent est id ut,
+mi at. Vestibulum varius, diam posuere tristique est adipiscing, proin quam orci,
+nunc tincidunt purus accumsan erat, nec amet magna donec. Consectetuer vivamus
+pharetra nulla vivamus, quam sit conubia ligula turpis, condimentum purus mauris
+felis scelerisque id. Tincidunt nullam tristique mattis sit vivamus viverra,
+velit orci convallis, suspendisse urna sed.</p>
+
+<!--
+When both dimension are specified, unsized-media has no effect. The image will
+be sized to the specified dimensions and no re-layout will occur.
+-->
+<img src="http://lorempixel.com/1200/600/animals/"  width="100%" height="300">
+
+<p>Lorem ipsum dolor sit amet, pretium urna faucibus etiam enim sollicitudin,
+    sagittis phasellus nec suspendisse aenean. Orci nec nam ipsum lobortis ipsum,
+    at nunc, semper in suscipit sem et, mauris amet amet accumsan risus quis, urna
+    quam. Lacus mi elit lectus tortor nec enim, sed ornare est praesent est id ut,
+    mi at. Vestibulum varius, diam posuere tristique est adipiscing, proin quam orci,
+    nunc tincidunt purus accumsan erat, nec amet magna donec. Consectetuer vivamus
+    pharetra nulla vivamus, quam sit conubia ligula turpis, condimentum purus mauris
+    felis scelerisque id. Tincidunt nullam tristique mattis sit vivamus viverra,
+    velit orci convallis, suspendisse urna sed.</p>
+
+<script type="module">
+import {hideDetails} from '/js/shared.js';
+
+hideDetails();
+
+// https://chromium.googlesource.com/chromium/src.git/+/832440db5c586d1bdeedfd01489e43d09de36aa9
+console.log('Allowed features:', document.policy.allowedFeatures());
+
+ //document.policy.allowsFeature('unsized-images')
+// document.policy.allowsFeature('geolocation', 'https://google-developers.appspot.com/')
+// console.log('who can use geolocation', document.policy.getAllowlistForFeature('geolocation'));
+
+</script>
+</body>
+</html>
