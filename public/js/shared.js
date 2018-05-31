@@ -14,10 +14,16 @@
  * limitations under the License.
  */
 
-export const inFrame = window.self !== window.top;
+import {html, render} from '/lit-html/lit-html.js';
+
 export const enablePolicy = new URL(location).searchParams.has('enable');
+export const currentPolicyId = new URL(location).pathname.split('/').slice(-1)[0].split('.')[0];
 
 let policies = [];
+
+function inFrame() {
+  return window.self !== window.top;
+}
 
 async function fetchPolicies() {
   if (policies.length) {
@@ -34,30 +40,44 @@ async function getPolicy(id) {
   return policies.find(item => item.id === id);
 }
 
-function hideDetails() {
-  if (inFrame) {
-    const details = document.querySelector('.details');
-    if (details) {
-      details.style.display = 'none';
-    }
+function showDetails() {
+  const details = document.querySelector('details');
+  if (details) {
+    details.style.display = 'block';
   }
 }
 
-async function loadPage() {
-  const url = new URL(location);
-  if (url.pathname !== '/') {
-    const contentFrame = document.querySelector('iframe[name="content-view"]');
-    const demoPage = url.pathname.slice(1).split('.')[0];
-    const enable = url.searchParams.has('enable');
-    contentFrame.src = `${(await getPolicy(demoPage)).url}${enable ? '?enable' : ''}`;
+/**
+ * Updates the UI metadata header when a feature policy is selected.
+ * @param {!Object} policy
+ */
+function updateDetailsHeader(policy) {
+  if (!policy) {
+    return;
   }
+
+  const tmpl = html`
+    <summary>
+      <span><span class="policyname">${policy.name}</span> feature policy</span>
+      <span class="trylinks">
+        <a href="${policy.url}?enable" onclick="updatePage(this, '${policy.id}')">Enable</a>
+        <a href="${policy.url}" onclick="updatePage(this, '${policy.id}')">Disable</a>
+      </span>
+    </summary>
+    <ul class="details-info">
+      <li><label>What</label>${policy.info.what}</li>
+      <li><label>Why</label>${policy.info.why}</li>
+      <li><label>Examples</label><code>${policy.info.examples.header}</code></li>
+      <li><label>Instructions</label>${policy.info.instructions}</li>
+    </ul>`;
+
+  render(tmpl, document.querySelector('.details'));
 }
 
-function updateUrl(anchor) {
-  const href = anchor.getAttribute('href').replace('/demos', '');
-  window.history.pushState(null, null, href);
-}
-
-window.updateUrl = updateUrl;
-
-export {fetchPolicies, hideDetails, loadPage};
+export {
+  fetchPolicies,
+  showDetails,
+  getPolicy,
+  updateDetailsHeader,
+  inFrame,
+};

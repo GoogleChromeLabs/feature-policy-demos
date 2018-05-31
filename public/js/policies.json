@@ -2,10 +2,12 @@
   "id": "unsized-media",
   "name": "Unsized Media",
   "url": "/demos/unsized-media.html",
-  "what": "Allows developers to enforce that image/video elements have explicit dimensions. If dimensions aren't specified on the element, the browser sets a default size of 300x150 when this policy is active.",
-  "why": "Reduces the layout work the browser has to perform.",
-  "instructions": "click the buttons above to load the page with the policy on/off. When it's active, you won't see the page re-layout as images load.",
-  "examples": {
-    "header": "FeaturePolicy: unsized-media 'none'"
+  "info": {
+    "what": "Allows developers to enforce that image/video elements have explicit dimensions. If dimensions aren't specified on the element, the browser sets a default size of 300x150 when this policy is active.",
+    "why": "Reduces the layout work the browser has to perform.",
+    "instructions": "Click the enable/disable buttons above to see how the page loads with the policy enabled/disabled. When the policy is enabled, you won't see layout thrashing as large images without sizes load and reflow text on the page.",
+    "examples": {
+      "header": "FeaturePolicy: unsized-media 'none'"
+    }
   }
 }]

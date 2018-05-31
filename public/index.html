@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
   <link rel="stylesheet" href="/styles/main.css">
   <link rel="stylesheet" href="/styles/header.css">
-  <!-- <link rel="modulepreload" href="/lit-html/lit-html.js"> -->
-  <!-- <link rel="modulepreload" href="/lit-html/lib/repeat.js"> -->
+  <base target="content-view"> <!-- magic that makes link clicks navigate the iframe -->
+  <link rel="modulepreload" href="/lit-html/lit-html.js">
+  <link rel="modulepreload" href="/lit-html/lib/repeat.js">
+  <link rel="modulepreload" href="/js/shared.js">
 </head>
 <body>
 
@@ -18,13 +20,13 @@
     <div>
       <img src="/img/sink.svg" title="It's a kitchen sink!" alt="It's a kitchen sink!">
     </div>
-    <a href="/">
+    <a href="/" target="_self">
       <h2 class="drawer-title">Feature Policy</h2>
       <h3 class="drawer-subtitle">Demos</h3>
     </a>
   </header>
   <nav id="policy-list">
-    <!-- <a href="/unsized-media.html?enable">Unsized media</a> -->
+
   </nav>
   <div id="all-policy-list">
 
@@ -33,29 +35,12 @@
 
 <main class="main-view">
   <div class="details">
-    <summary>
-      <span><span class="policyname">Unsized media</span> feature policy</span>
-      <span class="trylinks">
-        <a href="unsized-media.html?enable" target="content-view">Enable</a>
-        <a href="unsized-media.html" target="content-view">Disable</a>
-      </span>
-    </summary>
-    <ul class="details-info">
-      <li><label>What</label> a <a href="https://www.chromestatus.com/feature/5694225681219584" target="_blank">feature policy</a> allows
-      developers to enforce that image/video elements have explicit dimensions.
-      If dimensions aren't specified on the element, the browser sets a default size of 300x150
-      when this policy is active.</li>
-      <li><label>Why</label>reduce the layout work the browser has to perform.</li>
-      <li><label>Examples</label><code>FeaturePolicy: unsized-media 'none'</code></li>
-      <li><label>Instructions</label>Click the links above to load the page with the policy on/off. When it's active, you won't see the page re-layout as images load.</li>
-    </ul>
+    Select a feature policy demo from the list.
   </div>
 
   <iframe class="content-view" name="content-view"></iframe>
 </main>
 
-<script src="/js/app.js" type="module">
-
-</script>
+<script src="/js/app.js" type="module"></script>
 </body>
 </html>

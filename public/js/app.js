@@ -16,13 +16,44 @@
 
 import {html, render} from '/lit-html/lit-html.js';
 import {repeat} from '/lit-html/lib/repeat.js';
-import {fetchPolicies, loadPage} from '/js/shared.js';
+import {fetchPolicies, updateDetailsHeader, getPolicy} from '/js/shared.js';
 
-(async() => {
+/**
+ * Dynamically loads policy demo page based off current (deep link) url.
+ * @return {!Object} Feature policy info.
+ */
+async function loadPage() {
+  let policy = null;
+  const url = new URL(location);
+
+  if (url.pathname !== '/') {
+    const demoPage = url.pathname.slice(1).split('.')[0];
+    const enable = url.searchParams.has('enable');
+
+    policy = await getPolicy(demoPage);
+    contentFrame.src = `${policy.url}${enable ? '?enable' : ''}`;
+  }
+
+  return policy;
+}
+
+/**
+ * Updates the dyanmic portions of the page.
+ * @param {!HTMLAnchorElement} anchor
+ * @param {string} id Feature policy id.
+ */
+async function updatePage(anchor, id) {
+  updateDetailsHeader(await getPolicy(id));
+
+  const href = anchor.getAttribute('href').replace('/demos', '');
+  window.history.pushState(null, null, href);
+}
+
+const contentFrame = document.querySelector('iframe[name="content-view"]');
 
 const policiesList = fetchPolicies().then(policies => {
   return repeat(policies, (p) => p.id, (p, i) => {
-    return html`<a href="${p.url}?enable" target="content-view" onclick="updateUrl(this)">${p.name}</a>`;
+    return html`<a href="${p.url}?enable" target="content-view" onclick="updatePage(this, '${p.id}')">${p.name}</a>`;
   });
 });
 
@@ -32,13 +63,8 @@ const allPolicies = html`${
   })
 }`;
 
+loadPage().then(updateDetailsHeader);
 render(html`${policiesList}`, document.querySelector('#policy-list'));
 render(allPolicies, document.querySelector('#all-policy-list'));
 
-loadPage();
-
-})();
-
-
-
-
+window.updatePage = updatePage;

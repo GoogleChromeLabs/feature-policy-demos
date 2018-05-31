@@ -1,3 +1,7 @@
+details.details {
+  display: none;
+  margin-bottom: var(--default-padding-4x);
+}
 .details {
   background: var(--md-blue-grey-50);
   border-radius: 5px;

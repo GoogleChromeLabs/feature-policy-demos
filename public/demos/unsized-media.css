@@ -1,0 +1,36 @@
+body {
+  margin: 32px;
+}
+h1, h2, h3, h4 {
+  padding: 0;
+  margin: 0;
+  font-weight: inherit;
+  color: var(--title-color);
+}
+a {
+  color: currentcolor;
+}
+.height {
+  height: 400px;
+}
+.sized {
+  width: 300px;
+  height: 300px;
+}
+img {
+  border-radius: 3px;
+}
+.round {
+  shape-outside: circle();
+  shape-margin: 16px;
+  border-radius: 50%;
+}
+.right {
+  float: right;
+}
+.left {
+  float: left;
+}
+.center {
+  text-align: center;
+}
