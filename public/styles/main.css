@@ -47,6 +47,9 @@ h1, h2, h3 {
   margin: 0;
   font-weight: inherit;
 }
+.body-padding {
+  margin: var(--default-padding-4x);
+}
 .drawer-list {
   color: var(--app-drawer-text-color);
   position: fixed;

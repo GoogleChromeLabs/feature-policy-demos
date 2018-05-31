@@ -1,7 +1,8 @@
 {
-  "name": "featurepolicy",
+  "name": "feature-policy-demos",
   "version": "1.0.0",
-  "main": "server.js",
+  "author": "Eric Bidelman <ebidel@>",
+  "main": "server.mjs",
   "license": "Apache-2.0",
   "engines": {
     "node": ">=8"
@@ -11,6 +12,7 @@
     "lit-html": "^0.10.0"
   },
   "scripts": {
-    "start": "node --experimental-modules server.mjs"
+    "start": "node --experimental-modules server.mjs",
+    "deploy": "gcloud app deploy app.yaml --project feature-policy-demos"
   }
 }

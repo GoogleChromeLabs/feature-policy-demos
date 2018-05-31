@@ -35,12 +35,28 @@
 
 <main class="main-view">
   <div class="details">
-    Select a feature policy demo from the list.
+
   </div>
 
+  <div>
+
+  </div>
   <iframe class="content-view" name="content-view"></iframe>
 </main>
 
+<script type="module">
+  const view = document.querySelector('.content-view');
+  view.srcdoc = `
+    <link rel="stylesheet" href="/styles/main.css">
+    <div class="body-padding">
+      <h2><a href="https://wicg.github.io/feature-policy/" target="_blank">Feature Policy</a>
+        allows web developers to selectively enable, disable, and modify the behavior
+        of various features and APIs in the browser. This can provide a well-lit path towards good performance
+        and prevent common footguns when building and maintain web apps.</h2>
+      <h3 style="margin-top:var(--default-padding-4x);">&larr; Select a policy to begin.</h3>
+    </div>
+  `;
+</script>
 <script src="/js/app.js" type="module"></script>
 </body>
 </html>

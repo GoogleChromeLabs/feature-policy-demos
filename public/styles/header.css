@@ -30,13 +30,15 @@ details.details {
   padding: 0;
 }
 .details li {
+  display: flex;
   margin-bottom: 8px;
+  flex: 0 0 auto;
 }
 .details .policyname {
   font-weight: 600;
 }
 .details-info label {
-  width: 100px;
+  flex: 0 0 100px;
   display: inline-block;
   font-weight: 600;
 }

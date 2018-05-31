@@ -31,6 +31,7 @@ async function loadPage() {
     const enable = url.searchParams.has('enable');
 
     policy = await getPolicy(demoPage);
+    contentFrame.removeAttribute('srcdoc');
     contentFrame.src = `${policy.url}${enable ? '?enable' : ''}`;
   }
 
