@@ -4,7 +4,8 @@ module.exports = {
   "extends": ["eslint:recommended", "google"],
   "env": {
     "node": true,
-    "es6": true
+    "es6": true,
+    "browser": true
   },
   "parserOptions": {
     "ecmaVersion": 8,
@@ -12,7 +13,7 @@ module.exports = {
       "jsx": false,
       "experimentalObjectRestSpread": false
     },
-    "sourceType": "script"
+    "sourceType": "module"
   },
   "rules": {
     // 2 == error, 1 == warning, 0 == off
@@ -32,8 +33,7 @@ module.exports = {
     "prefer-const": 2,
 
     // Disable rules
-    "comma-dangle": 0,
     "arrow-parens": 0,
-    "require-jsdoc": 0
+    // "require-jsdoc": 0
   }
 }

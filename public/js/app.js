@@ -31,30 +31,38 @@ async function loadPage() {
     const enable = url.searchParams.has('enable');
 
     policy = await getPolicy(demoPage);
-    contentFrame.removeAttribute('srcdoc');
+
+    // Remove intro banner.
+    const intro = document.querySelector('#intro-summary')
+    if (intro){
+      intro.remove();
+    }
+
+    const contentFrame = document.querySelector('iframe.content-view');
     contentFrame.src = `${policy.url}${enable ? '?enable' : ''}`;
+
+    document.body.classList.toggle('enable', enable);
   }
 
   return policy;
 }
 
 /**
- * Updates the dyanmic portions of the page.
+ * Updates the dynamic portions of the page.
  * @param {!HTMLAnchorElement} anchor
  * @param {string} id Feature policy id.
  */
 async function updatePage(anchor, id) {
   updateDetailsHeader(await getPolicy(id));
-
   const href = anchor.getAttribute('href').replace('/demos', '');
   window.history.pushState(null, null, href);
-}
 
-const contentFrame = document.querySelector('iframe[name="content-view"]');
+  loadPage();
+}
 
 const policiesList = fetchPolicies().then(policies => {
   return repeat(policies, (p) => p.id, (p, i) => {
-    return html`<a href="${p.url}?enable" target="content-view" onclick="updatePage(this, '${p.id}')">${p.name}</a>`;
+    return html`<a href="${p.url}?enable" onclick="updatePage(this, '${p.id}')">${p.name}</a>`;
   });
 });
 

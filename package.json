@@ -13,6 +13,11 @@
   },
   "scripts": {
     "start": "node --experimental-modules server.mjs",
-    "deploy": "gcloud app deploy app.yaml --project feature-policy-demos"
+    "deploy": "gcloud app deploy app.yaml --project feature-policy-demos",
+    "lint": "./node_modules/eslint/bin/eslint.js --ext .js,.mjs ."
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.9.1"
   }
 }

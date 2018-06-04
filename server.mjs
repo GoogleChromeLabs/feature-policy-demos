@@ -16,11 +16,10 @@
 
 'use strict';
 
-// const fs = require('fs');
-// const express = require('express');
 import fs from 'fs';
 import express from 'express';
 
+/* eslint-disable */
 function errorHandler(err, req, res, next) {
   if (res.headersSent) {
     return next(err);
@@ -28,10 +27,23 @@ function errorHandler(err, req, res, next) {
   console.error('errorHandler', err);
   res.status(500).send({errors: `Error running your code. ${err}`});
 }
+/* eslint-enable */
 
 const app = express();
 
-app.use((req, res, next) => {
+app.use(function enableCors(req, res, next) {
+  res.set('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+app.get('/:demoPage', (req, res, next) => {
+  // const demoPage = req.params.demoPage;
+  // console.log(demoPage)
+  res.send(fs.readFileSync('./public/index.html', {encoding: 'utf-8'}));
+});
+
+// Enable/disable policies on demo pages.
+app.use('/demos', (req, res, next) => {
   const unsizedMedia = 'enable' in req.query;
   res.set('Access-Control-Allow-Origin', '*');
   // res.append('Feature-Policy', "camera 'none', microphone 'none'");
@@ -45,22 +57,9 @@ app.use((req, res, next) => {
   // res.append('Feature-Policy', "payment 'none'");
   // res.append('Feature-Policy', "vibrate 'none'");
   if (unsizedMedia) {
-    res.set('Feature-Policy', "unsized-media 'none'");
+    res.set('Feature-Policy', `unsized-media 'none'`);
   }
   next();
-});
-
-// app.get('/demos/:demoPage', (req, res, next) => {
-//   const demoPage = req.params.demoPage;
-//   // res.set('Content-Type', 'image/svg+xml');
-//   res.status(200).send(fs.readFileSync(demoPage));
-// });
-
-app.get('/:demoPage', (req, res, next) => {
-  // const demoPage = req.params.demoPage;
-  // console.log(demoPage)
-  res.send(fs.readFileSync('./public/index.html', {encoding: 'utf-8'}));
-  // next();
 });
 
 app.use(express.static('public', {extensions: ['html', 'htm']}));
@@ -70,6 +69,6 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-  console.log('Press Ctrl+C to quit.');
+  console.log(`App listening on port ${PORT}`); /* eslint-disable-line */
+  console.log('Press Ctrl+C to quit.'); /* eslint-disable-line */
 });

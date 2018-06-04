@@ -20,6 +20,25 @@ details.details {
   background: white;
   text-decoration: none;
 }
+.details .trylinks .try-button {
+  /* border-bottom: 4px solid transparent; */
+  --disable-color: var(--md-blue-grey-100);
+  --enable-color: var(--md-blue-grey-500);
+}
+body.enable .details .trylinks .enable-button {
+  border-bottom: 4px solid var(--enable-color);
+  font-weight: 600;
+}
+body.enable .details .trylinks .disable-button {
+  border-bottom: 4px solid var(--disable-color);
+}
+body:not(.enable) .details .trylinks .enable-button {
+  border-bottom: 4px solid var(--disable-color);
+}
+body:not(.enable) .details .trylinks .disable-button {
+  border-bottom: 4px solid var(--enable-color);
+  font-weight: 600;
+}
 .details summary {
   position: relative;
   color: var(--title-color);

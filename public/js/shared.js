@@ -21,10 +21,17 @@ export const currentPolicyId = new URL(location).pathname.split('/').slice(-1)[0
 
 let policies = [];
 
+/**
+ * @return {boolean} True if page is top-level and not an iframe.
+ */
 function inFrame() {
   return window.self !== window.top;
 }
 
+/**
+ * Fetches the list of feature policies and metadata.
+ * @return {!Promise<!Array>} List of policies.
+ */
 async function fetchPolicies() {
   if (policies.length) {
     return policies;
@@ -35,11 +42,19 @@ async function fetchPolicies() {
   return policies;
 }
 
+/**
+ * Lookups up a policy by id
+ * @param {string} id
+ * @return {!Promise<!Object>} Found policy
+ */
 async function getPolicy(id) {
   const policies = await fetchPolicies();
   return policies.find(item => item.id === id);
 }
 
+/**
+ * Shows the policy metadata UI element.
+ */
 function showDetails() {
   const details = document.querySelector('details');
   if (details) {
@@ -60,8 +75,10 @@ function updateDetailsHeader(policy) {
     <summary>
       <span><span class="policyname">${policy.name}</span> feature policy</span>
       <span class="trylinks">
-        <a href="${policy.url}?enable" onclick="updatePage(this, '${policy.id}')">Enable</a>
-        <a href="${policy.url}" onclick="updatePage(this, '${policy.id}')">Disable</a>
+        <a href="${policy.url}?enable" class="enable-button try-button"
+           onclick="updatePage(this, '${policy.id}')">Enable</a>
+        <a href="${policy.url}" class="disable-button try-button"
+           onclick="updatePage(this, '${policy.id}')">Disable</a>
       </span>
     </summary>
     <ul class="details-info">
