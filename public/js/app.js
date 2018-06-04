@@ -39,9 +39,12 @@ async function loadPage() {
     }
 
     const contentFrame = document.querySelector('iframe.content-view');
-    contentFrame.src = `${policy.url}${enable ? '?enable' : ''}`;
+    const pagePath = `${policy.url}${enable ? '?enable' : ''}`;
+    contentFrame.src = pagePath;
 
     document.body.classList.toggle('enable', enable);
+
+    gtag('config', 'UA-120357238-1', {page_path: pagePath});
   }
 
   return policy;
