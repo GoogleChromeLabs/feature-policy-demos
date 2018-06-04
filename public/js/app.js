@@ -63,6 +63,10 @@ async function updatePage(anchor, id) {
   loadPage();
 }
 
+function toggleDrawer() {
+  document.querySelector('.drawer-list').classList.toggle('active');
+}
+
 const policiesList = fetchPolicies().then(policies => {
   return repeat(policies, (p) => p.id, (p, i) => {
     return html`<a href="${p.url}?enable" onclick="updatePage(this, '${p.id}')">${p.name}</a>`;
@@ -80,3 +84,4 @@ render(html`${policiesList}`, document.querySelector('#policy-list'));
 render(allPolicies, document.querySelector('#all-policy-list'));
 
 window.updatePage = updatePage;
+window.toggleDrawer = toggleDrawer;

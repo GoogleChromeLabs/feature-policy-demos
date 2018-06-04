@@ -56,8 +56,36 @@ body:not(.enable) .details .trylinks .disable-button {
 .details .policyname {
   font-weight: 600;
 }
+.details .menu-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+}
 .details-info label {
   flex: 0 0 100px;
   display: inline-block;
   font-weight: 600;
+}
+@media only screen and (max-width: 450px) {
+  .details {
+    padding: var(--default-padding) var(--default-padding-2x);
+  }
+  .details .trylinks {
+    position: relative;
+    margin: var(--default-padding) 0;
+    display: block;
+  }
+  .details .trylinks a {
+    margin: 0 var(--default-padding-) 0 0;
+  }
+  .details li {
+    display: block;
+  }
+  .details li label {
+    margin-right: var(--default-padding);
+  }
+  .details .menu-button {
+    display: block;
+  }
 }

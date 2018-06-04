@@ -80,6 +80,7 @@ function updateDetailsHeader(policy) {
         <a href="${policy.url}" class="disable-button try-button"
            onclick="updatePage(this, '${policy.id}')">Disable</a>
       </span>
+      <span class="menu-button" onclick="toggleDrawer()"><img src="/img/menu24px.svg"></span>
     </summary>
     <ul class="details-info">
       <li><label>What</label>${policy.info.what}</li>
