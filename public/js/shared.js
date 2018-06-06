@@ -93,7 +93,7 @@ function updateDetailsHeader(policy) {
     <ul class="details-info">
       <li><label>What</label><span>${unsafeHTML(policy.what)}</span></li>
       <li><label>Why</label><span>${unsafeHTML(policy.why)}</span></li>
-      <li><label>Examples</label><code>FeaturePolicy: ${policy.usage.on}</code></li>
+      <li><label>Example header</label><code>FeaturePolicy: ${policy.usage.on}</code></li>
       <li><label>Demo instructions</label>${policy.instructions}</li>
     </ul>`;
 

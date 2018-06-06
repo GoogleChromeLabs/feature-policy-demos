@@ -63,7 +63,7 @@ body:not(.on) .details .trylinks .disable-button {
   display: none;
 }
 .details-info label {
-  flex: 0 0 100px;
+  flex: 0 0 150px;
   display: inline-block;
   font-weight: 600;
 }
