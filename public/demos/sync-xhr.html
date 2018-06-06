@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Feature Policy: sync-xhr example</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <style>
+    #list {
+      padding: 0;
+    }
+    .label {
+      margin-right: var(--default-padding);
+      flex: 0 0 300px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  </style>
+</head>
+<body class="body-padding">
+
+<details class="details">
+  <!-- filled dynamically -->
+</details>
+
+<h2 id="feature-allowed-banner">
+  <span id="allowfeature">...</span>
+</h2>
+
+<h1>Chrome features</h1>
+<ol id="list">
+  Fetching list of Chrome web features...
+</ol>
+
+<script type="module">
+import {html, render} from '/lit-html/lit-html.js';
+import {repeat} from '/lit-html/lib/repeat.js';
+import * as shared from '/js/shared.js';
+
+function syncLoadJSON(url) {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', url, false); // sync
+  xhr.send();
+  return JSON.parse(xhr.response);
+}
+
+shared.initPage();
+
+const listEl = document.querySelector('#list');
+
+try {
+  const list = syncLoadJSON('https://www.chromestatus.com/features_v2.json');
+  render(html`${
+    repeat(list, (item) => item.id, (item, i) => {
+      return html`<li class="layout"><label class="label" title="${item.name}">${item.name}</label>${item.summary}</li>`;
+    })
+  }`, listEl);
+} catch (err) {
+  listEl.textContent = `No features were fetched. The page blocked ${shared.currentPolicyId} usage.`;
+}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120357238-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-120357238-1');
+</script>
+</body>
+</html>

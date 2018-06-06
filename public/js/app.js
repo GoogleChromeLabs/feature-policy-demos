@@ -28,7 +28,7 @@ async function loadPage() {
 
   if (url.pathname !== '/') {
     const demoPage = url.pathname.slice(1).split('.')[0];
-    const enable = url.searchParams.has('enable');
+    const policyOn = url.searchParams.has('on');
 
     policy = await getPolicy(demoPage);
 
@@ -39,10 +39,10 @@ async function loadPage() {
     }
 
     const contentFrame = document.querySelector('iframe.content-view');
-    const pagePath = `${policy.url}${enable ? '?enable' : ''}`;
+    contentFrame.allow = policyOn ? policy.usage.on : policy.usage.off;
+    const pagePath = policyOn ? `${policy.url}?on` : policy.url;
     contentFrame.src = pagePath;
-
-    document.body.classList.toggle('enable', enable);
+    document.body.classList.toggle('on', policyOn);
 
     gtag('config', 'UA-120357238-1', {page_path: pagePath});
   }
@@ -69,7 +69,8 @@ function toggleDrawer() {
 
 const policiesList = fetchPolicies().then(policies => {
   return repeat(policies, (p) => p.id, (p, i) => {
-    return html`<a href="${p.url}?enable" onclick="updatePage(this, '${p.id}')">${p.name}</a>`;
+    return html`<a href="${p.url}?on" class="policy-name"
+        onclick="updatePage(this, '${p.id}')">${p.name}</a>`;
   });
 });
 

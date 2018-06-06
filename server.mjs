@@ -42,25 +42,24 @@ app.get('/:demoPage', (req, res, next) => {
   res.send(fs.readFileSync('./public/index.html', {encoding: 'utf-8'}));
 });
 
-// Enable/disable policies on demo pages.
-app.use('/demos', (req, res, next) => {
-  const unsizedMedia = 'enable' in req.query;
-  res.set('Access-Control-Allow-Origin', '*');
-  // res.append('Feature-Policy', "camera 'none', microphone 'none'");
-  // res.append('Feature-Policy', "autoplay 'self' https://clips.vorwaerts-gmbh.de");
-  // res.append('Feature-Policy', "fullscreen 'none'");
-  // res.append('Feature-Policy', "geolocation 'self' https://example.com");
-  // res.append('Feature-Policy', "midi 'none'");
-  // res.append('Feature-Policy', "sync-xhr 'none'");
-  // res.append('Feature-Policy', "vr 'none'");
-  // res.append('Feature-Policy', "usb 'none'");
-  // res.append('Feature-Policy', "payment 'none'");
-  // res.append('Feature-Policy', "vibrate 'none'");
-  if (unsizedMedia) {
-    res.set('Feature-Policy', `unsized-media 'none'`);
-  }
-  next();
-});
+// // Enable/disable policies on demo pages.
+// app.use('/demos', (req, res, next) => {
+//   const unsizedMedia = 'on' in req.query;
+//   // res.append('Feature-Policy', "camera 'none', microphone 'none'");
+//   // res.append('Feature-Policy', "autoplay 'self' https://clips.vorwaerts-gmbh.de");
+//   // res.append('Feature-Policy', "fullscreen 'none'");
+//   // res.append('Feature-Policy', "geolocation 'self' https://example.com");
+//   // res.append('Feature-Policy', "midi 'none'");
+//   // res.append('Feature-Policy', "sync-xhr 'none'");
+//   // res.append('Feature-Policy', "vr 'none'");
+//   // res.append('Feature-Policy', "usb 'none'");
+//   // res.append('Feature-Policy', "payment 'none'");
+//   // res.append('Feature-Policy', "vibrate 'none'");
+//   if (unsizedMedia) {
+//     // res.set('Feature-Policy', `unsized-media 'none'`);
+//   }
+//   next();
+// });
 
 app.use(express.static('public', {extensions: ['html', 'htm']}));
 app.use(express.static('node_modules'));

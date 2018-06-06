@@ -16,6 +16,10 @@
   <!-- filled dynamically -->
 </details>
 
+<h2 id="feature-allowed-banner">
+  <span id="allowfeature">...</span>
+</h2>
+
 <!--
 When no dimensions are specified (either via style attr, width/height attr, or class):
 1. unsized-media on: image/video will have an intrinsic size. Causes re-layout.
@@ -96,16 +100,11 @@ be sized to the specified dimensions and no re-layout will occur.
     pharetra nulla vivamus, quam sit conubia ligula turpis, condimentum purus mauris
     felis scelerisque id. Tincidunt nullam tristique mattis sit vivamus viverra,
     velit orci convallis, suspendisse urna sed.</p>
-</body>
+
 <script type="module">
 import * as shared from '/js/shared.js';
 
-if (!shared.inFrame()) {
-  shared.showDetails();
-  shared.getPolicy(shared.currentPolicyId).then(policy => {
-    shared.updateDetailsHeader(policy);
-  });
-}
+shared.initPage();
 
 // https://chromium.googlesource.com/chromium/src.git/+/832440db5c586d1bdeedfd01489e43d09de36aa9
 // console.log('Allowed features:', document.policy.allowedFeatures());
@@ -120,4 +119,5 @@ if (!shared.inFrame()) {
   gtag('js', new Date());
   gtag('config', 'UA-120357238-1');
 </script>
+</body>
 </html>

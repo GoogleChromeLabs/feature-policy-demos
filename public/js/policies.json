@@ -2,12 +2,22 @@
   "id": "unsized-media",
   "name": "Unsized Media",
   "url": "/demos/unsized-media.html",
-  "info": {
-    "what": "Allows developers to enforce that image/video elements have explicit dimensions. If dimensions aren't specified on the element, the browser sets a default size of 300x150 when this policy is active.",
-    "why": "Reduces the layout work the browser has to perform.",
-    "instructions": "Click the enable/disable buttons above to see how the page loads with the policy on and off. When the policy is on, you won't see layout thrashing as large images load. Media without explicit sizes (either as HTML attributes ore defined in CSS) causes layout and text reflows as the page loads",
-    "examples": {
-      "header": "FeaturePolicy: unsized-media 'none'"
-    }
+  "what": "Allows developers to enforce that image/video elements have explicit dimensions. If dimensions aren't specified on the element, the browser sets a default size of 300x150 when this policy is active.",
+  "why": "Reduces the layout work the browser has to perform.",
+  "instructions": "Click the disallow/allow buttons above to see how the page loads with the policy on and off. When the policy is on, you won't see layout thrashing as large images load. Media without explicit sizes (either as HTML attributes ore defined in CSS) causes layout and text reflows as the page loads.",
+  "usage": {
+    "off": "unsized-media 'self'",
+    "on": "unsized-media 'none'"
+  }
+}, {
+  "id": "sync-xhr",
+  "name": "Synchronous XHR",
+  "url": "/demos/sync-xhr.html",
+  "what": "Disallows the use of synchronous XMLHttpRequests.",
+  "why": "Using synchronous XHRs can cause jank on the main thread and be detrimental to user experience. Although the HTML spec has <a href=\"https://xhr.spec.whatwg.org/#sync-warning\" target=\"_blank\">deprecated sync XHRs</a>, developers are still able to use it for XHR requests where <code>responseType=\"text\"</code>.",
+  "instructions": "Reload the page. When the page allows synchronous XHRs, you will eventually see a list of web features supported in Chrome. Note that the green banner doesn't render until the JSON request has finished. This is because the main thread is blocked by the request + parsing of JSON data. When the page turns on this policy, the browser simply blocks the sync XHR request.",
+  "usage": {
+    "off": "sync-xhr 'self'",
+    "on": "sync-xhr 'none'"
   }
 }]

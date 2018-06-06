@@ -25,17 +25,17 @@ details.details {
   --disable-color: var(--md-blue-grey-100);
   --enable-color: var(--md-blue-grey-500);
 }
-body.enable .details .trylinks .enable-button {
+body.on .details .trylinks .enable-button {
   border-bottom: 4px solid var(--enable-color);
   font-weight: 600;
 }
-body.enable .details .trylinks .disable-button {
+body.on .details .trylinks .disable-button {
   border-bottom: 4px solid var(--disable-color);
 }
-body:not(.enable) .details .trylinks .enable-button {
+body:not(.on) .details .trylinks .enable-button {
   border-bottom: 4px solid var(--disable-color);
 }
-body:not(.enable) .details .trylinks .disable-button {
+body:not(.on) .details .trylinks .disable-button {
   border-bottom: 4px solid var(--enable-color);
   font-weight: 600;
 }
