@@ -11,3 +11,7 @@ First install the dependencies:
 Then run the web server:
 
 `npm run start`
+
+### Deployment
+
+`npm deploy`
