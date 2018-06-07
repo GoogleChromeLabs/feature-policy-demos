@@ -20,4 +20,15 @@
     "off": "sync-xhr 'self'",
     "on": "sync-xhr 'none'"
   }
+}, {
+  "id": "autoplay",
+  "name": "Autoplay media",
+  "url": "/demos/autoplay.html",
+  "what": "Allows cross-origin videos and movies to autoplay.",
+  "why": "By default, Chrome allows the `autoplay` attribute on videos within same-origin iframes. To enable cross-origin videos to autoplay (or disallow same-origin videos from auto playing), sites can use this feature policy.",
+  "instructions": "The video below uses `autoplay` attribute. Reload the page with the feature policy on/off to see the effect on it auto playing.",
+  "usage": {
+    "off": "autoplay 'self'",
+    "on": "autoplay 'none'"
+  }
 }]
