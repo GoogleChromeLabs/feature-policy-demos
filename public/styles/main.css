@@ -140,6 +140,26 @@ h1, h2, h3 {
   white-space: nowrap;
   color: var(--md-blue-grey-400);
 }
+footer {
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--default-padding-2x);
+  background-color: var(--md-blue-grey-50);
+}
+footer a {
+  line-height: 1;
+  opacity: 0.8;
+}
+footer a:hover {
+  opacity: 1;
+}
+footer .logo {
+  height: 30px;
+  width: auto;
+}
 
 @media only screen and (max-width: 450px) {
   .drawer-list {

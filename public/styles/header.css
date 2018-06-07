@@ -25,6 +25,9 @@ details.details {
   --disable-color: var(--md-blue-grey-100);
   --enable-color: var(--md-blue-grey-500);
 }
+.details .trylinks .try-button:hover {
+  border-bottom: 4px solid var(--enable-color) !important;
+}
 body.on .details .trylinks .enable-button {
   border-bottom: 4px solid var(--enable-color);
   font-weight: 600;
