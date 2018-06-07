@@ -1,3 +1,5 @@
+/* global gtag */
+
 /**
  * Copyright 2018 Google Inc. All rights reserved.
  *
@@ -33,8 +35,8 @@ async function loadPage() {
     policy = await getPolicy(demoPage);
 
     // Remove intro banner.
-    const intro = document.querySelector('#intro-summary')
-    if (intro){
+    const intro = document.querySelector('#intro-summary');
+    if (intro) {
       intro.remove();
     }
 
@@ -63,6 +65,9 @@ async function updatePage(anchor, id) {
   loadPage();
 }
 
+/**
+ * Toggles the app drawer.
+ */
 function toggleDrawer() {
   document.querySelector('.drawer-list').classList.toggle('active');
 }
