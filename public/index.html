@@ -12,6 +12,19 @@
   <link rel="modulepreload" href="/lit-html/lit-html.js">
   <link rel="modulepreload" href="/lit-html/lib/repeat.js">
   <link rel="modulepreload" href="/js/shared.js">
+  <style>
+    .notsupported {
+      background: var(--md-red-500);
+      padding: var(--default-padding);
+      color: white;
+      text-align: center;
+      margin-top:var(--default-padding-2x);
+      display: none;
+    }
+    .notsupported.show {
+      display: block;
+    }
+  </style>
 </head>
 <body>
 
@@ -34,7 +47,10 @@
 </div>
 
 <main class="main-view">
-  <div class="details"><!-- filled dynamically --></div>
+  <div class="details">
+    <h3>&larr; Select a policy to begin.</h3>
+    <!-- filled dynamically -->
+  </div>
 
   <div class="content-view">
     <div id="intro-summary" class="body-padding">
@@ -42,7 +58,21 @@
         allows web developers to selectively enable, disable, and modify the behavior
         of various features and APIs in the browser. This can provide a well-lit path towards good performance
         and prevent common footguns when building and maintain web apps.</h2>
-      <h3 style="margin-top:var(--default-padding-4x);">&larr; Select a policy to begin.</h3>
+      <h3 class="notsupported">Feature policy is not supported in your browser.</h3>
+      <h3 style="margin-top:var(--default-padding-3x);">You control feature policies through an HTTP header:</h3>
+      <p>
+        <pre class="snippet">FeaturePolicy: geolocation *
+FeaturePolicy: geolocation 'none'
+FeaturePolicy: geolocation 'self'
+FeaturePolicy: geolocation https://google-developers.appspot.com</pre>
+      </p>
+      <h3 style="margin-top:var(--default-padding-3x);">or by adding the <code>allow</code> attribute on iframes:</h3>
+      <p>
+        <pre class="snippet">&lt;iframe allow="geolocation *">
+&lt;iframe allow="geolocation 'self'">
+&lt;iframe allow="geolocation 'none'">
+&lt;iframe allow="geolocation https://google-developers.appspot.com"></pre>
+      </p>
     </div>
     <iframe class="content-view" name="content-view"></iframe>
   </div>

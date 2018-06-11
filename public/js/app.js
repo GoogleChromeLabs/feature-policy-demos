@@ -18,7 +18,7 @@
 
 import {html, render} from '/lit-html/lit-html.js';
 import {repeat} from '/lit-html/lib/repeat.js';
-import {fetchPolicies, updateDetailsHeader, getPolicy} from '/js/shared.js';
+import {fetchPolicies, updateDetailsHeader, getPolicy, featurePolicySupported} from '/js/shared.js';
 
 /**
  * Dynamically loads policy demo page based off current (deep link) url.
@@ -72,6 +72,13 @@ function toggleDrawer() {
   document.querySelector('.drawer-list').classList.toggle('active');
 }
 
+
+(() => {
+if (!featurePolicySupported) {
+  document.querySelector('.notsupported').classList.add('show');
+  return;
+}
+
 const policiesList = fetchPolicies().then(policies => {
   return repeat(policies, (p) => p.id, (p, i) => {
     return html`<a href="${p.url}?on" class="policy-name"
@@ -88,6 +95,7 @@ const allPolicies = html`${
 loadPage().then(updateDetailsHeader);
 render(html`${policiesList}`, document.querySelector('#policy-list'));
 render(allPolicies, document.querySelector('#all-policy-list'));
+})();
 
 window.updatePage = updatePage;
 window.toggleDrawer = toggleDrawer;

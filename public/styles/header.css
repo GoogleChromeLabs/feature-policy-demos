@@ -15,7 +15,7 @@ details.details {
   margin-left: var(--default-padding-2x);
   text-transform: uppercase;
   font-size: 18px;
-  border-radius: 3px;
+  border-radius: var(--default-border-radius);
   padding: var(--default-padding) var(--default-padding-2x);
   background: white;
   text-decoration: none;
@@ -50,6 +50,7 @@ body:not(.on) .details .trylinks .disable-button {
 .details  ul {
   list-style: none;
   padding: 0;
+  margin: var(--default-padding-3x) 0 0 0;
 }
 .details li {
   display: flex;
@@ -69,6 +70,12 @@ body:not(.on) .details .trylinks .disable-button {
   flex: 0 0 150px;
   display: inline-block;
   font-weight: 600;
+}
+.details-info pre {
+  margin: 0 0 var(--default-padding) 0;
+}
+.details-info pre:last-child {
+  margin-bottom: 0;
 }
 @media only screen and (max-width: 450px) {
   .details {

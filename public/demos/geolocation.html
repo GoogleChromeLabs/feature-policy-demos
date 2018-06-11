@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Feature Policy: geolocation example</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <style>
+    iframe {
+      border: 0;
+      width: 100%;
+      height: 350px;
+    }
+  </style>
+</head>
+<body class="body-padding">
+
+<details class="details">
+  <!-- filled dynamically -->
+</details>
+
+<h2 id="feature-allowed-banner">
+  <span id="allowfeature">...</span>
+</h2>
+
+<p>This page embeds a Google Map demo from <a href="https://google-developers.appspot.com/maps/documentation/javascript/examples/full/map-geolocation" target="_blank">https://google-developers.appspot.com/</a> (e.g. cross-domain) using the following:</p>
+
+<pre class="snippet">&lt;iframe src="https://google-developers.appspot.com/..."
+        allow="geolocation https://google-developers.appspot.com">&lt;/iframe></pre>
+
+<p>The iframe's demo attempts to use the <a href="https://developers.google.com/maps/documentation/geolocation/intro" target="_blank">Geolocation API</a> to
+  display the user's current location. However, when the parent page uses a more restrictive feature policy (<code>FeaturePolicy: geolocation 'self'</code>), the iframe is blocked
+  from accessing geolocation.</p>
+
+<div class="layout center">
+  <iframe src="https://google-developers.appspot.com/maps/documentation/javascript/examples/full/map-geolocation"
+          allow="geolocation https://google-developers.appspot.com"></iframe>
+</div>
+
+<script type="module">
+import {initPage} from '/js/shared.js';
+initPage();
+
+// navigator.geolocation.getCurrentPosition(position => {
+//   console.log(position.coords.latitude, position.coords.longitude);
+// }, err => {
+//   console.error(err.message);
+// });
+
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120357238-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-120357238-1');
+</script>
+</body>
+</html>

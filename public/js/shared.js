@@ -19,6 +19,7 @@ import {unsafeHTML} from '/lit-html/lib/unsafe-html.js';
 
 export const policyOn = new URL(location).searchParams.has('on');
 export const currentPolicyId = new URL(location).pathname.split('/').slice(-1)[0].split('.')[0];
+export const featurePolicySupported = 'policy' in document;
 
 let policies = [];
 let fetchingPoliciesPromise = null;
@@ -79,6 +80,9 @@ function updateDetailsHeader(policy) {
     return;
   }
 
+  const examples = [...policy.examples.header, ...policy.examples.iframe || []]
+      .map(item => `<pre>${item}</pre>`).join('');
+
   const tmpl = html`
     <summary>
       <span><span class="policyname">${policy.name}</span> feature policy</span>
@@ -93,8 +97,7 @@ function updateDetailsHeader(policy) {
     <ul class="details-info">
       <li><label>What</label><span>${unsafeHTML(policy.what)}</span></li>
       <li><label>Why</label><span>${unsafeHTML(policy.why)}</span></li>
-      <li><label>Example header</label><code>FeaturePolicy: ${policy.usage.on}</code></li>
-      <li><label>Demo instructions</label>${policy.instructions}</li>
+      <li><label>Examples</label><div>${unsafeHTML(examples)}</div></li>
     </ul>`;
 
   render(tmpl, document.querySelector('.details'));

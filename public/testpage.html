@@ -54,10 +54,11 @@ function doGeolocation() {
   navigator.geolocation.getCurrentPosition(position => {
     console.log(position.coords.latitude, position.coords.longitude);
   }, err => {
-    console.error(err);
+    console.error(err.message);
   });
 
   const iframe = document.createElement('iframe');
+  iframe.allow = `geolocation https://google-developers.appspot.com`;
   iframe.src = 'https://google-developers.appspot.com/maps/documentation/javascript/examples/full/map-geolocation';
   document.querySelector('#map').appendChild(iframe);
 }

@@ -36,6 +36,14 @@ app.use(function enableCors(req, res, next) {
   next();
 });
 
+// app.get('/test', (req, res, next) => {
+//   const on = 'on' in req.query;
+//   if (on) {
+//     res.append('Feature-Policy', `geolocation 'none'`);
+//   }
+//   res.send(fs.readFileSync('./public/testpage.html', {encoding: 'utf-8'}));
+// });
+
 app.get('/:demoPage', (req, res, next) => {
   // const demoPage = req.params.demoPage;
   // console.log(demoPage)
