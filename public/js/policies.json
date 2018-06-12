@@ -67,4 +67,21 @@
       "&lt;iframe src=\"https://google-developers.appspot.com/demo/...\"\n        allow=\"geolocation https://google-developers.appspot.com\"><\/iframe>"
     ]
   }
+}, {
+  "id": "picture-in-picture",
+  "name": "Picture-in-Picture",
+  "url": "/demos/picture-in-picture.html",
+  "chromeStatusLink": "https://www.chromestatus.com/features/5729206566649856",
+  "what": "Controls access to Picture in Picture.",
+  "why": "By default, Chrome allows the usage of Picture-in-Picture in cross-origin iframes. Developers can disable it using this feature policy.",
+  "usage": {
+    "on": "picture-in-picture 'self'",
+    "off": "picture-in-picture 'none'"
+  },
+  "examples": {
+    "header": [
+      "FeaturePolicy: picture-in-picture 'self'",
+      "FeaturePolicy: picture-in-picture 'none'"
+    ]
+  }
 }]
