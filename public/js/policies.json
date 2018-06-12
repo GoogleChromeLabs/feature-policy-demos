@@ -76,12 +76,12 @@
   "why": "By default, Chrome allows the usage of Picture-in-Picture in cross-origin iframes. Developers can disable it using this feature policy.",
   "usage": {
     "on": "picture-in-picture 'self'",
-    "off": "picture-in-picture https://google-developers.appspot.com"
+    "off": "picture-in-picture 'none'"
   },
   "examples": {
     "header": [
       "FeaturePolicy: picture-in-picture 'self'",
-      "FeaturePolicy: picture-in-picture https://google-developers.appspot.com"
+      "FeaturePolicy: picture-in-picture 'none'"
     ]
   }
 }]
