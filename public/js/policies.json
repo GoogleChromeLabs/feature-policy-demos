@@ -73,7 +73,7 @@
   "url": "/demos/picture-in-picture.html",
   "chromeStatusLink": "https://www.chromestatus.com/features/5729206566649856",
   "what": "Controls access to Picture in Picture.",
-  "why": "By default, Chrome allows the usage of Picture-in-Picture in cross-origin iframes. Developers can disable it using this feature policy.",
+  "why": "By default, Chrome allows the usage of Picture-in-Picture in cross-origin iframes. Developers can disable it using this feature policy. At the moment, you may need to enable the <code>--enable-picture-in-picture</code> and <code>--enable-experimental-web-platform-features</code> flags in Chrome 69.",
   "usage": {
     "on": "picture-in-picture 'self'",
     "off": "picture-in-picture 'none'"
