@@ -36,13 +36,22 @@ app.use(function enableCors(req, res, next) {
   next();
 });
 
-// app.get('/test', (req, res, next) => {
-//   const on = 'on' in req.query;
-//   if (on) {
-//     res.append('Feature-Policy', `geolocation 'none'`);
-//   }
-//   res.send(fs.readFileSync('./public/testpage.html', {encoding: 'utf-8'}));
-// });
+app.get('/test', (req, res, next) => {
+  const on = 'on' in req.query;
+  if (on) {
+    res.append('Feature-Policy', `geolocation 'none'`);
+    res.append('Feature-Policy', `camera 'none', microphone 'none'`);
+    res.append('Feature-Policy', `autoplay 'self'`);
+    res.append('Feature-Policy', `fullscreen 'none'`);
+    res.append('Feature-Policy', `geolocation 'self'`);
+    res.append('Feature-Policy', `midi 'none'`);
+    res.append('Feature-Policy', `sync-xhr 'none'`);
+    res.append('Feature-Policy', `vr 'none'`);
+    res.append('Feature-Policy', `usb 'none'`);
+    res.append('Feature-Policy', `payment 'none'`);
+  }
+  res.send(fs.readFileSync('./public/testpage.html', {encoding: 'utf-8'}));
+});
 
 app.get('/:demoPage', (req, res, next) => {
   // const demoPage = req.params.demoPage;
