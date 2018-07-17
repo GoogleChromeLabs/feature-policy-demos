@@ -6,34 +6,101 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Feature policy examples</title>
   <style>
+    body {
+      font-family: "Google Sans", sans-serif;
+    }
     iframe {
       border: none;
       width: 500px;
       height: 300px;
     }
+    .layout {
+      display: flex;
+    }
+    .center {
+      align-items: center;
+    }
+    figure {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      font-style: italic;
+    }
+    figcaption {
+      padding: 16px;
+      max-width: 400px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
 
-<img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">
-
-<video src="https://clips.vorwaerts-gmbh.de/big_buck_bunny.webm" autoplay></video>
-
 <div>
+Test stuff:
 <button onclick="goFullscreen()">use fullscreen</button>
 <button onclick="doSyncXhr()">use sync XHR</button>
 <button onclick="doMidi()">use MIDI</button>
-<button onclick="doGeolocation()">use geolocation</button>
 <button onclick="doUSB()">use usb</button>
-<button onclick="doCameraMic()">use camera/mic</button>
 <button onclick="doPaymenRequest()">use payment request</button>
 </div>
 
-<div id="map"></div>
+<hr>
+
+<div class="layout center">
+  <figure>
+    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png">
+    <figcaption>FAILS <code>unsized-media</code> because image is not sized
+      explicity in HTML or CSS. Image will be sized to 300x150.</figcaption>
+  </figure>
+  <figure>
+    <!-- <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" width="272" height="92"> -->
+    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" width="90" height="30">
+    <figcaption>FAILS <code>max-downscaling-image</code> because image is
+      scaled down > 0.5 it's natural size. Image colors will be inverted.</figcaption>
+  </figure>
+</div>
+
+<div class="layout">
+  <figure>
+    <img src="/img/Fisher-large.jpg">
+    <figcaption>FAILS <code>image-compression</code> because image
+      contains EXIF metdata making filesize greater than width x height. Image
+      colors will be inverted.</figcaption>
+  </figure>
+  <figure>
+    <img src="/img/Fisher-large-stripped.jpg">
+    <figcaption>PASSES <code>image-compression</code> b/c because image
+      contains no EXIF metdata.</figcaption>
+  </figure>
+</div>
+
+<div class="layout center">
+  <figure>
+    <img src="https://homepages.cae.wisc.edu/~ece533/images/sails.bmp" height="300">
+    <figcaption>FAILS <code>legacy-image-formats</code> because it's a BMP. Image colors will be inverted.</figcaption>
+  </figure>
+  <figure>
+    <div id="map">
+      <button onclick="doGeolocation()">use geolocation</button>
+    </div>
+    <figcaption>Shows <code>geolocation</code> failing when policy prevents it.</figcaption>
+  </figure>
+</div>
+
+<div class="layout center">
+  <figure>
+    <video src="https://clips.vorwaerts-gmbh.de/big_buck_bunny.webm" autoplay controls width="400"></video>
+    <figcaption>FAILS <code>autoplay</code> when policy is set.</figcaption>
+  </figure>
+  <figure>
+    <button onclick="doCameraMic(this)">use camera + microphone</button>
+    <figcaption>FAILS <code>camera/microphone</code> access when policy is set.</figcaption>
+  </figure>
+</div>
 
 <script>
 // https://chromium.googlesource.com/chromium/src.git/+/832440db5c586d1bdeedfd01489e43d09de36aa9
-console.log('Allowed features:', document.policy.allowedFeatures());
+// console.log('Allowed features:', document.policy.allowedFeatures());
 
 function doSyncXhr() {
   const xhr = new XMLHttpRequest();
@@ -49,18 +116,19 @@ async function doMidi() {
 function doGeolocation() {
   //document.policy.allowsFeature('geolocation')
   // document.policy.allowsFeature('geolocation', 'https://google-developers.appspot.com/')
-  console.log('who can use geolocation', document.policy.getAllowlistForFeature('geolocation'));
+  // console.log('who can use geolocation', document.policy.getAllowlistForFeature('geolocation'));
+
+  const iframe = document.createElement('iframe');
+  iframe.allow = `geolocation https://google-developers.appspot.com`;
+  iframe.src = 'https://google-developers.appspot.com/maps/documentation/javascript/examples/full/map-geolocation';
+  const map = document.querySelector('#map');
+  map.replaceChild(iframe, map.firstElementChild);
 
   navigator.geolocation.getCurrentPosition(position => {
     console.log(position.coords.latitude, position.coords.longitude);
   }, err => {
     console.error(err.message);
   });
-
-  const iframe = document.createElement('iframe');
-  iframe.allow = `geolocation https://google-developers.appspot.com`;
-  iframe.src = 'https://google-developers.appspot.com/maps/documentation/javascript/examples/full/map-geolocation';
-  document.querySelector('#map').appendChild(iframe);
 }
 
 function goFullscreen() {
@@ -82,8 +150,25 @@ function doVibration() {
   window.navigator.vibrate(200);
 }
 
-async function doCameraMic() {
-  const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
+async function doCameraMic(button) {
+  const stream = await navigator.mediaDevices.getUserMedia({
+    audio: true,
+    video: {
+      facingMode: 'user',
+      height: 300,
+      width: 300,
+    },
+  });
+
+  const video = document.createElement('video');
+  video.autoplay = true
+  video.style = 'border-radius:50%;width:300px;height:300px';
+  video.srcObject = stream;
+  video.controls = true;
+
+  button.parentElement.replaceChild(video, button);
+
+  return stream;
 }
 
 function doPaymenRequest() {
