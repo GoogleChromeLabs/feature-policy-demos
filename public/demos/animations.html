@@ -60,6 +60,9 @@
         transform: translateX(var(--animation-width));
       }
     }
+    .bottom {
+      margin-bottom: 100px;
+    }
   </style>
 </head>
 <body class="body-padding">
@@ -93,7 +96,7 @@
   one of the properties is non accelerated. Some of the animation still continues.</p>
   <div class="box animate-css both relative"></div>
 </div>
-<div>
+<div class="bottom">
   <h3><code>requestionAnimationFrame</code>-based animation on <code>left</code> property</h3>
   <p>JS-based animations using <code>requestionAnimationFrame</code> are not affected
   by the policy, even if they do terrible things like animate CSS <code>left</code>.</p>
