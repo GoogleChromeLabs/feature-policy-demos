@@ -34,6 +34,15 @@
       animation-iteration-count: infinite;
       animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
     }
+    .transition {
+      padding: var(--default-padding);
+      transition: all 300ms ease-in-out;
+      color: #fff;
+    }
+    .transition:hover {
+      height: calc(var(--box-width) * 2);
+      width: calc(var(--box-width) * 2);
+    }
     @keyframes slider {
       from {
         left: 0;
@@ -96,11 +105,16 @@
   one of the properties is non accelerated. Some of the animation still continues.</p>
   <div class="box animate-css both relative"></div>
 </div>
-<div class="bottom">
+<div>
   <h3><code>requestionAnimationFrame</code>-based animation on <code>left</code> property</h3>
   <p>JS-based animations using <code>requestionAnimationFrame</code> are not affected
   by the policy, even if they do terrible things like animate CSS <code>left</code>.</p>
   <div class="box animate-js relative"></div>
+</div>
+<div class="bottom">
+  <h3>CSS Transition on <code>height</code> property</h3>
+  <p>Hover over this box. The CSS transition on the height/width won't animate when the policy is active.</p>
+  <div class="box relative transition">Hover on me.</div>
 </div>
 
 <script type="module">
