@@ -72,29 +72,47 @@ function toggleDrawer() {
   document.querySelector('.drawer-list').classList.toggle('active');
 }
 
+/**
+ * @param {Array<Object>} implementedPolicies
+ */
+async function leftOverPolicies(implementedPolicies) {
+  const allPolicies = document.policy.allowedFeatures().sort();
 
-(() => {
+  const policies = [];
+  allPolicies.forEach((item, i) => {
+    const found = implementedPolicies.find(p => p.id === item);
+    if (!found) {
+      policies.push(item);
+    }
+  });
+
+  return repeat(policies, null, (p, i) => {
+    return html`<div class="policy-id">${p}</div>`;
+  });
+}
+
+
+(async () => {
 if (!featurePolicySupported) {
   document.querySelector('.notsupported').classList.add('show');
   return;
 }
 
-const policiesList = fetchPolicies().then(policies => {
-  return repeat(policies, (p) => p.id, (p, i) => {
+const fetchedPolcies = await fetchPolicies();
+
+const implementedPolicies = () => {
+  const markup = repeat(fetchedPolcies, (p) => p.id, (p, i) => {
     return html`<a href="${p.url}?on" class="policy-name"
         onclick="updatePage(this, '${p.id}')">${p.name}</a>`;
   });
-});
-
-const allPolicies = html`${
-  repeat(document.policy.allowedFeatures().sort(), null, (p, i) => {
-    return html`<div class="policy-id">${p}</div>`;
-  })
-}`;
+  return {markup, policies: fetchedPolcies};
+};
 
 loadPage().then(updateDetailsHeader);
-render(html`${policiesList}`, document.querySelector('#policy-list'));
-render(allPolicies, document.querySelector('#all-policy-list'));
+render(html`${implementedPolicies().markup}`,
+  document.querySelector('#policy-list'));
+render(html`${leftOverPolicies(implementedPolicies().policies)}`,
+  document.querySelector('#all-policy-list'));
 })();
 
 window.updatePage = updatePage;
