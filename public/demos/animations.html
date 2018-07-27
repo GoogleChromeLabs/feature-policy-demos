@@ -76,22 +76,21 @@
 
 <div>
   <h3>CSS keyframe animation on <code>transform</code> property</h3>
-  <p>This first animation
-      continues when the policy is active because it is GPU accelerated. It's
-      animating one of the three properties (opacity, transform, filter) that can be
-      reliably hardware accelerated. </p>
+  <p>This first animation continues when the policy is active because it is GPU accelerated. It's
+  animating one of the three properties (opacity, transform, filter) that can be
+  reliably hardware accelerated.</p>
   <div><div class="box animate-gpu"></div></div>
 </div>
 <div>
   <h3>CSS keyframe animation on <code>left</code> property</h3>
   <p>This second animation jumps when the policy is
-      active because it's animating the <code>left</code> property. Don't do that.</p>
+  active because it's animating the <code>left</code> property. Don't do that.</p>
   <div class="box animate-css relative"></div>
 </div>
 <div>
   <h3>CSS keyframe animation on <code>left</code> and <code>transform</code> properties</h3>
   <p>This one shows what happens if you animate more than one property and
-    one of the properties is non accelerated. Some of the animation still continues.</p>
+  one of the properties is non accelerated. Some of the animation still continues.</p>
   <div class="box animate-css both relative"></div>
 </div>
 <div>
