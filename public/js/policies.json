@@ -84,4 +84,22 @@
       "FeaturePolicy: picture-in-picture 'none'"
     ]
   }
+}, {
+  "id": "animations",
+  "name": "Fast animations",
+  "url": "/demos/animations.html",
+  "what": "Restricts the set of CSS properties which can be animated to opacity, transform, and filter.",
+  "why": "Ensures smooth animations, by only allowing those properties which can be animated on the GPU using the hardware acceleration.",
+  "usage": {
+    "off": "animations 'self'",
+    "on": "animations 'none'"
+  },
+  "examples": {
+    "header": [
+      "FeaturePolicy: animations 'none'"
+    ],
+    "iframe": [
+      "&lt;iframe allow=\"animations https:\/\/anim8.cdn.com\" src=\"...\"><\/iframe>"
+    ]
+  }
 }]

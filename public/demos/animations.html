@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Feature Policy: animations example</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <style>
+    .box {
+      --box-width: 100px;
+      --animation-width: 250px;
+      background-color: var(--md-red-500);
+      width: 100px;
+      height: 100px;
+      display: inline-block;
+    }
+    .animate-css {
+      animation-duration: 3s;
+      animation-name: slider;
+      animation-direction: alternate;
+      animation-iteration-count: infinite;
+      animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
+    }
+    .animate-css.both {
+      animation-name: slider2;
+    }
+    .animate-gpu {
+      animation-duration: 3s;
+      animation-name: slider-gpu;
+      animation-direction: alternate;
+      animation-iteration-count: infinite;
+      animation-timing-function: cubic-bezier(0.65, 0.05, 0.36, 1);
+    }
+    @keyframes slider {
+      from {
+        left: 0;
+      }
+      to {
+        left: var(--animation-width);
+      }
+    }
+    @keyframes slider2 {
+      from {
+        left: 0;
+        transform: rotateZ(0);
+      }
+      to {
+        left: var(--animation-width);
+        transform: rotateZ(360deg);
+      }
+    }
+    @keyframes slider-gpu {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(var(--animation-width));
+      }
+    }
+  </style>
+</head>
+<body class="body-padding">
+
+<details class="details">
+  <!-- filled dynamically -->
+</details>
+
+<h2 id="feature-allowed-banner">
+  <span id="allowfeature">...</span>
+</h2>
+
+<p>This page shows how animations are affected by this policy.</p>
+
+<div>
+  <h3>CSS keyframe animation on <code>transform</code> property</h3>
+  <p>This first animation
+      continues when the policy is active because it is GPU accelerated. It's
+      animating one of the three properties (opacity, transform, filter) that can be
+      reliably hardware accelerated. </p>
+  <div><div class="box animate-gpu"></div></div>
+</div>
+<div>
+  <h3>CSS keyframe animation on <code>left</code> property</h3>
+  <p>This second animation jumps when the policy is
+      active because it's animating the <code>left</code> property. Don't do that.</p>
+  <div class="box animate-css relative"></div>
+</div>
+<div>
+  <h3>CSS keyframe animation on <code>left</code> and <code>transform</code> properties</h3>
+  <p>This one shows what happens if you animate more than one property and
+    one of the properties is non accelerated. Some of the animation still continues.</p>
+  <div class="box animate-css both relative"></div>
+</div>
+<div>
+  <h3><code>requestionAnimationFrame</code>-based animation on <code>left</code> property</h3>
+  <p>JS-based animations using <code>requestionAnimationFrame</code> are not affected
+  by the policy, even if they do terrible things like animate CSS <code>left</code>.</p>
+  <div class="box animate-js relative"></div>
+</div>
+
+<script type="module">
+import {initPage} from '/js/shared.js';
+initPage();
+
+const box = document.querySelector('.animate-js');
+const maxLeft = box.parentElement.getBoundingClientRect().width;
+const boxWidth = box.getBoundingClientRect().width;
+let x = 0;
+
+function animate() {
+  box.style.left = `${x++ % (boxWidth * 2 - boxWidth)}px`;
+  requestAnimationFrame(animate);
+}
+animate();
+
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120357238-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-120357238-1');
+</script>
+</body>
+</html>
