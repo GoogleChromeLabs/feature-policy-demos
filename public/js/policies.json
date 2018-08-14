@@ -102,4 +102,22 @@
       "&lt;iframe allow=\"animations https:\/\/anim8.cdn.com\" src=\"...\"><\/iframe>"
     ]
   }
+}, {
+  "id": "max-downscaling-image",
+  "name": "Maximum Downscaling Image",
+  "url": "/demos/image-downscaling.html",
+  "what": "Restricts images whose intrinsic dimensions that are much larger than the container size.",
+  "why": "Ensures optimized image performance by avoiding unnecessarily large images.",
+  "usage": {
+    "off": "max-downscaling-image 'self'",
+    "on": "max-downscaling-image 'none'"
+  },
+  "examples": {
+    "header": [
+      "FeaturePolicy: max-downscaling-image 'none'"
+    ],
+    "iframe": [
+      "&lt;iframe allow=\"max-downscaling-image 'none'\" src=\"...\"><\/iframe>"
+    ]
+  }
 }]
