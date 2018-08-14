@@ -20,90 +20,50 @@
 </h2>
 
 <p>Click the disallow/allow buttons above to see how the page loads with the policy on and off.
-  When the policy is on, you won't see layout thrashing as large images load. Media without
-  explicit sizes (either as HTML attributes ore defined in CSS) causes layout and text reflows
-  as the page loads.</p>
+  When the policy is on, you will see images whose intrinsic dimentions that are much larger
+  than the container size.</p>
 
 <!--
-When no dimensions are specified (either via style attr, width/height attr, or class):
-1. unsized-media on: image/video will have an intrinsic size. Causes re-layout.
-2. unsized-media off: image/video will have a default size of 300x150. No re-layout.
+For optimized images:
+1. max-downscaling-image on: image will be rendered accurately.
+2. max-downscaling-image off: image will be rendered accurately.
 
-When one dimension is specified (via a class, width="200", style="width:200px").
-1. unsized-media off: image/video will be one of the specified dimension
-   and the intrinsic ratio. Causes a re-layout.
-2. unsized-media on: image/video will be one of the default dimensions (300x150)
-   and the specified dimension. No re-layout.
-
-When both dimension are specified, unsized-media has no effect. The image will
-be sized to the specified dimensions and no re-layout will occur.
+For images with exeeds maximum downscaling threshold:
+1. max-downscaling-image on: image will be rendered accurately.
+2. max-downscaling-image off: image will be rendered in inverted color.
 -->
-<img src="https://picsum.photos/1200/600/?random" width="100%">
 
-<p>Lorem ipsum dolor sit amet, pretium urna faucibus etiam enim sollicitudin,
-sagittis phasellus nec suspendisse aenean. Orci nec nam ipsum lobortis ipsum,
-at nunc, semper in suscipit sem et, mauris amet amet accumsan risus quis, urna
-quam. Lacus mi elit lectus tortor nec enim, sed ornare est praesent est id ut,
-mi at. Vestibulum varius, diam posuere tristique est adipiscing, proin quam orci,
-nunc tincidunt purus accumsan erat, nec amet magna donec. Consectetuer vivamus
-pharetra nulla vivamus, quam sit conubia ligula turpis, condimentum purus mauris
-felis scelerisque id. Tincidunt nullam tristique mattis sit vivamus viverra,
-velit orci convallis, suspendisse urna sed. </p>
-
-<img src="https://picsum.photos/300/300/?random" class="round right sized" style="margin-left:16px;">
-
-<img src="https://picsum.photos/400/500/?random" class="left" style="margin-right:16px;">
-
-<p>Lorem ipsum dolor sit amet, pretium urna faucibus etiam enim sollicitudin,
-sagittis phasellus nec suspendisse aenean. Orci nec nam ipsum lobortis ipsum,
-at nunc, semper in suscipit sem et, mauris amet amet accumsan risus quis, urna
-quam. Lacus mi elit lectus tortor nec enim, sed ornare est praesent est id ut,
-mi at. Vestibulum varius, diam posuere tristique est adipiscing, proin quam orci,
-nunc tincidunt purus accumsan erat, nec amet magna donec. Consectetuer vivamus
-pharetra nulla vivamus, quam sit conubia ligula turpis, condimentum purus mauris
-felis scelerisque id. Tincidunt nullam tristique mattis sit vivamus viverra,
-velit orci convallis, suspendisse urna sed.</p>
-
-<p>Lorem ipsum dolor sit amet, pretium urna faucibus etiam enim sollicitudin,
-sagittis phasellus nec suspendisse aenean. Orci nec nam ipsum lobortis ipsum,
-at nunc, semper in suscipit sem et, mauris amet amet accumsan risus quis, urna
-quam. Lacus mi elit lectus tortor nec enim, sed ornare est praesent est id ut,
-mi at. Vestibulum varius, diam posuere tristique est adipiscing, proin quam orci,
-nunc tincidunt purus accumsan erat, nec amet magna donec. Consectetuer vivamus
-pharetra nulla vivamus, quam sit conubia ligula turpis, condimentum purus mauris
-felis scelerisque id. Tincidunt nullam tristique mattis sit vivamus viverra,
-velit orci convallis, suspendisse urna sed.</p>
-
-<!-- No dimensions -->
 <div class="center">
-  <video src="https://clips.vorwaerts-gmbh.de/big_buck_bunny.webm" autoplay controls></video>
+  <img src="../img/Fisher-large-stripped.jpg" width="200" height="150">
+  <p class="center">
+  Image intrinsic size: 200px x 150px <br />
+  Image container size: 200px x 150px
+  </p>
 </div>
 
-<p>Lorem ipsum dolor sit amet, pretium urna faucibus etiam enim sollicitudin,
-sagittis phasellus nec suspendisse aenean. Orci nec nam ipsum lobortis ipsum,
-at nunc, semper in suscipit sem et, mauris amet amet accumsan risus quis, urna
-quam. Lacus mi elit lectus tortor nec enim, sed ornare est praesent est id ut,
-mi at. Vestibulum varius, diam posuere tristique est adipiscing, proin quam orci,
-nunc tincidunt purus accumsan erat, nec amet magna donec. Consectetuer vivamus
-pharetra nulla vivamus, quam sit conubia ligula turpis, condimentum purus mauris
-felis scelerisque id. Tincidunt nullam tristique mattis sit vivamus viverra,
-velit orci convallis, suspendisse urna sed.</p>
+<div class="center">
+  <img src="../img/Fisher-large-stripped.jpg" width="80" height="150">
+  <p class="center">
+  Image intrinsic size: 200px x 150px <br />
+  Image container size: 80px x 150px
+  </p>
+</div>
 
-<!--
-When both dimension are specified, unsized-media has no effect. The image will
-be sized to the specified dimensions and no re-layout will occur.
--->
-<img src="https://picsum.photos/1200/700/?random"  width="100%" height="300">
+<div class="center">
+  <img src="../img/Fisher-large-stripped.jpg" width="200" height="70">
+  <p class="center">
+  Image intrinsic size: 200px x 150px <br />
+  Image container size: 200px x 70px
+  </p>
+</div>
 
-<p>Lorem ipsum dolor sit amet, pretium urna faucibus etiam enim sollicitudin,
-    sagittis phasellus nec suspendisse aenean. Orci nec nam ipsum lobortis ipsum,
-    at nunc, semper in suscipit sem et, mauris amet amet accumsan risus quis, urna
-    quam. Lacus mi elit lectus tortor nec enim, sed ornare est praesent est id ut,
-    mi at. Vestibulum varius, diam posuere tristique est adipiscing, proin quam orci,
-    nunc tincidunt purus accumsan erat, nec amet magna donec. Consectetuer vivamus
-    pharetra nulla vivamus, quam sit conubia ligula turpis, condimentum purus mauris
-    felis scelerisque id. Tincidunt nullam tristique mattis sit vivamus viverra,
-    velit orci convallis, suspendisse urna sed.</p>
+<div class="center">
+  <img src="../img/Fisher-large-stripped.jpg" width="80" height="70">
+  <p class="center">
+  Image intrinsic size: 200px x 150px <br />
+  Image container size: 80px x 70px
+  </p>
+</div>
 
 <script type="module">
 import * as shared from '/js/shared.js';
