@@ -1,5 +1,71 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<!-- DO NOT SUBMIT: Fix Page Title. Missing tags? http://go/optional-html -->
-<title>Page Title</title>
-TEST
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Feature Policy: legacy-image-formats example</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/header.css">
+</head>
+<body class="body-padding">
+
+<details class="details">
+  <!-- filled dynamically -->
+</details>
+
+<h2 id="feature-allowed-banner">
+  <span id="allowfeature">...</span>
+</h2>
+
+<p>Click the disallow/allow buttons above to see how the page loads with the policy on and off.
+  When the policy is on, you will see images with legacy formats will be rendered in inverted
+ color.</p>
+
+<!--
+For images with morden formats:
+1. legacy-image-formats on: images will be rendered accurately.
+2. legacy-image-formats off: images will be rendered accurately.
+
+For images with legacy formats:
+1. legacy-image-formats on: images will be rendered accurately.
+2. legacy-image-formats off: images will be rendered in inverted color.
+-->
+
+<div class="center">
+<img src="../img/Fisher.bmp" width="200" height="150">
+<p class="center">
+Image format: BMP</br>
+Legacy image format: Yes
+</p>
+</div>
+
+<div class="center">
+<img src="../img/Fisher-large.jpg" width="200" height="150">
+<p class="center">
+Image format: JPEG</br>
+Legacy image format: No
+</p>
+</div>
+
+<script type="module">
+import * as shared from '/js/shared.js';
+
+shared.initPage();
+
+// https://chromium.googlesource.com/chromium/src.git/+/832440db5c586d1bdeedfd01489e43d09de36aa9
+// console.log('Allowed features:', document.policy.allowedFeatures());
+// document.policy.allowsFeature('legacy-image-formats')
+// document.policy.allowsFeature('legacy-image-formats', 'https://google-developers.appspot.com/')
+// console.log('who can use legacy-image-formats', document.policy.getAllowlistForFeature('legacy-image-formats'));
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120357238-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-120357238-1');
+</script>
+</body>
+</html>
