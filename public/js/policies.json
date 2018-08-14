@@ -102,4 +102,22 @@
       "&lt;iframe allow=\"animations https:\/\/anim8.cdn.com\" src=\"...\"><\/iframe>"
     ]
   }
+}, {
+  "id": "legacy-image-formats",
+  "name": "Legacy Image Formats",
+  "url": "/demos/legacy-image-formats.html",
+  "what": "Restricts images to be one of certain modern formats (JPEG, PNG, GIF, WEBP, and SVG). Images with legacy formats will be rendered with inverted color.",
+  "why": "Ensures optimized performance with images.",
+  "usage": {
+    "off": "legacy-image-formats 'self'",
+    "on": "legacy-image-formats 'none'"
+  },
+  "examples": {
+    "header": [
+      "FeaturePolicy: legacy-image-formats 'none'"
+    ],
+    "iframe": [
+      "&lt;iframe allow=\"legacy-image-formats \'none\'\" src=\"...\"><\/iframe>"
+    ]
+  }
 }]
