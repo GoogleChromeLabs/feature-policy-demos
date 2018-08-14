@@ -102,4 +102,22 @@
       "&lt;iframe allow=\"animations https:\/\/anim8.cdn.com\" src=\"...\"><\/iframe>"
     ]
   }
+}, {
+  "id": "image-compression",
+  "name": "Image Compression",
+  "url": "/demos/image-compression.html",
+  "what": "Restricts image file size (bits) to be no more than 10 times bigger than its compressed pixels. Images violating this policy will be rendered with inverted color.",
+  "why": "Ensures optimized performance with images by minimizing image file size.",
+  "usage": {
+    "off": "image-compression 'self'",
+    "on": "image-compression 'none'"
+  },
+  "examples": {
+    "header": [
+      "FeaturePolicy: image-compression 'none'"
+    ],
+    "iframe": [
+      "&lt;iframe allow=\"image-compression 'none'\" src=\"...\"><\/iframe>"
+    ]
+  }
 }]
