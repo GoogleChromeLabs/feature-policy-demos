@@ -1,5 +1,5 @@
 :root {
-  --app-drawer-width: 256px;
+  --app-drawer-width: 275px;
   --app-primary-color: #E91E63;
   --app-secondary-color: #293237;
   --app-dark-text-color: var(--app-secondary-color);
@@ -65,6 +65,9 @@ h1, h2, h3 {
 }
 .layout.vertical {
   flex-direction: column;
+}
+.layout.wrap {
+  flex-wrap: wrap;
 }
 .flex {
   flex: 1 0 auto;

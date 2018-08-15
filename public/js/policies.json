@@ -104,9 +104,9 @@
   }
 }, {
   "id": "max-downscaling-image",
-  "name": "Maximum Downscaling Image",
-  "url": "/demos/image-downscaling.html",
-  "what": "Restricts images whose intrinsic dimensions that are much larger than the container size.",
+  "name": "Max downscaling images",
+  "url": "/demos/max-downscaling-image.html",
+  "what": "Ensures instrinsic size of images are not much larger than their container size.",
   "why": "Image bloat is a large problem on the web. Sending unnecessarily large images is bad for performance, UX, and wastes bandwidth.",
   "usage": {
     "off": "max-downscaling-image 'self'",
@@ -118,6 +118,9 @@
     ],
     "iframe": [
       "&lt;iframe allow=\"max-downscaling-image 'none'\" src=\"...\"><\/iframe>"
+    ]
+  }
+}, {
   "id": "legacy-image-formats",
   "name": "Legacy image formats",
   "url": "/demos/legacy-image-formats.html",

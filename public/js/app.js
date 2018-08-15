@@ -67,9 +67,15 @@ async function updatePage(anchor, id) {
 
 /**
  * Toggles the app drawer.
+ * @param {boolean=} forClose True to force close the drawer. Default toggles.
  */
-function toggleDrawer() {
-  document.querySelector('.drawer-list').classList.toggle('active');
+function toggleDrawer(forClose = false) {
+  const el = document.querySelector('.drawer-list');
+  if (forClose) {
+    el.classList.remove('active');
+  } else {
+    el.classList.toggle('active');
+  }
 }
 
 /**
@@ -113,6 +119,15 @@ render(html`${implementedPolicies().markup}`,
   document.querySelector('#policy-list'));
 render(html`${leftOverPolicies(implementedPolicies().policies)}`,
   document.querySelector('#all-policy-list'));
+
+document.addEventListener('click', e => {
+  const button = document.querySelector('.menu-button');
+  if (!button.contains(e.target)) {
+    e.stopPropagation();
+    toggleDrawer(true);
+  }
+});
+
 })();
 
 window.updatePage = updatePage;
