@@ -118,6 +118,9 @@
     ],
     "iframe": [
       "&lt;iframe allow=\"max-downscaling-image 'none'\" src=\"...\"><\/iframe>"
+    ]
+  }
+}, {
   "id": "legacy-image-formats",
   "name": "Legacy image formats",
   "url": "/demos/legacy-image-formats.html",
