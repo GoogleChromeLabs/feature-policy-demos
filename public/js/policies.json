@@ -106,7 +106,7 @@
   "id": "legacy-image-formats",
   "name": "Legacy Image Formats",
   "url": "/demos/legacy-image-formats.html",
-  "what": "Restricts images to be one of certain modern formats (JPEG, PNG, GIF, WEBP, and SVG). Images with legacy formats will be rendered with inverted color.",
+  "what": "Restricts images to be one of the more modern formats (JPEG, PNG, GIF, WEBP, and SVG). Images with legacy formats will render with inverted color.",
   "why": "Ensures optimized performance with images.",
   "usage": {
     "off": "legacy-image-formats 'self'",
@@ -117,7 +117,7 @@
       "Feature-Policy: legacy-image-formats 'none'"
     ],
     "iframe": [
-      "&lt;iframe allow=\"legacy-image-formats \'none\'\" src=\"...\"><\/iframe>"
+      "&lt;iframe allow=\"legacy-image-formats 'none'\" src=\"...\"><\/iframe>"
     ]
   }
 }]
