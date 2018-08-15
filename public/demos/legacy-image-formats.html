@@ -32,21 +32,22 @@ For images with legacy formats:
 2. legacy-image-formats off: images will be rendered in inverted color.
 -->
 
-<div class="center">
-<img src="../img/Fisher.bmp" width="200" height="150">
-<p class="center">
-Image format: BMP</br>
-Legacy image format: Yes
-</p>
-</div>
-
-<div class="center">
-<img src="../img/Fisher-large.jpg" width="200" height="150">
-<p class="center">
-Image format: JPEG</br>
-Legacy image format: No
-</p>
-</div>
+<section class="layout center" style="justify-content:space-evenly">
+  <div class="layout vertical center-center">
+    <img src="../img/Fisher.bmp" width="200" height="150">
+    <p>
+      Image format: BMP</br>
+      Legacy image format: <b>Yes</b>
+    </p>
+  </div>
+  <div class="layout vertical center-center">
+    <img src="../img/Fisher-large.jpg" width="200" height="150">
+    <p>
+      Image format: JPEG</br>
+      Legacy image format: No
+    </p>
+  </div>
+</section>
 
 <script type="module">
 import * as shared from '/js/shared.js';
