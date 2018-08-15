@@ -104,7 +104,7 @@
   }
 }, {
   "id": "legacy-image-formats",
-  "name": "Legacy Image Formats",
+  "name": "Legacy image formats",
   "url": "/demos/legacy-image-formats.html",
   "what": "Restricts images to be one of the more modern formats (JPEG, PNG, GIF, WEBP, and SVG). Images with legacy formats will render with inverted color.",
   "why": "Ensures optimized performance with images.",
@@ -122,10 +122,10 @@
   }
 }, {
   "id": "image-compression",
-  "name": "Image Compression",
+  "name": "Image compression",
   "url": "/demos/image-compression.html",
-  "what": "Requires the file size of images (in byte) to be no more than 1.25x bigger than its rendering area (in pixels). Images violating this policy render with inverted colors.",
-  "why": "Ensures optimized performance with images by minimizing image file size.",
+  "what": "Requires the file size of images (in bytes) to be no more than 1.25x bigger than its rendering area (in pixels). Images violating this policy render with inverted colors.",
+  "why": "Ensures optimized performance with images by minimizing file size, reducing image bloat and saving bandwidth.",
   "usage": {
     "off": "image-compression 'self'",
     "on": "image-compression 'none'"

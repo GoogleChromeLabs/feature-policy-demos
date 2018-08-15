@@ -32,23 +32,25 @@ For images with non-optimized file size (i.e. file size too large):
 1. image-compression off: images will render as they normally would.
 2. image-compression on: images will render with inverted colors.
 -->
-<div class="center">
-  <img src="../img/Fisher-large.jpg" width="200" height="150">
-  <p class="center">
-  Image file size: 43K </br>
-  Image area: 200px x 150px </br>
-  Compression ratio (byte-per-pixel): 1.4 (&gt; 1.25)
-  </p>
-</div>
 
-<div class="center">
-  <img src="../img/Fisher-large.jpg" width="200" height="150">
-  <p class="center">
-  Image file size: 9.2K </br>
-  Image area: 200px x 150px </br>
-  Compression ratio (byte-per-pixel): 0.31 (&lt; 1.25)
-  </p>
-</div>
+<section class="layout center" style="justify-content:space-evenly">
+  <div class="layout vertical center-center">
+    <img src="../img/Fisher-large.jpg" width="200" height="150">
+    <p>
+    Image file size: 43K </br>
+    Image area: 200px x 150px </br>
+    Compression ratio (byte-per-pixel): 1.4 (&gt; 1.25)
+    </p>
+  </div>
+  <div class="layout vertical center-center">
+    <img src="../img/Fisher-large-stripped.jpg" width="200" height="150">
+    <p>
+    Image file size: 16K </br>
+    Image area: 200px x 150px </br>
+    Compression ratio (byte-per-pixel): 0.55 (&lt; 1.25)
+    </p>
+  </div>
+</section>
 
 <script type="module">
 import * as shared from '/js/shared.js';
