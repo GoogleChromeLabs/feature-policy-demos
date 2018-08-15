@@ -14,4 +14,4 @@ Then run the web server:
 
 ### Deployment
 
-`npm deploy`
+`npm run deploy`
