@@ -20,17 +20,17 @@
 </h2>
 
 <p>Click the disallow/allow buttons above to see how the page loads with the policy on and off.
-  When the policy is on, you will see images whose intrinsic dimentions that are much larger
-  than the container size.</p>
+  When the policy is on, you will see images that have intrinsic dimentions which are much larger
+  than their container size render with inverted colors..</p>
 
 <!--
 For optimized images:
-1. max-downscaling-image on: image will be rendered accurately.
-2. max-downscaling-image off: image will be rendered accurately.
+1. max-downscaling-image on: images will render as they normally would.
+2. max-downscaling-image off: images will render as they normally would.
 
 For images with exeeds maximum downscaling threshold:
-1. max-downscaling-image on: image will be rendered accurately.
-2. max-downscaling-image off: image will be rendered in inverted color.
+1. max-downscaling-image on: images will render as they normally would.
+2. max-downscaling-image off: images willrender with inverted colors.
 -->
 
 <div class="center">
@@ -69,12 +69,6 @@ For images with exeeds maximum downscaling threshold:
 import * as shared from '/js/shared.js';
 
 shared.initPage();
-
-// https://chromium.googlesource.com/chromium/src.git/+/832440db5c586d1bdeedfd01489e43d09de36aa9
-// console.log('Allowed features:', document.policy.allowedFeatures());
-//document.policy.allowsFeature('unsized-images')
-// document.policy.allowsFeature('geolocation', 'https://google-developers.appspot.com/')
-// console.log('who can use geolocation', document.policy.getAllowlistForFeature('geolocation'));
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120357238-1"></script>
 <script>
