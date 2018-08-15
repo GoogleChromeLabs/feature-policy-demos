@@ -10,8 +10,8 @@
   },
   "examples": {
     "header": [
-      "FeaturePolicy: unsized-media 'none'",
-      "FeaturePolicy: unsized-media https://img.cdn.com"
+      "Feature-Policy: unsized-media 'none'",
+      "Feature-Policy: unsized-media https://img.cdn.com"
     ]
   }
 }, {
@@ -27,7 +27,7 @@
   },
   "examples": {
     "header": [
-      "FeaturePolicy: sync-xhr 'none'"
+      "Feature-Policy: sync-xhr 'none'"
     ]
   }
 }, {
@@ -43,8 +43,8 @@
   },
   "examples": {
     "header": [
-      "FeaturePolicy: autoplay 'none'",
-      "FeaturePolicy: autoplay 'self'"
+      "Feature-Policy: autoplay 'none'",
+      "Feature-Policy: autoplay 'self'"
     ]
   }
 }, {
@@ -60,8 +60,8 @@
   },
   "examples": {
     "header": [
-      "FeaturePolicy: geolocation 'self'",
-      "FeaturePolicy: geolocation https://google-developers.appspot.com"
+      "Feature-Policy: geolocation 'self'",
+      "Feature-Policy: geolocation https://google-developers.appspot.com"
     ],
     "iframe": [
       "&lt;iframe src=\"https://google-developers.appspot.com/demo/...\"\n        allow=\"geolocation https://google-developers.appspot.com\"><\/iframe>"
@@ -80,8 +80,8 @@
   },
   "examples": {
     "header": [
-      "FeaturePolicy: picture-in-picture 'self'",
-      "FeaturePolicy: picture-in-picture 'none'"
+      "Feature-Policy: picture-in-picture 'self'",
+      "Feature-Policy: picture-in-picture 'none'"
     ]
   }
 }, {
@@ -96,7 +96,7 @@
   },
   "examples": {
     "header": [
-      "FeaturePolicy: animations 'none'"
+      "Feature-Policy: animations 'none'"
     ],
     "iframe": [
       "&lt;iframe allow=\"animations https:\/\/anim8.cdn.com\" src=\"...\"><\/iframe>"
@@ -114,7 +114,7 @@
   },
   "examples": {
     "header": [
-      "FeaturePolicy: legacy-image-formats 'none'"
+      "Feature-Policy: legacy-image-formats 'none'"
     ],
     "iframe": [
       "&lt;iframe allow=\"legacy-image-formats \'none\'\" src=\"...\"><\/iframe>"

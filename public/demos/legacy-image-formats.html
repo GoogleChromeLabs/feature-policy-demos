@@ -20,16 +20,15 @@
 </h2>
 
 <p>Click the disallow/allow buttons above to see how the page loads with the policy on and off.
-  When the policy is on, you will see images with legacy formats will be rendered in inverted
- color.</p>
+When the policy is on, you will see images with legacy formats render with inverted colors.</p>
 
 <!--
-For images with morden formats:
-1. legacy-image-formats on: images will be rendered accurately.
-2. legacy-image-formats off: images will be rendered accurately.
+For images with modern formats:
+1. legacy-image-formats on: images will render as they normally would.
+2. legacy-image-formats off: images will render as they normally would.
 
 For images with legacy formats:
-1. legacy-image-formats on: images will be rendered accurately.
+1. legacy-image-formats on: images will render as they normally would.
 2. legacy-image-formats off: images will be rendered in inverted color.
 -->
 
@@ -53,12 +52,6 @@ Legacy image format: No
 import * as shared from '/js/shared.js';
 
 shared.initPage();
-
-// https://chromium.googlesource.com/chromium/src.git/+/832440db5c586d1bdeedfd01489e43d09de36aa9
-// console.log('Allowed features:', document.policy.allowedFeatures());
-// document.policy.allowsFeature('legacy-image-formats')
-// document.policy.allowsFeature('legacy-image-formats', 'https://google-developers.appspot.com/')
-// console.log('who can use legacy-image-formats', document.policy.getAllowlistForFeature('legacy-image-formats'));
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120357238-1"></script>
 <script>
