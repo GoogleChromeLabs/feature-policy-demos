@@ -106,18 +106,25 @@ if (!featurePolicySupported) {
 
 const fetchedPolcies = await fetchPolicies();
 
-const implementedPolicies = () => {
-  const markup = repeat(fetchedPolcies, (p) => p.id, (p, i) => {
+const buildImplementedPolicies = () => {
+  const orderedPolices = fetchedPolcies.sort((a, b) => {
+    return a.name < b.name ? -1 :
+      a.name > b.name ? 1 : 0;
+  });
+  const markup = repeat(orderedPolices, (p) => p.id, (p, i) => {
     return html`<a href="${p.url}?on" class="policy-name"
         onclick="updatePage(this, '${p.id}')">${p.name}</a>`;
   });
-  return {markup, policies: fetchedPolcies};
+  return {markup, policies: orderedPolices};
 };
 
 loadPage().then(updateDetailsHeader);
-render(html`${implementedPolicies().markup}`,
+
+const implementedPolicies = buildImplementedPolicies();
+
+render(html`${implementedPolicies.markup}`,
   document.querySelector('#policy-list'));
-render(html`${leftOverPolicies(implementedPolicies().policies)}`,
+render(html`${leftOverPolicies(implementedPolicies.policies)}`,
   document.querySelector('#all-policy-list'));
 
 document.addEventListener('click', e => {
