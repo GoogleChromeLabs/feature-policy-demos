@@ -1,6 +1,7 @@
 [{
   "id": "unsized-media",
   "name": "Unsized Media",
+  "type": "images",
   "url": "/demos/unsized-media.html",
   "what": "Allows developers to enforce that image/video elements have explicit dimensions. If dimensions aren't specified on the element, the browser sets a default size of 300x150 when this policy is active.",
   "why": "Reduces the layout work the browser has to perform.",
@@ -17,6 +18,7 @@
 }, {
   "id": "sync-xhr",
   "name": "Synchronous XHR",
+  "type": "performance",
   "url": "/demos/sync-xhr.html",
   "chromeStatusLink": "https://www.chromestatus.com/feature/5154875084111872",
   "what": "Disallows the use of synchronous XMLHttpRequests.",
@@ -33,6 +35,7 @@
 }, {
   "id": "autoplay",
   "name": "Autoplay media",
+  "type": "granular",
   "url": "/demos/autoplay.html",
   "chromeStatusLink": "https://www.chromestatus.com/feature/5100524789563392",
   "what": "Allows cross-origin videos and movies to autoplay.",
@@ -50,6 +53,7 @@
 }, {
   "id": "geolocation",
   "name": "Geolocation",
+  "type": "granular",
   "url": "/demos/geolocation.html",
   "chromeStatusLink": null,
   "what": "Allows/disables the use of the Geolocation API.",
@@ -70,6 +74,7 @@
 }, {
   "id": "picture-in-picture",
   "name": "Picture-in-Picture",
+  "type": "granular",
   "url": "/demos/picture-in-picture.html",
   "chromeStatusLink": "https://www.chromestatus.com/features/5729206566649856",
   "what": "Controls access to Picture in Picture.",
@@ -87,6 +92,7 @@
 }, {
   "id": "animations",
   "name": "Fast animations",
+  "type": "performance",
   "url": "/demos/animations.html",
   "what": "Restricts the set of CSS properties which can be animated to opacity, transform, and filter.",
   "why": "Ensures smooth animations, by only allowing those properties which can be animated on the GPU using the hardware acceleration.",
@@ -105,6 +111,7 @@
 }, {
   "id": "max-downscaling-image",
   "name": "Max downscaling images",
+  "type": "images",
   "url": "/demos/max-downscaling-image.html",
   "what": "Ensures instrinsic size of images are not much larger than their container size.",
   "why": "Image bloat is a large problem on the web. Sending unnecessarily large images is bad for performance, UX, and wastes bandwidth.",
@@ -123,6 +130,7 @@
 }, {
   "id": "legacy-image-formats",
   "name": "Legacy image formats",
+  "type": "images",
   "url": "/demos/legacy-image-formats.html",
   "what": "Restricts images to be one of the more modern formats (JPEG, PNG, GIF, WEBP, and SVG). Images with legacy formats will render with inverted color.",
   "why": "Ensures optimized performance with images.",
@@ -141,6 +149,7 @@
 }, {
   "id": "image-compression",
   "name": "Image compression",
+  "type": "images",
   "url": "/demos/image-compression.html",
   "what": "Requires the file size of images (in bytes) to be no more than 1.25x bigger than its rendering area (in pixels). Images violating this policy render with inverted colors.",
   "why": "Ensures optimized performance with images by minimizing file size, reducing image bloat and saving bandwidth.",
@@ -159,6 +168,7 @@
 }, {
   "id": "sync-script",
   "name": "Synchronous scripts",
+  "type": "performance",
   "url": "/demos/sync-script.html",
   "what": "Prevents synchronous, parsing blocking scripts from executing.",
   "why": "Inline scripts and <code>&lt;script src></code> without the <code>defer</code>/<code>async</code> attributes block the parser. This can lead to bad performance and poor UX. Instead, use <code>defer</code>/<code>async</code> when loading scripts, dynamically inject them into the page using JS, or use ES Modules (which are defer loaded by default). These solutions will not violate this feature policy.",

@@ -49,7 +49,7 @@ html, body {
 a {
   color: inherit;
 }
-h1, h2, h3 {
+h1, h2, h3, h4 {
   margin: 0;
   font-weight: inherit;
 }
@@ -130,7 +130,6 @@ h1, h2, h3 {
   height: 56px;
 }
 .drawer-list a {
-  font-size: 18px;
   text-decoration: none;
 }
 .main-view {
@@ -143,10 +142,22 @@ h1, h2, h3 {
 }
 .policy-name {
   display: block;
+  padding-left: var(--default-padding-2x);
 }
 .policy-id {
   white-space: nowrap;
   color: var(--md-blue-grey-400);
+}
+.policy-type {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+.policy-type {
+  margin-top: var(--default-padding);
+}
+#policy-list .policy-type:first-of-type {
+  margin-top: 0;
 }
 footer {
   z-index: 1;
