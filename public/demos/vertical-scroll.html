@@ -31,20 +31,24 @@
 </h2>
 
 <p>When this policy is active, iframe
-  content will <b>not</b> be able use tools like <code>touch-action: none</code>
-  and <code>e.preventDefault()</code> on <code>touchstart</code>events to
-  prevent the content frome scrolling. When it's off, iframes can use those
-tools (as normal) to prevent scrolling.</p>
+  content will <b>not</b> be able prevent its content from scrolling.
+This is done by:</p>
 
-<p>The frame uses <code>body{touch-action:none}</code> to
-prevent its content from scrolling. However, <b>when the policy is "on", the iframe
-content will still be scrollable!</b> The policy prevents <code>touch-action:none</code>
-from working.</p>
+<ul>
+  <li>Ensuring all scroll related input events (e.g. <code>touchstart</code>) are non-cancelable.</li>
+  <li>All elements and nodes inside such frames do have pan-y in their <code>touch-action</code> CSS property (if not, enforce pan-y).</li>
+  <li>Scripted and programmtic scorlling is handled within the scrop of a frame, i.e., calls to <code>element.scrollIntoView()</code> do not propagate outside of a disabled frame.</li>
+</ul>
+
+<p>The frame below uses <code>body{ touch-action: none; }</code> to
+prevent its content from scrolling. However, <b>when the policy is "on", it
+will be scrollable!</b> Practically speaking, the policy prevents <code>touch-action: none</code>
+in the iframe from working.</p>
 
 <p>Try scrolling the iframe below on mobile (e.g. using touch events).</p>
 
 <div class="frame-container">
-  <iframe srcdoc="<style>body{touch-action:none}</style><p>iframe content</p><p>that still controls on mobile (when the policy is on)</p><p>test</p><p>test</p><p>test</p><p>test</p><p>test</p><p>test</p><p>test</p><p>test</p><p id='last'>last</p><script>//setTimeout(() => document.querySelector('#last').scrollIntoView(), 2000);</script>"></iframe>
+  <iframe srcdoc="<style>body{touch-action: none}</style><p>iframe content</p><p>that still controls on mobile (when the policy is on)</p><p>test</p><p>test</p><p>test</p><p>test</p><p>test</p><p>test</p><p>test</p><p>test</p><p id='last'>last</p><script>//setTimeout(() => document.querySelector('#last').scrollIntoView(), 2000);</script>"></iframe>
 </div>
 
 <script type="module">

@@ -189,8 +189,8 @@
   "name": "Vertical Scroll",
   "type": "granular",
   "url": "/demos/vertical-scroll.html",
-  "what": "Controls whether embeeded content in iframes can interfere with the user's vertical scrolling.",
-  "why": "Embedded content that stops a user from being able to scroll the page is a frustrating UX. By default, iframe content can use <code>touch-action</code>, <code>e.preventDefault()</code>, and the DOM Scroll APIs to prevent and/or alter how the user can scroll the content vertically. This policy can prevent those features from working in iframes, and therefore, not effect the user's scrolling.",
+  "what": "Controls whether embedded content can interfere with the user's vertical scrolling.",
+  "why": "By default, iframe content can use <code>touch-action</code>, <code>e.preventDefault()</code>, and the DOM Scroll APIs to prevent and/or alter how the user can scroll the content vertically. This policy can prevent those features from working in iframes, and therefore, effect how the user scrolls the page.",
   "usage": {
     "off": "vertical-scroll 'self'",
     "on": "vertical-scroll 'none'"
