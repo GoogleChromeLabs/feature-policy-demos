@@ -36,8 +36,8 @@ This is done by:</p>
 
 <ul>
   <li>Ensuring all scroll related input events (e.g. <code>touchstart</code>) are non-cancelable.</li>
-  <li>All elements and nodes inside such frames do have pan-y in their <code>touch-action</code> CSS property (if not, enforce pan-y).</li>
-  <li>Scripted and programmtic scorlling is handled within the scrop of a frame, i.e., calls to <code>element.scrollIntoView()</code> do not propagate outside of a disabled frame.</li>
+  <li>Ensuring all elements inside frames have <code>touch-action: pan-y</code> (if not, enforce <code>pan-y</code>).</li>
+  <li>Ensuring programmatic scrolling using the DOM scroll APIs is handled within the scope of the frame, i.e., calls to <code>el.scrollIntoView()</code> do not propagate outside of the frame.</li>
 </ul>
 
 <p>The frame below uses <code>body{ touch-action: none; }</code> to
