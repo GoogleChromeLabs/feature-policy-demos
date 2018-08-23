@@ -186,7 +186,7 @@
   }
 }, {
   "id": "vertical-scroll",
-  "name": "Vertical Scroll",
+  "name": "Vertical scroll",
   "type": "granular",
   "url": "/demos/vertical-scroll.html",
   "what": "Controls whether embedded content can interfere with the user's vertical scrolling.",
