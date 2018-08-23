@@ -45,6 +45,7 @@ html, body {
   font-weight: 300;
   height: 100vh;
   color: var(--md-blue-grey-700);
+  overflow-x: hidden;
 }
 a {
   color: inherit;
