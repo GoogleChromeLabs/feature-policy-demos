@@ -35,7 +35,8 @@ For images with exeeds maximum downscaling threshold:
 
 <section class="layout center wrap" style="justify-content:space-evenly;">
   <h3>
-    When device pixel ratio is 1 (e.g. tablets, microsoft surface, etc)
+    When the compression ratio is less than or equal to maximum downscaling ratio (2),
+    image renders normally.
   </h3>
   <div class="layout vertical center-center">
     <img src="../img/emilio-large.jpg" width="800" height="500">
@@ -44,105 +45,107 @@ For images with exeeds maximum downscaling threshold:
     Container size: 800px x 500px
     </p>
   </div>
-
+</section>
+<section class="layout center wrap" style="justify-content:space-evenly;">
+  <h3>
+    When the compression ratio (width) is more than maximum downscaling raio, image renders
+    with inverted colors.
+  </h3>
   <div class="layout vertical center-center">
     <img src="../img/emilio-large.jpg" width="380" height="500">
     <p>
     Intrinsic size: 800px x 500px <br />
     Container size: 380px x 500px
+    For devices with device pixel ratio of 1 (e.g. tablets, monitors, etc), the compression ratio (800/380) > 2, image renders with inverted clolors.
     </p>
   </div>
 
   <div class="layout vertical center-center">
-    <img src="../img/emilio-large.jpg" width="800" height="220">
+    <img src="../img/emilio-large.jpg" width="180" height="500">
     <p>
     Intrinsic size: 800px x 500px <br />
-    Container size: 800px x 220px
+    Container size: 180px x 500px
+    For devices with device pixel ratio of 2 (e.g. iPad, MacBook, smartphones, etc), the compression ratio (800/(180 * 2)) > 2, image renders with inverted clolors.
     </p>
   </div>
 
   <div class="layout vertical center-center">
-    <img src="../img/emilio-large.jpg" width="380" height="220">
-    <p class="center">
+    <img src="../img/emilio-large.jpg" width="60" height="500">
+    <p>
     Intrinsic size: 800px x 500px <br />
-    Container size: 380px x 220px
+    Container size: 60px x 500px
+    For devices with device pixel ratio between 3 to 5 (e.g. iPhoneX, LG G3+, Samsung Galaxy S4, etc),
+    the compression raio (800 / (60 * 5)) > 2, image renders with inverted clolors.
     </p>
   </div>
 </section>
-
 <section class="layout center wrap" style="justify-content:space-evenly;">
   <h3>
-    When device pixel ratio is 2 (e.g. iPad, MacBook, smart phones, etc)
+    When the compression ratio (height) is more than maximum downscaling raio, image renders
+    with inverted colors.
   </h3>
   <div class="layout vertical center-center">
-    <img src="../img/emilio-large.jpg" width="400" height="250">
+    <img src="../img/emilio-large.jpg" width="800" height="500">
     <p>
     Intrinsic size: 800px x 500px <br />
-    Container size: 400px x 250px
+    Container size: 800px x 200px
+    For devices with device pixel ratio of 1 (e.g. tablets, monitors, etc), the compression ratio (500/200) > 2, image renders with inverted clolors.
     </p>
   </div>
 
   <div class="layout vertical center-center">
-    <img src="../img/emilio-large.jpg" width="180" height="250">
+    <img src="../img/emilio-large.jpg" width="800" height="100">
     <p>
     Intrinsic size: 800px x 500px <br />
-    Container size: 180px x 250px
+    Container size: 800px x 100px
+    For devices with device pixel ratio of 2 (e.g. iPad, MacBook, smartphones, etc), the compression ratio (800/(200 * 2)) > 2, image renders with inverted clolors.
     </p>
   </div>
 
   <div class="layout vertical center-center">
-    <img src="../img/emilio-large.jpg" width="400" height="120">
+    <img src="../img/emilio-large.jpg" width="800" height="40">
     <p>
     Intrinsic size: 800px x 500px <br />
-    Container size: 400px x 120px
-    </p>
-  </div>
-
-  <div class="layout vertical center-center">
-    <img src="../img/emilio-large.jpg" width="180" height="120">
-    <p class="center">
-    Intrinsic size: 800px x 500px <br />
-    Container size: 180px x 120px
+    Container size: 800px x 40px
+    For devices with device pixel ratio between 3 to 5 (e.g. iPhoneX, LG G3+, Samsung Galaxy S4, etc),
+    the compression raio (500 / (40 * 5)) > 2, image renders with inverted clolors.
     </p>
   </div>
 </section>
-
 <section class="layout center wrap" style="justify-content:space-evenly;">
   <h3>
-    When device pixel ratio is >=3 (e.g. iPhoneX, LG G3, Samsung Galaxy S4 etc)
+    When the compression ratio is more than maximum downscaling raio, image renders
+    with inverted colors.
   </h3>
   <div class="layout vertical center-center">
-    <img src="../img/emilio-large.jpg" width="300" height="180">
+    <img src="../img/emilio-large.jpg" width="380" height="200">
     <p>
     Intrinsic size: 800px x 500px <br />
-    Container size: 300px x 180px
+    Container size: 380px x 200px
+    For devices with device pixel ratio of 1 (e.g. tablets, monitors, etc), the compression ratio > 2, image renders with inverted clolors.
     </p>
   </div>
 
   <div class="layout vertical center-center">
-    <img src="../img/emilio-large.jpg" width="80" height="180">
+    <img src="../img/emilio-large.jpg" width="180" height="100">
     <p>
     Intrinsic size: 800px x 500px <br />
-    Container size: 80px x 180px
+    Container size: 180px x 100px
+    For devices with device pixel ratio of 2 (e.g. iPad, MacBook, smartphones, etc), the compression raio > 2, image renders with inverted clolors.
     </p>
   </div>
 
   <div class="layout vertical center-center">
-    <img src="../img/emilio-large.jpg" width="300" height="50">
+    <img src="../img/emilio-large.jpg" width="60" height="40">
     <p>
     Intrinsic size: 800px x 500px <br />
-    Container size: 300px x 50px
-    </p>
-  </div>
-
-  <div class="layout vertical center-center">
-    <img src="../img/emilio-large.jpg" width="80" height="50">
-    <p class="center">
-    Intrinsic size: 800px x 500px <br />
-    Container size: 80px x 50px
+    Container size: 60px x 40px
+    For devices with device pixel ratio between 3 to 5 (e.g. iPhoneX, LG G3+, Samsung Galaxy S4, etc),
+    the compression raio > 2, image renders with inverted clolors.
     </p>
   </div>
 </section>
+
 <script type="module">
 import * as shared from '/js/shared.js';
 
