@@ -15,7 +15,7 @@
  */
 
 import {html, render} from '/lit-html/lit-html.js';
-import {unsafeHTML} from '/lit-html/lib/unsafe-html.js';
+import {unsafeHTML} from '/lit-html/directives/unsafe-html.js';
 
 export const policyOn = new URL(location).searchParams.has('on');
 export const currentPolicyId = new URL(location).pathname.split('/').slice(-1)[0].split('.')[0];

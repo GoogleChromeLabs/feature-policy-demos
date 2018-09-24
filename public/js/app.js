@@ -17,7 +17,7 @@
  */
 
 import {html, render} from '/lit-html/lit-html.js';
-import {repeat} from '/lit-html/lib/repeat.js';
+import {repeat} from '/lit-html/directives/repeat.js';
 import {fetchPolicies, updateDetailsHeader, getPolicy, featurePolicySupported} from '/js/shared.js';
 
 const POLICY_TYPE_TO_LABEL = {
