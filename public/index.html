@@ -4,8 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- Origin Trial Token, feature = Feature Policy JS API, origin = https://feature-policy-demos.appspot.com, expires = 2018-11-06 -->
-  <meta http-equiv="origin-trial" data-feature="Feature Policy JS API" data-expires="2018-11-06" content="AsZO5HHizge4fuqGU9CTMpHRUBKtVhDlPkwiu1hY1xu+5BuGsuCIaB3zp8K3bU3Efh4LVtaLKJUJcAjU1Fx6tAcAAABseyJvcmlnaW4iOiJodHRwczovL2ZlYXR1cmUtcG9saWN5LWRlbW9zLmFwcHNwb3QuY29tOjQ0MyIsImZlYXR1cmUiOiJGZWF0dXJlUG9saWN5SlNBUEkiLCJleHBpcnkiOjE1NDE1MzM0MzR9">
   <title>Feature Policy Kitchen Sink</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
   <link rel="stylesheet" href="/styles/main.css">
@@ -20,7 +18,7 @@
       padding: var(--default-padding);
       color: white;
       text-align: center;
-      margin-top:var(--default-padding-2x);
+      margin-top: var(--default-padding-2x);
       display: none;
     }
     .notsupported.show {
@@ -68,14 +66,16 @@
       <h3 class="notsupported">Feature policy is not supported in your browser. Try Chrome Canary and enable the <code>--enable-experimental-web-platform-features</code> flag.</h3>
       <h3 style="margin-top:var(--default-padding-3x);">You control feature policies through an HTTP header:</h3>
       <p>
-        <pre class="snippet">Feature-Policy: geolocation *
+        <pre class="snippet">Feature-Policy: geolocation
+Feature-Policy: geolocation *
 Feature-Policy: geolocation 'none'
 Feature-Policy: geolocation 'self'
 Feature-Policy: geolocation https://google-developers.appspot.com</pre>
       </p>
       <h3 style="margin-top:var(--default-padding-3x);">or by adding the <code>allow</code> attribute on iframes:</h3>
       <p>
-        <pre class="snippet">&lt;iframe allow="geolocation *">
+        <pre class="snippet">&lt;iframe allow="geolocation">
+&lt;iframe allow="geolocation *">
 &lt;iframe allow="geolocation 'self'">
 &lt;iframe allow="geolocation 'none'">
 &lt;iframe allow="geolocation https://google-developers.appspot.com"></pre>

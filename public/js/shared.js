@@ -19,7 +19,7 @@ import {unsafeHTML} from '/lit-html/directives/unsafe-html.js';
 
 export const policyOn = new URL(location).searchParams.has('on');
 export const currentPolicyId = new URL(location).pathname.split('/').slice(-1)[0].split('.')[0];
-export const featurePolicySupported = 'policy' in document;
+export const featurePolicyAPISupported = 'policy' in document;
 
 let policies = [];
 let fetchingPoliciesPromise = null;
@@ -48,6 +48,11 @@ async function fetchPolicies() {
   fetchingPoliciesPromise = fetch('/js/policies.json').then(resp => resp.json());
   policies = await fetchingPoliciesPromise;
 
+  // Determine if policy is supported in browser.
+  policies.forEach(policy => {
+    policy.supported = policySupported(policy.id);
+  });
+
   return policies;
 }
 
@@ -59,6 +64,18 @@ async function fetchPolicies() {
 async function getPolicy(id) {
   const policies = await fetchPolicies();
   return policies.find(item => item.id === id);
+}
+
+/**
+ * Returns true if the policy is supported by the browser.
+ * @param {string} id
+ * @return {!Boolean}
+ */
+function policySupported(id) {
+  if (!featurePolicyAPISupported) {
+    return false;
+  }
+  return document.policy.allowedFeatures().findIndex(el => el === id) !== -1;
 }
 
 /**
@@ -98,7 +115,12 @@ function updateDetailsHeader(policy) {
       <li><label>What</label><span>${unsafeHTML(policy.what)}</span></li>
       <li><label>Why</label><span>${unsafeHTML(policy.why)}</span></li>
       <li><label>Examples</label><div>${unsafeHTML(examples)}</div></li>
-    </ul>`;
+    </ul>
+    <div class="notsupported ${policy.supported ? '' : 'show'}">
+      <span>This policy is not supported in your browser.<br>
+      <img src="/img/flag-24px.svg" class="flag-icon">Try running Chrome Canary with the
+      <code>--enable-experimental-web-platform-features</code> flag.</span>
+    </div>`;
 
   render(tmpl, document.querySelector('.details'));
 }

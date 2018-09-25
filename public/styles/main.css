@@ -1,5 +1,5 @@
 :root {
-  --app-drawer-width: 275px;
+  --app-drawer-width: 305px;
   --app-primary-color: #E91E63;
   --app-secondary-color: #293237;
   --app-dark-text-color: var(--app-secondary-color);
@@ -109,13 +109,16 @@ h1, h2, h3, h4 {
 }
 .drawer-list.active {
   transform: none;
+  z-index: 2;
 }
 .drawer-list header {
   line-height: 1;
   display: flex;
   flex: 0 0 auto;
-  justify-content: space-between;
   margin-bottom: var(--default-padding-3x);
+}
+.drawer-list img {
+  margin-right: var(--default-padding-2x);
 }
 .drawer-list .drawer-title {
   font-size: 20px;
@@ -132,6 +135,12 @@ h1, h2, h3, h4 {
 }
 .drawer-list a {
   text-decoration: none;
+}
+.drawer-list .flag-icon {
+  display: inline-block;
+}
+.drawer-list .flag-icon.supported {
+  display: none;
 }
 .main-view {
   padding-left: var(--app-drawer-width);
@@ -188,6 +197,13 @@ pre.snippet {
   font-weight: 600;
   font-size: 14px;
   border-radius: var(--default-border-radius);
+}
+.flag-icon {
+  height: 24px;
+  width: 24px;
+  vertical-align: middle;
+  margin-right: 3px;
+  opacity: 0.25;
 }
 @media only screen and (max-width: 450px) {
   .drawer-list {

@@ -78,6 +78,9 @@ body:not(.on) .details .trylinks .disable-button {
 .details-info pre:last-child {
   margin-bottom: 0;
 }
+.details .flag-icon {
+  opacity: 1;
+}
 @media only screen and (max-width: 450px) {
   .details {
     padding: var(--default-padding) var(--default-padding-2x);
@@ -88,7 +91,7 @@ body:not(.on) .details .trylinks .disable-button {
     display: block;
   }
   .details .trylinks a {
-    margin: 0 var(--default-padding-) 0 0;
+    margin: 0 var(--default-padding) 0 0;
   }
   .details li {
     display: block;

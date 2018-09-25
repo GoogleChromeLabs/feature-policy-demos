@@ -18,7 +18,7 @@
 
 import {html, render} from '/lit-html/lit-html.js';
 import {repeat} from '/lit-html/directives/repeat.js';
-import {fetchPolicies, updateDetailsHeader, getPolicy, featurePolicySupported} from '/js/shared.js';
+import {fetchPolicies, updateDetailsHeader, getPolicy, featurePolicyAPISupported} from '/js/shared.js';
 
 const POLICY_TYPE_TO_LABEL = {
   performance: 'Performance',
@@ -106,21 +106,21 @@ async function leftOverPolicies(implementedPolicies) {
 
 
 (async () => {
-if (!featurePolicySupported) {
+if (!featurePolicyAPISupported) {
   document.querySelector('.notsupported').classList.add('show');
   return;
 }
 
-const fetchedPolcies = await fetchPolicies();
+const fetchedPolicies = await fetchPolicies();
 
 const buildImplementedPolicies = () => {
-  const orderedPolices = fetchedPolcies.sort((a, b) => {
+  const orderedPolicies = fetchedPolicies.sort((a, b) => {
     return a.name < b.name ? -1 :
       a.name > b.name ? 1 : 0;
   });
 
   const categoryMapping = new Map();
-  fetchedPolcies.forEach(policy => {
+  fetchedPolicies.forEach(policy => {
     const item = categoryMapping.get(policy.type);
     if (item) {
       item.push(policy);
@@ -132,15 +132,19 @@ const buildImplementedPolicies = () => {
   const categories = Array.from(categoryMapping.entries());
   const markup = repeat(categories, (item) => item[0], ([cat, policies], i) => {
     const items = repeat(policies, (p) => p.id, (p, i) => {
-      return html`<a href="${p.url}?on" class="policy-name"
-          onclick="updatePage(this, '${p.id}')">${p.name}</a>`;
+      return html`
+        <a href="${p.url}?on" class="policy-name" onclick="updatePage(this, '${p.id}')">
+          ${p.name}
+          <img src="/img/flag-24px.svg" class="flag-icon ${p.supported ? 'supported' : ''}"
+               title="Requires a flag">
+        </a>`;
     });
     return html`
       <h4 class="policy-type">${POLICY_TYPE_TO_LABEL[cat]}</h4>
       ${items}
     `;
   });
-  return {markup, policies: orderedPolices};
+  return {markup, policies: orderedPolicies};
 };
 
 loadPage().then(updateDetailsHeader);
@@ -161,7 +165,6 @@ document.addEventListener('click', e => {
     toggleDrawer(true);
   }
 });
-
 })();
 
 window.updatePage = updatePage;

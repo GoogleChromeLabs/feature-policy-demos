@@ -19,6 +19,9 @@
 import fs from 'fs';
 import express from 'express';
 
+const ORIGIN_TRIAL_TOKEN = 'AsZO5HHizge4fuqGU9CTMpHRUBKtVhDlPkwiu1hY1xu+5BuGsuCIaB3zp8K3bU3Efh4LVtaLKJUJcAjU1Fx6tAcAAABseyJvcmlnaW4iOiJodHRwczovL2ZlYXR1cmUtcG9saWN5LWRlbW9zLmFwcHNwb3QuY29tOjQ0MyIsImZlYXR1cmUiOiJGZWF0dXJlUG9saWN5SlNBUEkiLCJleHBpcnkiOjE1NDE1MzM0MzR9';
+const ORIGIN_TRIAL_TOKEN2 = 'AlaRC4XEznfqmhsKbtYF7BixFX3I/8/BkpaoK19V9q94F4zRRL/fqB0cOZj9vG0QeKwS3MmKEBq7JimvonBzwgYAAABVeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJmZWF0dXJlIjoiRmVhdHVyZVBvbGljeUpTQVBJIiwiZXhwaXJ5IjoxNTQxNTM3MDE5fQ=='; // localhost:8080;
+
 /* eslint-disable */
 function errorHandler(err, req, res, next) {
   if (res.headersSent) {
@@ -31,8 +34,10 @@ function errorHandler(err, req, res, next) {
 
 const app = express();
 
-app.use(function enableCors(req, res, next) {
+app.use(function commonHeaders(req, res, next) {
   res.set('Access-Control-Allow-Origin', '*');
+  res.set('Origin-Trial', ORIGIN_TRIAL_TOKEN);
+  res.set('Origin-Trial', ORIGIN_TRIAL_TOKEN2);
   next();
 });
 
