@@ -110,7 +110,7 @@ function updateDetailsHeader(policy) {
  */
 function updateAllowBanner(policyId) {
   const allowsFeature = document.policy.allowsFeature(policyId);
-  const allows = allowsFeature ? 'allows' : 'disallows';
+  const allows = allowsFeature ? 'enables' : 'disables';
   const banner = document.querySelector('#feature-allowed-banner');
   if (!banner) {
     /* eslint-disable-next-line */
