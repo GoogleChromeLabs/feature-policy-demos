@@ -37,7 +37,7 @@ const app = express();
 app.use(function commonHeaders(req, res, next) {
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Origin-Trial', ORIGIN_TRIAL_TOKEN);
-  res.set('Origin-Trial', ORIGIN_TRIAL_TOKEN2);
+  // res.sen('Origin-Trial', ORIGIN_TRIAL_TOKEN2);
   next();
 });
 
