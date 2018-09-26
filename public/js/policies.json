@@ -68,7 +68,7 @@
       "Feature-Policy: geolocation https://google-developers.appspot.com"
     ],
     "iframe": [
-      "&lt;iframe src=\"https://google-developers.appspot.com/demo/...\"\n        allow=\"geolocation https://google-developers.appspot.com\"><\/iframe>"
+      "&lt;iframe src=\"...\" allow=\"geolocation https://google-developers.appspot.com\"><\/iframe>"
     ]
   }
 }, {

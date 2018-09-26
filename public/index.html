@@ -57,7 +57,7 @@
     </div>
   </div>
 
-  <div class="content-view">
+  <div>
     <div id="intro-summary" class="body-padding">
       <h2><a href="https://developers.google.com/web/updates/2018/06/feature-policy" target="_blank">Feature Policy</a>
         allows web developers to selectively enable, disable, and modify the behavior
@@ -66,8 +66,7 @@
       <h3 class="notsupported">Feature policy is not supported in your browser. Try Chrome Canary and enable the <code>--enable-experimental-web-platform-features</code> flag.</h3>
       <h3 style="margin-top:var(--default-padding-3x);">You control feature policies through an HTTP header:</h3>
       <p>
-        <pre class="snippet">Feature-Policy: geolocation
-Feature-Policy: geolocation *
+        <pre class="snippet">Feature-Policy: geolocation *
 Feature-Policy: geolocation 'none'
 Feature-Policy: geolocation 'self'
 Feature-Policy: geolocation https://google-developers.appspot.com</pre>
@@ -75,7 +74,6 @@ Feature-Policy: geolocation https://google-developers.appspot.com</pre>
       <h3 style="margin-top:var(--default-padding-3x);">or by adding the <code>allow</code> attribute on iframes:</h3>
       <p>
         <pre class="snippet">&lt;iframe allow="geolocation">
-&lt;iframe allow="geolocation *">
 &lt;iframe allow="geolocation 'self'">
 &lt;iframe allow="geolocation 'none'">
 &lt;iframe allow="geolocation https://google-developers.appspot.com"></pre>
