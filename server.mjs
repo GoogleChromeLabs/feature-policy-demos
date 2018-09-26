@@ -34,6 +34,14 @@ function errorHandler(err, req, res, next) {
 
 const app = express();
 
+app.use(function forceSSL(req, res, next) {
+  const fromCron = req.get('X-Appengine-Cron');
+  if (!fromCron && req.hostname !== 'localhost' && req.get('X-Forwarded-Proto') === 'http') {
+    return res.redirect(`https://${req.hostname}${req.url}`);
+  }
+  next();
+});
+
 app.use(function commonHeaders(req, res, next) {
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Origin-Trial', ORIGIN_TRIAL_TOKEN);
