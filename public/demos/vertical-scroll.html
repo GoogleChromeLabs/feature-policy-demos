@@ -72,13 +72,6 @@ import {html, render} from '/lit-html/lit-html.js';
 import {repeat} from '/lit-html/directives/repeat.js';
 import * as shared from '/js/shared.js';
 
-function syncLoadJSON(url) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', url, false); // sync
-  xhr.send();
-  return JSON.parse(xhr.response);
-}
-
 shared.initPage();
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120357238-1"></script>
