@@ -57,7 +57,7 @@ app.get('/test', (req, res, next) => {
     res.append('Feature-Policy', `image-compression 'none'`);
     res.append('Feature-Policy', `legacy-image-formats 'none'`);
     res.append('Feature-Policy', `geolocation 'none'`);
-    res.append('Feature-Policy', `camera 'none', microphone 'none'`);
+    res.append('Feature-Policy', `camera 'none'; microphone 'none'`);
     res.append('Feature-Policy', `autoplay 'self'`);
     res.append('Feature-Policy', `fullscreen 'none'`);
     res.append('Feature-Policy', `geolocation 'self'`);
@@ -79,7 +79,7 @@ app.get('/:demoPage', (req, res, next) => {
 // // Enable/disable policies on demo pages.
 // app.use('/demos', (req, res, next) => {
 //   const unsizedMedia = 'on' in req.query;
-//   // res.append('Feature-Policy', "camera 'none', microphone 'none'");
+//   // res.append('Feature-Policy', "camera 'none'; microphone 'none'");
 //   // res.append('Feature-Policy', "autoplay 'self' https://clips.vorwaerts-gmbh.de");
 //   // res.append('Feature-Policy', "fullscreen 'none'");
 //   // res.append('Feature-Policy', "geolocation 'self' https://example.com");
