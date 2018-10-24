@@ -190,7 +190,7 @@
   "type": "granular",
   "url": "/demos/vertical-scroll.html",
   "what": "Controls whether embedded content can interfere with vertical scrolling.",
-  "why": "By default, iframe content can use <code>touch-action: nonr</code>, <code>e.preventDefault()</code> in touch events, and the DOM Scroll APIs to prevent and/or alter how content scrolls vertically. This policy ensures vertical scrolling is not blocked by preventing these features from working.",
+  "why": "By default, iframe content can use <code>touch-action: none</code>, <code>e.preventDefault()</code> in touch events, and the DOM Scroll APIs to prevent and/or alter how content scrolls vertically. This policy ensures vertical scrolling is not blocked by preventing these features from working.",
   "usage": {
     "off": "vertical-scroll 'self'",
     "on": "vertical-scroll 'none'"
