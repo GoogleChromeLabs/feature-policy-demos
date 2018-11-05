@@ -109,22 +109,22 @@
     ]
   }
 }, {
-  "id": "max-downscaling-image",
-  "name": "Max downscaling images",
+  "id": "oversized-images",
+  "name": "Oversized images",
   "type": "images",
-  "url": "/demos/max-downscaling-image.html",
+  "url": "/demos/oversized-images.html",
   "what": "Ensures instrinsic size of images are not much larger than their container size.",
   "why": "Image bloat is a large problem on the web. Sending unnecessarily large images is bad for performance, UX, and wastes bandwidth.",
   "usage": {
-    "off": "max-downscaling-image 'self'",
-    "on": "max-downscaling-image 'none'"
+    "off": "oversized-images 'self'",
+    "on": "oversized-images 'none'"
   },
   "examples": {
     "header": [
-      "Feature-Policy: max-downscaling-image 'none'"
+      "Feature-Policy: oversized-images 'none'"
     ],
     "iframe": [
-      "&lt;iframe allow=\"max-downscaling-image 'none'\" src=\"...\"><\/iframe>"
+      "&lt;iframe allow=\"oversized-images 'none'\" src=\"...\"><\/iframe>"
     ]
   }
 }, {
