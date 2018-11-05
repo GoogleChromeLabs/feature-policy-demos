@@ -147,22 +147,22 @@
     ]
   }
 }, {
-  "id": "image-compression",
-  "name": "Image compression",
+  "id": "unoptimized-images",
+  "name": "Unoptimized images",
   "type": "images",
-  "url": "/demos/image-compression.html",
-  "what": "Requires the file size of images (in bytes) to be no more than 1.25x bigger than its rendering area (in pixels). Images violating this policy render with inverted colors.",
+  "url": "/demos/unoptimized-images.html",
+  "what": "Requires the data size of images (in bytes) to be no more than 0.5x bigger than its rendering area (in pixels). Images violating this policy render as placeholder images.",
   "why": "Ensures optimized performance with images by minimizing file size, reducing image bloat and saving bandwidth.",
   "usage": {
-    "off": "image-compression 'self'",
-    "on": "image-compression 'none'"
+    "off": "unoptimized-images 'self'",
+    "on": "unoptimized-images 'none'"
   },
   "examples": {
     "header": [
-      "Feature-Policy: image-compression 'none'"
+      "Feature-Policy: unoptimized-images 'none'"
     ],
     "iframe": [
-      "&lt;iframe allow=\"image-compression 'none'\" src=\"...\"><\/iframe>"
+      "&lt;iframe allow=\"unoptimized-images 'none'\" src=\"...\"><\/iframe>"
     ]
   }
 }, {
