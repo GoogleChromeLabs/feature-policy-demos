@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Feature Policy: oversized-images example</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/header.css">
+</head>
+<body class="body-padding">
+
+<details class="details">
+  <!-- filled dynamically -->
+</details>
+
+<h2 id="feature-allowed-banner">
+  <span id="allowfeature">...</span>
+</h2>
+
+<p>Click the disallow/allow buttons above to see how the page loads with the policy on and off.
+  When the policy is on, you will see images that have intrinsic dimentions which are much larger
+  than their container size render as placeholder images.</p>
+
+<!--
+For optimized images:
+1. oversized-image on: images will render as they normally would.
+2. oversized-image off: images will render as they normally would.
+
+For images with exeeds maximum oversizing threshold:
+1. oversized-image on: images will render as they normally would.
+2. oversized-image off: images will render as placeholder images.
+-->
+
+<section class="layout center wrap" style="justify-content:space-evenly;">
+  <h3>
+    When the downscaling ratio is less than or equal to maximum oversizing ratio (2),
+    the image renders normally.
+  </h3>
+  <div class="layout vertical center-center">
+    <img src="../img/emilio-large.jpg" width="800" height="500">
+    <p>
+    Intrinsic size: 800px x 500px <br />
+    Container size: 800px x 500px
+    </p>
+  </div>
+</section>
+<section class="layout center wrap" style="justify-content:space-evenly;">
+  <h3>
+    When the downscaling ratio (width) is more than maximum oversizing raio, the image renders
+    as a placeholder image.
+  </h3>
+  <div class="layout vertical center-center">
+    <img src="../img/emilio-large.jpg" width="380" height="500">
+    <p>
+    Intrinsic size: 800px x 500px <br />
+    Container size: 380px x 500px
+    For devices with device pixel ratio of 1 (e.g. tablets, monitors, etc), the downscaling ratio (800/380) > 2, the image renders as a placeholder image.
+    </p>
+  </div>
+
+  <div class="layout vertical center-center">
+    <img src="../img/emilio-large.jpg" width="180" height="500">
+    <p>
+    Intrinsic size: 800px x 500px <br />
+    Container size: 180px x 500px
+    For devices with device pixel ratio of 2 (e.g. iPad, MacBook, smartphones, etc), the downscaling ratio (800/(180 * 2)) > 2, the image renders as a placeholder image.
+    </p>
+  </div>
+
+  <div class="layout vertical center-center">
+    <img src="../img/emilio-large.jpg" width="60" height="500">
+    <p>
+    Intrinsic size: 800px x 500px <br />
+    Container size: 60px x 500px
+    For devices with device pixel ratio between 3 to 5 (e.g. iPhoneX, LG G3+, Samsung Galaxy S4, etc),
+    the downscaling raio (800 / (60 * 5)) > 2, the image renders as a placeholder image.
+    </p>
+  </div>
+</section>
+<section class="layout center wrap" style="justify-content:space-evenly;">
+  <h3>
+    When the downscaling ratio (height) is more than maximum oversizing raio, the image as a placeholder image.
+  </h3>
+  <div class="layout vertical center-center">
+    <img src="../img/emilio-large.jpg" width="800" height="500">
+    <p>
+    Intrinsic size: 800px x 500px <br />
+    Container size: 800px x 200px
+    For devices with device pixel ratio of 1 (e.g. tablets, monitors, etc), the downscaling ratio (500/200) > 2, the image renders as a placeholder image.
+    </p>
+  </div>
+
+  <div class="layout vertical center-center">
+    <img src="../img/emilio-large.jpg" width="800" height="100">
+    <p>
+    Intrinsic size: 800px x 500px <br />
+    Container size: 800px x 100px
+    For devices with device pixel ratio of 2 (e.g. iPad, MacBook, smartphones, etc), the downscaling ratio (800/(200 * 2)) > 2, the image renders as a placeholder image.
+    </p>
+  </div>
+
+  <div class="layout vertical center-center">
+    <img src="../img/emilio-large.jpg" width="800" height="40">
+    <p>
+    Intrinsic size: 800px x 500px <br />
+    Container size: 800px x 40px
+    For devices with device pixel ratio between 3 to 5 (e.g. iPhoneX, LG G3+, Samsung Galaxy S4, etc),
+    the downscaling raio (500 / (40 * 5)) > 2, the image renders as a placeholder image.
+    </p>
+  </div>
+</section>
+<section class="layout center wrap" style="justify-content:space-evenly;">
+  <h3>
+    When the downscaling ratio is more than maximum oversizing raio, the image renders as a placeholder image.
+  </h3>
+  <div class="layout vertical center-center">
+    <img src="../img/emilio-large.jpg" width="380" height="200">
+    <p>
+    Intrinsic size: 800px x 500px <br />
+    Container size: 380px x 200px
+    For devices with device pixel ratio of 1 (e.g. tablets, monitors, etc), the downscaling ratio > 2, the image renders as a placeholder image.
+    </p>
+  </div>
+
+  <div class="layout vertical center-center">
+    <img src="../img/emilio-large.jpg" width="180" height="100">
+    <p>
+    Intrinsic size: 800px x 500px <br />
+    Container size: 180px x 100px
+    For devices with device pixel ratio of 2 (e.g. iPad, MacBook, smartphones, etc), the downscaling raio > 2, the image renders as a placeholder image.
+    </p>
+  </div>
+
+  <div class="layout vertical center-center">
+    <img src="../img/emilio-large.jpg" width="60" height="40">
+    <p>
+    Intrinsic size: 800px x 500px <br />
+    Container size: 60px x 40px
+    For devices with device pixel ratio between 3 to 5 (e.g. iPhoneX, LG G3+, Samsung Galaxy S4, etc),
+    the downscaling raio > 2, image renders as a placeholder image.
+    </p>
+  </div>
+</section>
+
+<script type="module">
+import * as shared from '/js/shared.js';
+
+shared.initPage();
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120357238-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-120357238-1');
+</script>
+</body>
+</html>
