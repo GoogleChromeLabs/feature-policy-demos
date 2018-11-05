@@ -109,41 +109,41 @@
     ]
   }
 }, {
-  "id": "max-downscaling-image",
-  "name": "Max downscaling images",
+  "id": "oversized-images",
+  "name": "Oversized images",
   "type": "images",
-  "url": "/demos/max-downscaling-image.html",
+  "url": "/demos/oversized-images.html",
   "what": "Ensures instrinsic size of images are not much larger than their container size.",
   "why": "Image bloat is a large problem on the web. Sending unnecessarily large images is bad for performance, UX, and wastes bandwidth.",
   "usage": {
-    "off": "max-downscaling-image 'self'",
-    "on": "max-downscaling-image 'none'"
+    "off": "oversized-images 'self'",
+    "on": "oversized-images 'none'"
   },
   "examples": {
     "header": [
-      "Feature-Policy: max-downscaling-image 'none'"
+      "Feature-Policy: oversized-images 'none'"
     ],
     "iframe": [
-      "&lt;iframe allow=\"max-downscaling-image 'none'\" src=\"...\"><\/iframe>"
+      "&lt;iframe allow=\"oversized-images 'none'\" src=\"...\"><\/iframe>"
     ]
   }
 }, {
-  "id": "image-compression",
-  "name": "Image compression",
+  "id": "unoptimized-images",
+  "name": "Unoptimized images",
   "type": "images",
-  "url": "/demos/image-compression.html",
-  "what": "Requires the file size of images (in bytes) to be no more than 1.25x bigger than its rendering area (in pixels). Images violating this policy render with inverted colors.",
+  "url": "/demos/unoptimized-images.html",
+  "what": "Requires the data size of images (in bytes) to be no more than 0.5x bigger than its rendering area (in pixels). Images violating this policy render as placeholder images.",
   "why": "Ensures optimized performance with images by minimizing file size, reducing image bloat and saving bandwidth.",
   "usage": {
-    "off": "image-compression 'self'",
-    "on": "image-compression 'none'"
+    "off": "unoptimized-images 'self'",
+    "on": "unoptimized-images 'none'"
   },
   "examples": {
     "header": [
-      "Feature-Policy: image-compression 'none'"
+      "Feature-Policy: unoptimized-images 'none'"
     ],
     "iframe": [
-      "&lt;iframe allow=\"image-compression 'none'\" src=\"...\"><\/iframe>"
+      "&lt;iframe allow=\"unoptimized-images 'none'\" src=\"...\"><\/iframe>"
     ]
   }
 }, {
