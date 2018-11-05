@@ -128,41 +128,22 @@
     ]
   }
 }, {
-  "id": "legacy-image-formats",
-  "name": "Legacy image formats",
+  "id": "unoptimized-images",
+  "name": "Unoptimized images",
   "type": "images",
-  "url": "/demos/legacy-image-formats.html",
-  "what": "Restricts images to be one of the more modern formats (JPEG, PNG, GIF, WEBP, and SVG). Images with legacy formats will render with inverted color.",
-  "why": "Ensures optimized performance with images.",
-  "usage": {
-    "off": "legacy-image-formats 'self'",
-    "on": "legacy-image-formats 'none'"
-  },
-  "examples": {
-    "header": [
-      "Feature-Policy: legacy-image-formats 'none'"
-    ],
-    "iframe": [
-      "&lt;iframe allow=\"legacy-image-formats 'none'\" src=\"...\"><\/iframe>"
-    ]
-  }
-}, {
-  "id": "image-compression",
-  "name": "Image compression",
-  "type": "images",
-  "url": "/demos/image-compression.html",
-  "what": "Requires the file size of images (in bytes) to be no more than 1.25x bigger than its rendering area (in pixels). Images violating this policy render with inverted colors.",
+  "url": "/demos/unoptimized-images.html",
+  "what": "Requires the data size of images (in bytes) to be no more than 0.5x bigger than its rendering area (in pixels). Images violating this policy render as placeholder images.",
   "why": "Ensures optimized performance with images by minimizing file size, reducing image bloat and saving bandwidth.",
   "usage": {
-    "off": "image-compression 'self'",
-    "on": "image-compression 'none'"
+    "off": "unoptimized-images 'self'",
+    "on": "unoptimized-images 'none'"
   },
   "examples": {
     "header": [
-      "Feature-Policy: image-compression 'none'"
+      "Feature-Policy: unoptimized-images 'none'"
     ],
     "iframe": [
-      "&lt;iframe allow=\"image-compression 'none'\" src=\"...\"><\/iframe>"
+      "&lt;iframe allow=\"unoptimized-images 'none'\" src=\"...\"><\/iframe>"
     ]
   }
 }, {
