@@ -3,7 +3,7 @@
   "name": "Unsized Media",
   "type": "images",
   "url": "/demos/unsized-media.html",
-  "what": "Allows developers to enforce that image/video elements have explicit dimensions. If dimensions aren't specified on the element, the browser sets a default size of 300x150 when this policy is active.",
+  "what": "Allows developers to enforce that image/video elements have explicit dimensions. If dimensions aren't specified on the element, the browser uses a default intrinsic size of 300px x 150px when this policy is active.",
   "why": "Reduces the layout work the browser has to perform.",
   "usage": {
     "off": "unsized-media 'self'",
