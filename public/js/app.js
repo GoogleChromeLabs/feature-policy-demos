@@ -17,8 +17,15 @@
  */
 
 import {html, render} from '/lit-html/lit-html.js';
-import {repeat} from '/lit-html/lib/repeat.js';
-import {fetchPolicies, updateDetailsHeader, getPolicy, featurePolicySupported} from '/js/shared.js';
+import {repeat} from '/lit-html/directives/repeat.js';
+import {fetchPolicies, updateDetailsHeader, getPolicy, featurePolicyAPISupported} from '/js/shared.js';
+
+const POLICY_TYPE_TO_LABEL = {
+  performance: 'Performance',
+  images: 'Images',
+  granular: 'Granular control',
+  other: 'Coming soon...',
+};
 
 /**
  * Dynamically loads policy demo page based off current (deep link) url.
@@ -67,9 +74,15 @@ async function updatePage(anchor, id) {
 
 /**
  * Toggles the app drawer.
+ * @param {boolean=} forClose True to force close the drawer. Default toggles.
  */
-function toggleDrawer() {
-  document.querySelector('.drawer-list').classList.toggle('active');
+function toggleDrawer(forClose = false) {
+  const el = document.querySelector('.drawer-list');
+  if (forClose) {
+    el.classList.remove('active');
+  } else {
+    el.classList.toggle('active');
+  }
 }
 
 /**
@@ -93,26 +106,65 @@ async function leftOverPolicies(implementedPolicies) {
 
 
 (async () => {
-if (!featurePolicySupported) {
+if (!featurePolicyAPISupported) {
   document.querySelector('.notsupported').classList.add('show');
   return;
 }
 
-const fetchedPolcies = await fetchPolicies();
+const fetchedPolicies = await fetchPolicies();
 
-const implementedPolicies = () => {
-  const markup = repeat(fetchedPolcies, (p) => p.id, (p, i) => {
-    return html`<a href="${p.url}?on" class="policy-name"
-        onclick="updatePage(this, '${p.id}')">${p.name}</a>`;
+const buildImplementedPolicies = () => {
+  const orderedPolicies = fetchedPolicies.sort((a, b) => {
+    return a.name < b.name ? -1 :
+      a.name > b.name ? 1 : 0;
   });
-  return {markup, policies: fetchedPolcies};
+
+  const categoryMapping = new Map();
+  fetchedPolicies.forEach(policy => {
+    const item = categoryMapping.get(policy.type);
+    if (item) {
+      item.push(policy);
+    } else {
+      categoryMapping.set(policy.type, [policy]);
+    }
+  });
+
+  const categories = Array.from(categoryMapping.entries());
+  const markup = repeat(categories, (item) => item[0], ([cat, policies], i) => {
+    const items = repeat(policies, (p) => p.id, (p, i) => {
+      return html`
+        <a href="${p.url}?on" class="policy-name" onclick="updatePage(this, '${p.id}')">
+          ${p.name}
+          <img src="/img/flag-24px.svg" class="flag-icon ${p.supported ? 'supported' : ''}"
+               title="Requires a flag">
+        </a>`;
+    });
+    return html`
+      <h4 class="policy-type">${POLICY_TYPE_TO_LABEL[cat]}</h4>
+      ${items}
+    `;
+  });
+  return {markup, policies: orderedPolicies};
 };
 
 loadPage().then(updateDetailsHeader);
-render(html`${implementedPolicies().markup}`,
+
+const implementedPolicies = buildImplementedPolicies();
+
+render(html`${implementedPolicies.markup}`,
   document.querySelector('#policy-list'));
-render(html`${leftOverPolicies(implementedPolicies().policies)}`,
-  document.querySelector('#all-policy-list'));
+render(html`
+  <h4 class="policy-type">${POLICY_TYPE_TO_LABEL['other']}</h4>
+  ${leftOverPolicies(implementedPolicies.policies)}
+`, document.querySelector('#all-policy-list'));
+
+document.addEventListener('click', e => {
+  const button = document.querySelector('.menu-button');
+  if (!button.contains(e.target)) {
+    e.stopPropagation();
+    toggleDrawer(true);
+  }
+});
 })();
 
 window.updatePage = updatePage;

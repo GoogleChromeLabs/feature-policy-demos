@@ -1,6 +1,7 @@
 [{
   "id": "unsized-media",
   "name": "Unsized Media",
+  "type": "images",
   "url": "/demos/unsized-media.html",
   "what": "Allows developers to enforce that image/video elements have explicit dimensions. If dimensions aren't specified on the element, the browser sets a default size of 300x150 when this policy is active.",
   "why": "Reduces the layout work the browser has to perform.",
@@ -10,13 +11,14 @@
   },
   "examples": {
     "header": [
-      "FeaturePolicy: unsized-media 'none'",
-      "FeaturePolicy: unsized-media https://img.cdn.com"
+      "Feature-Policy: unsized-media 'none'",
+      "Feature-Policy: unsized-media https://img.cdn.com"
     ]
   }
 }, {
   "id": "sync-xhr",
   "name": "Synchronous XHR",
+  "type": "performance",
   "url": "/demos/sync-xhr.html",
   "chromeStatusLink": "https://www.chromestatus.com/feature/5154875084111872",
   "what": "Disallows the use of synchronous XMLHttpRequests.",
@@ -27,12 +29,13 @@
   },
   "examples": {
     "header": [
-      "FeaturePolicy: sync-xhr 'none'"
+      "Feature-Policy: sync-xhr 'none'"
     ]
   }
 }, {
   "id": "autoplay",
   "name": "Autoplay media",
+  "type": "granular",
   "url": "/demos/autoplay.html",
   "chromeStatusLink": "https://www.chromestatus.com/feature/5100524789563392",
   "what": "Allows cross-origin videos and movies to autoplay.",
@@ -43,13 +46,14 @@
   },
   "examples": {
     "header": [
-      "FeaturePolicy: autoplay 'none'",
-      "FeaturePolicy: autoplay 'self'"
+      "Feature-Policy: autoplay 'none'",
+      "Feature-Policy: autoplay 'self'"
     ]
   }
 }, {
   "id": "geolocation",
   "name": "Geolocation",
+  "type": "granular",
   "url": "/demos/geolocation.html",
   "chromeStatusLink": null,
   "what": "Allows/disables the use of the Geolocation API.",
@@ -60,16 +64,17 @@
   },
   "examples": {
     "header": [
-      "FeaturePolicy: geolocation 'self'",
-      "FeaturePolicy: geolocation https://google-developers.appspot.com"
+      "Feature-Policy: geolocation 'self'",
+      "Feature-Policy: geolocation https://google-developers.appspot.com"
     ],
     "iframe": [
-      "&lt;iframe src=\"https://google-developers.appspot.com/demo/...\"\n        allow=\"geolocation https://google-developers.appspot.com\"><\/iframe>"
+      "&lt;iframe src=\"...\" allow=\"geolocation https://google-developers.appspot.com\"><\/iframe>"
     ]
   }
 }, {
   "id": "picture-in-picture",
   "name": "Picture-in-Picture",
+  "type": "granular",
   "url": "/demos/picture-in-picture.html",
   "chromeStatusLink": "https://www.chromestatus.com/features/5729206566649856",
   "what": "Controls access to Picture in Picture.",
@@ -80,13 +85,14 @@
   },
   "examples": {
     "header": [
-      "FeaturePolicy: picture-in-picture 'self'",
-      "FeaturePolicy: picture-in-picture 'none'"
+      "Feature-Policy: picture-in-picture 'self'",
+      "Feature-Policy: picture-in-picture 'none'"
     ]
   }
 }, {
   "id": "animations",
   "name": "Fast animations",
+  "type": "performance",
   "url": "/demos/animations.html",
   "what": "Restricts the set of CSS properties which can be animated to opacity, transform, and filter.",
   "why": "Ensures smooth animations, by only allowing those properties which can be animated on the GPU using the hardware acceleration.",
@@ -96,10 +102,105 @@
   },
   "examples": {
     "header": [
-      "FeaturePolicy: animations 'none'"
+      "Feature-Policy: animations 'none'"
     ],
     "iframe": [
       "&lt;iframe allow=\"animations https:\/\/anim8.cdn.com\" src=\"...\"><\/iframe>"
+    ]
+  }
+}, {
+  "id": "max-downscaling-image",
+  "name": "Max downscaling images",
+  "type": "images",
+  "url": "/demos/max-downscaling-image.html",
+  "what": "Ensures instrinsic size of images are not much larger than their container size.",
+  "why": "Image bloat is a large problem on the web. Sending unnecessarily large images is bad for performance, UX, and wastes bandwidth.",
+  "usage": {
+    "off": "max-downscaling-image 'self'",
+    "on": "max-downscaling-image 'none'"
+  },
+  "examples": {
+    "header": [
+      "Feature-Policy: max-downscaling-image 'none'"
+    ],
+    "iframe": [
+      "&lt;iframe allow=\"max-downscaling-image 'none'\" src=\"...\"><\/iframe>"
+    ]
+  }
+}, {
+  "id": "legacy-image-formats",
+  "name": "Legacy image formats",
+  "type": "images",
+  "url": "/demos/legacy-image-formats.html",
+  "what": "Restricts images to be one of the more modern formats (JPEG, PNG, GIF, WEBP, and SVG). Images with legacy formats will render with inverted color.",
+  "why": "Ensures optimized performance with images.",
+  "usage": {
+    "off": "legacy-image-formats 'self'",
+    "on": "legacy-image-formats 'none'"
+  },
+  "examples": {
+    "header": [
+      "Feature-Policy: legacy-image-formats 'none'"
+    ],
+    "iframe": [
+      "&lt;iframe allow=\"legacy-image-formats 'none'\" src=\"...\"><\/iframe>"
+    ]
+  }
+}, {
+  "id": "image-compression",
+  "name": "Image compression",
+  "type": "images",
+  "url": "/demos/image-compression.html",
+  "what": "Requires the file size of images (in bytes) to be no more than 1.25x bigger than its rendering area (in pixels). Images violating this policy render with inverted colors.",
+  "why": "Ensures optimized performance with images by minimizing file size, reducing image bloat and saving bandwidth.",
+  "usage": {
+    "off": "image-compression 'self'",
+    "on": "image-compression 'none'"
+  },
+  "examples": {
+    "header": [
+      "Feature-Policy: image-compression 'none'"
+    ],
+    "iframe": [
+      "&lt;iframe allow=\"image-compression 'none'\" src=\"...\"><\/iframe>"
+    ]
+  }
+}, {
+  "id": "sync-script",
+  "name": "Synchronous scripts",
+  "type": "performance",
+  "url": "/demos/sync-script.html",
+  "what": "Prevents synchronous, parsing blocking scripts from executing.",
+  "why": "Inline scripts and <code>&lt;script src></code> without the <code>defer</code>/<code>async</code> attributes block the parser. This can lead to bad performance and poor UX. Instead, use <code>defer</code>/<code>async</code> when loading scripts, dynamically inject them into the page using JS, or use ES Modules (which are defer loaded by default). These solutions will not violate this feature policy.",
+  "usage": {
+    "off": "sync-script 'self'",
+    "on": "sync-script 'none'"
+  },
+  "examples": {
+    "header": [
+      "Feature-Policy: sync-script 'none'"
+    ],
+    "iframe": [
+      "&lt;iframe allow=\"sync-script 'none'\" src=\"...\"><\/iframe>"
+    ]
+  }
+}, {
+  "id": "vertical-scroll",
+  "name": "Vertical scroll",
+  "type": "granular",
+  "url": "/demos/vertical-scroll.html",
+  "what": "Controls whether embedded content can interfere with vertical scrolling.",
+  "why": "By default, iframe content can use <code>touch-action: none</code>, <code>e.preventDefault()</code> in touch events, and the DOM Scroll APIs to prevent and/or alter how content scrolls vertically. This policy ensures vertical scrolling is not blocked by preventing these features from working.",
+  "usage": {
+    "off": "vertical-scroll 'self'",
+    "on": "vertical-scroll 'none'"
+  },
+  "examples": {
+    "header": [
+      "Feature-Policy: vertical-scroll 'none'"
+    ],
+    "iframe": [
+      "&lt;iframe allow=\"vertical-scroll 'none'\" src=\"...\"><\/iframe>"
     ]
   }
 }]

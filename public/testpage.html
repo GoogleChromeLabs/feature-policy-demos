@@ -41,7 +41,7 @@ Test stuff:
 <button onclick="doSyncXhr()">use sync XHR</button>
 <button onclick="doMidi()">use MIDI</button>
 <button onclick="doUSB()">use usb</button>
-<button onclick="doPaymenRequest()">use payment request</button>
+<button onclick="doPaymentRequest()">use payment request</button>
 </div>
 
 <hr>
@@ -171,7 +171,7 @@ async function doCameraMic(button) {
   return stream;
 }
 
-function doPaymenRequest() {
+function doPaymentRequest() {
   new PaymentRequest([{supportedMethods: 'basic-card'}], {
     total: {
       label: 'Total',

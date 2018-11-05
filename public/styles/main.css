@@ -1,5 +1,5 @@
 :root {
-  --app-drawer-width: 256px;
+  --app-drawer-width: 305px;
   --app-primary-color: #E91E63;
   --app-secondary-color: #293237;
   --app-dark-text-color: var(--app-secondary-color);
@@ -43,13 +43,13 @@ html, body {
   -webkit-font-smoothing: antialiased;
   line-height: 1.6;
   font-weight: 300;
-  height: 100vh;
   color: var(--md-blue-grey-700);
+  overflow-x: hidden;
 }
 a {
   color: inherit;
 }
-h1, h2, h3 {
+h1, h2, h3, h4 {
   margin: 0;
   font-weight: inherit;
 }
@@ -65,6 +65,9 @@ h1, h2, h3 {
 }
 .layout.vertical {
   flex-direction: column;
+}
+.layout.wrap {
+  flex-wrap: wrap;
 }
 .flex {
   flex: 1 0 auto;
@@ -101,7 +104,7 @@ h1, h2, h3 {
   overflow-y: auto;
   overscroll-behavior: contain;
   transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1;
+  z-index: 2;
 }
 .drawer-list.active {
   transform: none;
@@ -110,8 +113,10 @@ h1, h2, h3 {
   line-height: 1;
   display: flex;
   flex: 0 0 auto;
-  justify-content: space-between;
   margin-bottom: var(--default-padding-3x);
+}
+.drawer-list img {
+  margin-right: var(--default-padding-2x);
 }
 .drawer-list .drawer-title {
   font-size: 20px;
@@ -127,23 +132,43 @@ h1, h2, h3 {
   height: 56px;
 }
 .drawer-list a {
-  font-size: 18px;
   text-decoration: none;
+}
+.drawer-list .flag-icon {
+  display: inline-block;
+}
+.drawer-list .flag-icon.supported {
+  display: none;
 }
 .main-view {
   padding-left: var(--app-drawer-width);
+  height: 100vh;
+  overflow-y: hidden;
 }
 .main-view iframe {
   width: 100%;
   height: 100vh;
   border: none;
+  padding-bottom: 350px;
 }
 .policy-name {
   display: block;
+  padding-left: var(--default-padding-2x);
 }
 .policy-id {
   white-space: nowrap;
   color: var(--md-blue-grey-400);
+}
+.policy-type {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+.policy-type {
+  margin-top: var(--default-padding);
+}
+#policy-list .policy-type:first-of-type {
+  margin-top: 0;
 }
 footer {
   z-index: 1;
@@ -153,6 +178,7 @@ footer {
   bottom: 0;
   padding: var(--default-padding-2x);
   background-color: var(--md-blue-grey-50);
+  padding-left: var(--app-drawer-width);
 }
 footer a {
   line-height: 1;
@@ -174,7 +200,17 @@ pre.snippet {
   font-size: 14px;
   border-radius: var(--default-border-radius);
 }
+.flag-icon {
+  height: 24px;
+  width: 24px;
+  vertical-align: middle;
+  margin-right: 3px;
+  opacity: 0.25;
+}
 @media only screen and (max-width: 450px) {
+  #intro-summary {
+    font-size: 11px;
+  }
   .drawer-list {
     transform: translate3d(-100%,0,0);
   }
@@ -183,5 +219,8 @@ pre.snippet {
   }
   .body-padding {
     margin: var(--default-padding-2x);
+  }
+  footer {
+    padding-left: var(--default-padding-2x);
   }
 }
