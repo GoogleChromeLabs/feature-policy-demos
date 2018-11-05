@@ -26,18 +26,20 @@
   as the page loads.</p>
 
 <!--
-When no dimensions are specified (either via style attr, width/height attr, or class):
+When no dimensions are specified (either via style attr, width/height attr, intrinsicSize attr, or class):
 1. unsized-media on: image/video will have an intrinsic size. Causes re-layout.
-2. unsized-media off: image/video will have a default size of 300x150. No re-layout.
+2. unsized-media off: image/video will have a default size of 300px x 150px. No re-layout.
 
 When one dimension is specified (via a class, width="200", style="width:200px").
 1. unsized-media off: image/video will be one of the specified dimension
    and the intrinsic ratio. Causes a re-layout.
-2. unsized-media on: image/video will be one of the default dimensions (300x150)
-   and the specified dimension. No re-layout.
+2. unsized-media on:image/video will use the default aspect ratio (300x150)
+   and the specified dimension to calculate the unspecified dimension. No re-layout.
 
 When both dimension are specified, unsized-media has no effect. The image will
-be sized to the specified dimensions and no re-layout will occur.
+be sized to the specified dimensions and no re-layout will occur. Note, when one
+dimension and the intrinsicSize attr is specified, the other dimension of the image
+will be caculated respectfully.
 -->
 <img src="https://picsum.photos/1200/600/?random" width="100%">
 
