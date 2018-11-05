@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Feature Policy: vertical-scroll example</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <style>
+    iframe {
+      width: 100%;
+      height: 200px;
+      border: 1px solid var(--md-blue-grey-500);
+    }
+    .frame-container {
+      height: 1000px;
+      /* touch-action: none; */
+    }
+  </style>
+</head>
+<body class="body-padding">
+
+<details class="details">
+  <!-- filled dynamically -->
+</details>
+
+<h2 id="feature-allowed-banner">
+  <span id="allowfeature">...</span>
+</h2>
+
+<p>When this policy is active, a frame or main page content will <b>not</b>
+  be able prevent its content from scrolling vertically. This is done by:</p>
+
+<ul>
+  <li>Ensuring all scroll related input events (e.g. <code>touchstart</code>) are non-cancelable.</li>
+  <li>Treat <code>touch-action: none</code> as if it were <code>touch-action: pan-y</code>). Meaning the page still blocks <code>pan-x</code> and zoom.</li>
+  <li>Ensuring programmatic scrolling using the DOM scroll APIs is handled within the scope of the frame, i.e., calls to <code>el.scrollIntoView()</code> do not propagate outside of the frame.</li>
+</ul>
+
+<p>The frame below uses <code>body{ touch-action: none; }</code> to
+prevent its content from scrolling. However, <b>when the policy is "on", it
+will be scrollable!</b>. In other words, the policy prevents
+the page from blocking vertical scroll by treating the <code>touch-action: none</code>
+as <code>touch-action: pan-y</code>.</p>
+
+<p>Try scrolling the iframe below on mobile (e.g. using touch events).</p>
+
+<div class="frame-container">
+  <iframe src="data:text/html,
+    <style>
+      body{
+        font-family: sans-serif;
+        touch-action: none;
+        height: 1000px;
+        background: linear-gradient(white, red);
+      }
+    </style>
+    <p>iframe whose content blocks vertical scrolling. But it will be scrollable on mobile when the policy is on.</p>
+    <p>scroll me. scroll me. scroll me!</p>
+    <script>
+    window.onscroll = function() {
+      //window.scrollTo(0, 0);
+    }
+    </script>
+  "></iframe>
+</div>
+
+<script type="module">
+import {html, render} from '/lit-html/lit-html.js';
+import {repeat} from '/lit-html/directives/repeat.js';
+import * as shared from '/js/shared.js';
+
+function syncLoadJSON(url) {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', url, false); // sync
+  xhr.send();
+  return JSON.parse(xhr.response);
+}
+
+shared.initPage();
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120357238-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-120357238-1');
+</script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Feature Policy: sync-script example</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <style>
+    #results {
+      /* font-family: 'Courier New', Courier, monospace; */
+    }
+    .script-snippet {
+      color: var(--md-green-500);
+    }
+    .script-snippet label {
+      font-weight: bold;
+      display: inline-block;
+      width: 150px;
+    }
+    .blocked {
+      color: var(--md-red-500);
+    }
+  </style>
+</head>
+<body class="body-padding">
+
+<details class="details">
+  <!-- filled dynamically -->
+</details>
+
+<h2 id="feature-allowed-banner">
+  <span id="allowfeature">...</span>
+</h2>
+
+<p>Below, you'll see the list of scripts that executed on the page. When the
+  policy is active, some scripts will not run.</p>
+
+<div id="results"></div>
+
+<!-- Note: made a module so the script isn't blocked by the policy.-->
+<script id="script-1">
+  // Inline scripts block the parser.
+  window.didExecuteInlineParsingBlockingScript = true;
+  console.log('didExecuteInlineParsingBlockingScript');
+  document.currentScript.dataset.ran = true;
+</script>
+<!-- External scripts block the parser. -->
+<script id="script-2" src="/js/resources/parser-blocking-script.js"></script>
+<!-- Async, deferred, and modules do not block the parser! -->
+<script id="script-3" src="/js/resources/defer-script.js" defer></script>
+<script id="script-4" src="/js/resources/async-script.js" async></script>
+<script id="script-5" type="module" src="/js/resources/module.mjs"></script>
+
+<script type="module">
+import {html, render} from '/lit-html/lit-html.js';
+import {repeat} from '/lit-html/directives/repeat.js';
+import * as shared from '/js/shared.js';
+
+shared.initPage();
+
+function loadScript(src) {
+  return new Promise(resolve => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.id = 'script-6';
+    script.onload = e => {
+      resolve();
+    };
+    document.body.append(script);
+  });
+}
+
+(async() => {
+
+const SCRIPT_SNIPPETS = {
+  'script-1': 'Inline <script>',
+  'script-2': '<script src="/js/resources/parser-blocking-script.js">',
+  'script-3': '<script src="/js/resources/defer-script.js" defer>',
+  'script-4': '<script src="/js/resources/async-script.js" async>',
+  'script-5': '<script type="module" src="/js/resources/module.mjs">',
+  'script-6': 'Dynamically loaded script via JS injection',
+};
+
+// Dynamically inserted scripts are async by default so they do not block the parser.
+await loadScript('/js/resources/async-script.js');
+
+const scripts = Array.from(document.querySelectorAll('script[id^="script-"]'));
+
+render(html`${
+  repeat(Object.entries(SCRIPT_SNIPPETS), (script) => script[0], ([id, snippet], i) => {
+    const ran = scripts[i].dataset.ran;
+    return html`<div class="script-snippet ${ran ? '' : 'blocked'}">
+      <label>${ran ? '✔ EXECUTED script' : '✘ BLOCKED script'}</label> ${snippet}
+    </div>`;
+  })
+}`, document.querySelector('#results'));
+
+})();
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120357238-1"></script>
+<!-- Note: made a module so the policy doesn't block the script! -->
+<script type="module">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-120357238-1');
+</script>
+</body>
+</html>

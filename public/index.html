@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="/styles/header.css">
   <base target="content-view"> <!-- magic that makes link clicks navigate the iframe -->
   <link rel="modulepreload" href="/lit-html/lit-html.js">
-  <link rel="modulepreload" href="/lit-html/lib/repeat.js">
+  <link rel="modulepreload" href="/lit-html/directives/repeat.js">
   <link rel="modulepreload" href="/js/shared.js">
   <style>
     .notsupported {
@@ -18,7 +18,7 @@
       padding: var(--default-padding);
       color: white;
       text-align: center;
-      margin-top:var(--default-padding-2x);
+      margin-top: var(--default-padding-2x);
       display: none;
     }
     .notsupported.show {
@@ -48,27 +48,32 @@
 
 <main class="main-view">
   <div class="details">
-    <h3>&larr; Select a policy to begin.</h3>
     <!-- filled dynamically -->
+    <div class="layout">
+        <h3>Select a policy to begin.</h3>
+      <summary class="flex">
+        <span class="menu-button" onclick="toggleDrawer()"><img src="/img/menu24px.svg"></span>
+      </summary>
+    </div>
   </div>
 
-  <div class="content-view">
+  <div>
     <div id="intro-summary" class="body-padding">
-      <h2><a href="https://wicg.github.io/feature-policy/" target="_blank">Feature Policy</a>
+      <h2><a href="https://developers.google.com/web/updates/2018/06/feature-policy" target="_blank">Feature Policy</a>
         allows web developers to selectively enable, disable, and modify the behavior
         of various features and APIs in the browser. This can provide a well-lit path towards good performance
         and prevent common footguns when building and maintaining web apps.</h2>
       <h3 class="notsupported">Feature policy is not supported in your browser. Try Chrome Canary and enable the <code>--enable-experimental-web-platform-features</code> flag.</h3>
       <h3 style="margin-top:var(--default-padding-3x);">You control feature policies through an HTTP header:</h3>
       <p>
-        <pre class="snippet">FeaturePolicy: geolocation *
-FeaturePolicy: geolocation 'none'
-FeaturePolicy: geolocation 'self'
-FeaturePolicy: geolocation https://google-developers.appspot.com</pre>
+        <pre class="snippet">Feature-Policy: geolocation *
+Feature-Policy: geolocation 'none'
+Feature-Policy: geolocation 'self'
+Feature-Policy: geolocation https://google-developers.appspot.com</pre>
       </p>
       <h3 style="margin-top:var(--default-padding-3x);">or by adding the <code>allow</code> attribute on iframes:</h3>
       <p>
-        <pre class="snippet">&lt;iframe allow="geolocation *">
+        <pre class="snippet">&lt;iframe allow="geolocation">
 &lt;iframe allow="geolocation 'self'">
 &lt;iframe allow="geolocation 'none'">
 &lt;iframe allow="geolocation https://google-developers.appspot.com"></pre>
