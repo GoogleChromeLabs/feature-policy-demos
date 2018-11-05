@@ -37,9 +37,14 @@ When one dimension is specified (via a class, width="200", style="width:200px").
    and the specified dimension to calculate the unspecified dimension. No re-layout.
 
 When both dimension are specified, unsized-media has no effect. The image will
-be sized to the specified dimensions and no re-layout will occur. Note, when one
-dimension and the intrinsicSize attr is specified, the other dimension of the image
-will be caculated respectfully.
+be sized to the specified dimensions and no re-layout will occur.
+
+When one dimension is specified and intrinsicsize attr is present, the other dimension
+will be caculated respectfully and the image will be sized to the specified values and
+no re-layout will occur.
+
+When no dimensiond are specified but intrinsicsize attr is present, image will be sized to
+the values specified in the intrinsicsize attr and no re-layout will occur.
 -->
 <img src="https://picsum.photos/1200/600/?random" width="100%">
 
@@ -107,8 +112,41 @@ be sized to the specified dimensions and no re-layout will occur.
     pharetra nulla vivamus, quam sit conubia ligula turpis, condimentum purus mauris
     felis scelerisque id. Tincidunt nullam tristique mattis sit vivamus viverra,
     velit orci convallis, suspendisse urna sed.</p>
+<!--
+When one dimension is specified and intrinsicsize attr is present, the other dimension
+will be caculated respectfully and the image will be sized to the specified values and
+no re-layout will occur.
+-->
+<img src="https://picsum.photos/1200/700/?random"  width="100%" intrinsicsize="300x200">
 
+  
+<p>Lorem ipsum dolor sit amet, pretium urna faucibus etiam enim sollicitudin,
+    sagittis phasellus nec suspendisse aenean. Orci nec nam ipsum lobortis ipsum,
+    at nunc, semper in suscipit sem et, mauris amet amet accumsan risus quis, urna
+    quam. Lacus mi elit lectus tortor nec enim, sed ornare est praesent est id ut,
+    mi at. Vestibulum varius, diam posuere tristique est adipiscing, proin quam orci,
+    nunc tincidunt purus accumsan erat, nec amet magna donec. Consectetuer vivamus
+    pharetra nulla vivamus, quam sit conubia ligula turpis, condimentum purus mauris
+    felis scelerisque id. Tincidunt nullam tristique mattis sit vivamus viverra,
+    velit orci convallis, suspendisse urna sed.</p>
+  
+<!--
+When no dimensiond are specified but intrinsicsize attr is present, image will be sized to
+the values specified in the intrinsicsize attr and no re-layout will occur.
+-->
+<img src="https://picsum.photos/500/400/?random"  intrinsicsize="500x400">
+  
+<p>Lorem ipsum dolor sit amet, pretium urna faucibus etiam enim sollicitudin,
+    sagittis phasellus nec suspendisse aenean. Orci nec nam ipsum lobortis ipsum,
+    at nunc, semper in suscipit sem et, mauris amet amet accumsan risus quis, urna
+    quam. Lacus mi elit lectus tortor nec enim, sed ornare est praesent est id ut,
+    mi at. Vestibulum varius, diam posuere tristique est adipiscing, proin quam orci,
+    nunc tincidunt purus accumsan erat, nec amet magna donec. Consectetuer vivamus
+    pharetra nulla vivamus, quam sit conubia ligula turpis, condimentum purus mauris
+    felis scelerisque id. Tincidunt nullam tristique mattis sit vivamus viverra,
+    velit orci convallis, suspendisse urna sed.</p>
 <script type="module">
+  
 import * as shared from '/js/shared.js';
 
 shared.initPage();
