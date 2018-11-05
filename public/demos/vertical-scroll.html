@@ -37,6 +37,8 @@
   <li>Ensuring all scroll related input events (e.g. <code>touchstart</code>) are non-cancelable.</li>
   <li>Treat <code>touch-action: none</code> as if it were <code>touch-action: pan-y</code>). Meaning the page still blocks <code>pan-x</code> and zoom.</li>
   <li>Ensuring programmatic scrolling using the DOM scroll APIs is handled within the scope of the frame, i.e., calls to <code>el.scrollIntoView()</code> do not propagate outside of the frame.</li>
+  <li>Ensuring that no scrollable layer is targeted for scroll gestures (to avoid a frame from consuming
+  all the scroll gestures).</li>
 </ul>
 
 <p>The frame below uses <code>body{ touch-action: none; }</code> to
@@ -71,13 +73,6 @@ as <code>touch-action: pan-y</code>.</p>
 import {html, render} from '/lit-html/lit-html.js';
 import {repeat} from '/lit-html/directives/repeat.js';
 import * as shared from '/js/shared.js';
-
-function syncLoadJSON(url) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', url, false); // sync
-  xhr.send();
-  return JSON.parse(xhr.response);
-}
 
 shared.initPage();
 </script>
