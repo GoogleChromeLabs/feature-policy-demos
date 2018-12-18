@@ -18,6 +18,7 @@
 
 import {html, render} from '/lit-html/lit-html.js';
 import {repeat} from '/lit-html/directives/repeat.js';
+import {until} from '/lit-html/directives/until.js';
 import {fetchPolicies, updateDetailsHeader, getPolicy, featurePolicyAPISupported} from '/js/shared.js';
 
 const POLICY_TYPE_TO_LABEL = {
@@ -153,10 +154,11 @@ const implementedPolicies = buildImplementedPolicies();
 
 render(html`${implementedPolicies.markup}`,
   document.querySelector('#policy-list'));
-render(html`
-  <h4 class="policy-type">${POLICY_TYPE_TO_LABEL['other']}</h4>
-  ${leftOverPolicies(implementedPolicies.policies)}
-`, document.querySelector('#all-policy-list'));
+render(
+  html`
+    <h4 class="policy-type">${POLICY_TYPE_TO_LABEL['other']}</h4>
+    ${until(leftOverPolicies(implementedPolicies.policies))}
+  `, document.querySelector('#all-policy-list'));
 
 document.addEventListener('click', e => {
   const button = document.querySelector('.menu-button');
