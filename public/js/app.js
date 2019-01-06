@@ -90,7 +90,8 @@ function toggleDrawer(forClose = false) {
  * @param {Array<Object>} implementedPolicies
  */
 async function leftOverPolicies(implementedPolicies) {
-  const allPolicies = document.policy.allowedFeatures().sort();
+  const featurePolicy = document.policy || document.featurePolicy;
+  const allPolicies = featurePolicy.allowedFeatures().sort();
 
   const policies = [];
   allPolicies.forEach((item, i) => {

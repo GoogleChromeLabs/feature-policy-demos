@@ -19,8 +19,9 @@ import {unsafeHTML} from '/lit-html/directives/unsafe-html.js';
 
 export const policyOn = new URL(location).searchParams.has('on');
 export const currentPolicyId = new URL(location).pathname.split('/').slice(-1)[0].split('.')[0];
-export const featurePolicyAPISupported = 'policy' in document;
+export const featurePolicyAPISupported = 'policy' in document || 'featurePolicy' in document;
 
+const featurePolicy = document.policy || document.featurePolicy;
 let policies = [];
 let fetchingPoliciesPromise = null;
 
@@ -75,7 +76,7 @@ function policySupported(id) {
   if (!featurePolicyAPISupported) {
     return false;
   }
-  return document.policy.allowedFeatures().findIndex(el => el === id) !== -1;
+  return featurePolicy.allowedFeatures().findIndex(el => el === id) !== -1;
 }
 
 /**
@@ -131,7 +132,7 @@ function updateDetailsHeader(policy) {
  * @return {boolean} True if the current policy is enabled.
  */
 function updateAllowBanner(policyId) {
-  const allowsFeature = document.policy.allowsFeature(policyId);
+  const allowsFeature = featurePolicy.allowsFeature(policyId);
   const allows = allowsFeature ? 'enables' : 'disables';
   const banner = document.querySelector('#feature-allowed-banner');
   if (!banner) {
