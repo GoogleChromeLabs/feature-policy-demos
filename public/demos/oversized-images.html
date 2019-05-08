@@ -25,23 +25,23 @@
 
 <!--
 For optimized images:
-1. oversized-image on: images will render as they normally would.
-2. oversized-image off: images will render as they normally would.
+1. oversized-images on: images will render as they normally would.
+2. oversized-images off: images will render as they normally would.
 
 For images with exeeds maximum oversizing threshold:
-1. oversized-image on: images will render as they normally would.
-2. oversized-image off: images will render as placeholder images.
+1. oversized-images on: images will render as they normally would.
+2. oversized-images off: images will render as placeholder images.
 -->
 
 <section class="layout center wrap" style="justify-content:space-evenly;">
   <h3>
-    When the downscaling ratio is less than or equal to maximum oversizing ratio (2),
+    When the downscaling ratio is less than or equal to maximum oversizing ratio (2.0),
     the image renders normally.
   </h3>
   <div class="layout vertical center-center">
-    <img src="../img/emilio-large.jpg" width="800" height="540">
+    <img src="../img/emilio-large.jpg" width="800" height="500">
     <p>
-    Intrinsic size: 800px x 500px <br />
+    Intrinsic size: 800 x 500px <br />
     Container size: 800px x 500px
     </p>
   </div>
@@ -54,7 +54,7 @@ For images with exeeds maximum oversizing threshold:
   <div class="layout vertical center-center">
     <img src="../img/emilio-large.jpg" width="380" height="500">
     <p>
-    Intrinsic size: 800px x 500px <br />
+    Intrinsic size: 800 x 500px <br />
     Container size: 380px x 500px
     For devices with device pixel ratio of 1 (e.g. tablets, monitors, etc), the downscaling ratio (800/380) > 2, the image renders as a placeholder image.
     </p>
