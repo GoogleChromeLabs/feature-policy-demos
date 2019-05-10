@@ -113,18 +113,15 @@
   "name": "Oversized images",
   "type": "images",
   "url": "/demos/oversized-images.html",
-  "what": "Ensures instrinsic size of images are not much larger than their container size.",
+  "what": "Ensures instrinsic size of images are not more than X times larger than their container size.",
   "why": "Image bloat is a large problem on the web. Sending unnecessarily large images is bad for performance, UX, and wastes bandwidth.",
   "usage": {
-    "off": "oversized-images 'self'",
-    "on": "oversized-images 'none'"
+    "off": "oversized-images 'self'(inf)",
+    "on": "oversized-images 'self'(2.0)"
   },
   "examples": {
     "header": [
-      "Feature-Policy: oversized-images 'none'"
-    ],
-    "iframe": [
-      "&lt;iframe allow=\"oversized-images 'none'\" src=\"...\"><\/iframe>"
+      "Feature-Policy: oversized-images 'self'(2.0) *(inf)"
     ]
   }
 }, {
