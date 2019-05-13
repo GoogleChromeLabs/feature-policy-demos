@@ -142,7 +142,12 @@ function updateAllowBanner(policyId) {
   }
   banner.classList.toggle('allows', allowsFeature);
   banner.classList.add('show');
-  document.querySelector('#allowfeature').textContent = `Page ${allows} ${currentPolicyId}.`;
+  /* override banner description for unoptimized-images */
+  if (policyId == 'unoptimized-lossy-images') {
+    document.querySelector('#allowfeature').textContent = `Page ${allows} unoptimized-\{lossy,lossless\}-images.`;
+  } else {
+    document.querySelector('#allowfeature').textContent = `Page ${allows} ${currentPolicyId}.`;
+  }
 
   return allowsFeature;
 }
