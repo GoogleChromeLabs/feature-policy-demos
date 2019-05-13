@@ -125,22 +125,19 @@
     ]
   }
 }, {
-  "id": "unoptimized-images",
+  "id": "unoptimized-lossy-images",
   "name": "Unoptimized images",
   "type": "images",
-  "url": "/demos/unoptimized-images.html",
-  "what": "Requires the data size of images (in bytes) to be no more than 0.5x bigger than its rendering area (in pixels). Images violating this policy render as placeholder images.",
+  "url": "/demos/unoptimized-lossy-images.html",
+  "what": "Requires the data size of images (in bytes) to be no more than X times bigger than its rendering area (in pixels). Images violating this policy render as placeholder images.",
   "why": "Ensures optimized performance with images by minimizing file size, reducing image bloat and saving bandwidth.",
   "usage": {
-    "off": "unoptimized-images 'self'",
-    "on": "unoptimized-images 'none'"
+    "off": "unoptimized-lossy-images 'self'(inf); unoptimized-lossless-images 'self'(inf); unoptimized-lossless-images-strict 'self'(inf);",
+    "on": "unoptimized-lossy-images 'self'(0.5); unoptimized-lossless-images 'self'(1); unoptimized-lossless-images-strict 'self'(1);"
   },
   "examples": {
     "header": [
-      "Feature-Policy: unoptimized-images 'none'"
-    ],
-    "iframe": [
-      "&lt;iframe allow=\"unoptimized-images 'none'\" src=\"...\"><\/iframe>"
+      "Feature-Policy: unoptimized-lossy-images 'self'(0.5) *(inf); unoptimized-lossless-images 'self'(1) *(inf); unoptimized-lossless-images-strict 'self'(1) *(inf);"
     ]
   }
 }, {

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Feature Policy: unoptimized-{lossy,lossless}-images example</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/header.css">
+</head>
+<body class="body-padding">
+
+<details class="details">
+  <!-- filled dynamically -->
+</details>
+
+<h2 id="feature-allowed-banner">
+  <span id="allowfeature">...</span>
+</h2>
+
+<p>Click the disallow/allow buttons above to see how the page loads with the policy on and off.
+ When the policy is on, you will see images whose file size is over the threshold render as placeholder images.
+</p>
+
+<!--
+For images with optimized file size:
+1. unoptimized-images on: images will render as they normally would.
+2. unoptimized-images off: images will render as they normally would.
+
+For images with non-optimized file size (i.e. file size too large):
+1. unoptimized-images off: images will render as they normally would.
+2. unoptimized-images on: images will render as a placeholder image.
+-->
+
+<li> For lossy images, (image size - 1KB) / image resolution should be under 0.5</li>
+<section class="layout center wrap" style="justify-content:space-evenly">
+  <div class="layout vertical center-center">
+    <img src="../img/emilio.jpg" width="400" height="300">
+    <p>
+    emilio.jpg </br>
+    Image file size: 111K </br>
+    Image resolution: 400px x 300px </br>
+    Compression ratio (byte-per-pixel): (111KB - 1KB) / (400px * 300px) = <b>0.9 (&gt; 0.5)</b>
+    </p>
+  </div>
+  <div class="layout vertical center-center">
+    <img src="../img/lossy-emilio.webp" width="400" height="300">
+    <p>
+    lossy-emilio.webp </br>
+    Image file size: 17.3K </br>
+    Image resolution: 400px x 300px </br>
+    Compression ratio (byte-per-pixel): (17.3KB - 1KB) / (400px * 300px) = <b>0.14 (&lt;= 0.5)</b>
+    </p>
+  </div>
+</section>
+
+<li> For lossless images, (image size - 10KB) / image resolution should be under 1</li>
+<section class="layout center wrap" style="justify-content:space-evenly">
+  <div class="layout vertical center-center">
+    <img src="../img/emilio.bmp" width="400" height="300">
+    <p>
+    emilio.bmp </br>
+    Image file size: 351K </br>
+    Image resolution: 400px x 300px </br>
+    Compression ratio (byte-per-pixel): (351KB - 10KB) / (400px * 300px) = <b>2.9 (&gt; 1.0)</b>
+    </p>
+  </div>
+  <div class="layout vertical center-center">
+    <img src="../img/lossless-emilio.webp" width="400" height="300">
+    <p>
+    lossless-emilio.webp </br>
+    Image file size: 111K </br>
+    Image resolution: 400px x 300px </br>
+    Compression ratio (byte-per-pixel): (111KB - 10KB) / (400px * 300px) = <b>0.86 (&lt;= 1.0)</b>
+    </p>
+  </div>
+</section>
+
+<li> For lossless images in strict mode, (image size - 1KB) / image resolution should be under 1</li>
+<section class="layout center wrap" style="justify-content:space-evenly">
+  <div class="layout vertical center-center">
+    <img src="../img/emilio.bmp" width="400" height="300">
+    <p>
+    emilio.bmp </br>
+    Image file size: 351K </br>
+    Image resolution: 400px x 300px </br>
+    Compression ratio (byte-per-pixel): (351KB - 1KB) / (400px * 300px) = <b>2.99 (&gt; 1.0)</b>
+    </p>
+  </div>
+  <div class="layout vertical center-center">
+    <img src="../img/lossless-emilio.webp" width="400" height="300">
+    <p>
+    lossless-emilio.webp </br>
+    Image file size: 147K </br>
+    Image resolution: 400px x 300px </br>
+    Compression ratio (byte-per-pixel): (111KB - 1KB) / (400px * 300px) = <b>0.94 (&lt;= 0.5)</b>
+    </p>
+  </div>
+</section>
+
+<script type="module">
+import * as shared from '/js/shared.js';
+
+shared.initPage();
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120357238-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-120357238-1');
+</script>
+</body>
+</html>
