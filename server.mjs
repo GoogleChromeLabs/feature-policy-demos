@@ -44,7 +44,8 @@ app.use(function forceSSL(req, res, next) {
 
 app.use(function commonHeaders(req, res, next) {
   res.set('Access-Control-Allow-Origin', '*');
-  res.set('Origin-Trial', OT_TOKEN_UNOPT_IMAGES);
+  // TODO: Re-enable when OT working correctly
+  // res.set('Origin-Trial', OT_TOKEN_UNOPT_IMAGES);
   // res.set('Origin-Trial', OT_TOKEN_UNOPT_IMAGES_LOCALHOST);
   next();
 });
