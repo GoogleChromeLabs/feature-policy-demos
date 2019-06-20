@@ -19,8 +19,8 @@
 import fs from 'fs';
 import express from 'express';
 
-const ORIGIN_TRIAL_TOKEN = 'AuePjg8Sq4/6iDir9WsCLACbZ+u91FoK9j1MqUl3UcPVelqiUdvsrSBG5l3nlvOu0Fb0ESBcAJV5phrT+ULzMQQAAABseyJvcmlnaW4iOiJodHRwczovL2ZlYXR1cmUtcG9saWN5LWRlbW9zLmFwcHNwb3QuY29tOjQ0MyIsImZlYXR1cmUiOiJGZWF0dXJlUG9saWN5SlNBUEkiLCJleHBpcnkiOjE1NDgyMDE1OTl9';
-const ORIGIN_TRIAL_TOKEN2 = 'ArjW/zFOC4Soi9peXLf8rtNK9kzTuXZQMXXK6qQe7rLN8NEY8F8zlX+SPKhzUV1Jlp31h3ng38DOHTAsV9nNqQkAAABVeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJmZWF0dXJlIjoiRmVhdHVyZVBvbGljeUpTQVBJIiwiZXhwaXJ5IjoxNTQ4MjAxNTk5fQ=='; // localhost:8080
+const OT_TOKEN_UNOPT_IMAGES = 'AiGYzl8A17mcET9ObZ6QbC5vmOlCWk+4jZwZptDwKw8Iguu3jX2e6WVzUbHZpW0zPgqZdq/WSSUysH2chjMtCA4AAAByeyJvcmlnaW4iOiJodHRwczovL2ZlYXR1cmUtcG9saWN5LWRlbW9zLmFwcHNwb3QuY29tOjQ0MyIsImZlYXR1cmUiOiJVbm9wdGltaXplZEltYWdlUG9saWNpZXMiLCJleHBpcnkiOjE1NjQ2Nzg1NjF9';
+const OT_TOKEN_UNOPT_IMAGES_LOCALHOST = 'AuqelXxw7r91rz8mkV5fJnMkjNXY6vtmpd8lzATN2KGpwd0D6akFg7GBtigifHHuqk7zAnOvo2NlUnmAQTmSTQkAAABbeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJmZWF0dXJlIjoiVW5vcHRpbWl6ZWRJbWFnZVBvbGljaWVzIiwiZXhwaXJ5IjoxNTY0Njc4MzU1fQ==';
 
 /* eslint-disable */
 function errorHandler(err, req, res, next) {
@@ -44,8 +44,8 @@ app.use(function forceSSL(req, res, next) {
 
 app.use(function commonHeaders(req, res, next) {
   res.set('Access-Control-Allow-Origin', '*');
-  res.set('Origin-Trial', ORIGIN_TRIAL_TOKEN);
-  // res.sen('Origin-Trial', ORIGIN_TRIAL_TOKEN2);
+  res.set('Origin-Trial', OT_TOKEN_UNOPT_IMAGES);
+  // res.set('Origin-Trial', OT_TOKEN_UNOPT_IMAGES_LOCALHOST);
   next();
 });
 
