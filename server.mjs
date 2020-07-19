@@ -18,6 +18,7 @@
 
 import fs from 'fs';
 import express from 'express';
+import bodyParser from 'body-parser';
 
 const OT_TOKEN_UNOPT_IMAGES = 'AiGYzl8A17mcET9ObZ6QbC5vmOlCWk+4jZwZptDwKw8Iguu3jX2e6WVzUbHZpW0zPgqZdq/WSSUysH2chjMtCA4AAAByeyJvcmlnaW4iOiJodHRwczovL2ZlYXR1cmUtcG9saWN5LWRlbW9zLmFwcHNwb3QuY29tOjQ0MyIsImZlYXR1cmUiOiJVbm9wdGltaXplZEltYWdlUG9saWNpZXMiLCJleHBpcnkiOjE1NjQ2Nzg1NjF9';
 const OT_TOKEN_UNOPT_IMAGES_LOCALHOST = 'AuqelXxw7r91rz8mkV5fJnMkjNXY6vtmpd8lzATN2KGpwd0D6akFg7GBtigifHHuqk7zAnOvo2NlUnmAQTmSTQkAAABbeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJmZWF0dXJlIjoiVW5vcHRpbWl6ZWRJbWFnZVBvbGljaWVzIiwiZXhwaXJ5IjoxNTY0Njc4MzU1fQ==';
@@ -33,6 +34,9 @@ function errorHandler(err, req, res, next) {
 /* eslint-enable */
 
 const app = express();
+app.use(bodyParser.urlencoded({
+  extended: false,
+}));
 
 app.use(function forceSSL(req, res, next) {
   const fromCron = req.get('X-Appengine-Cron');
@@ -47,6 +51,23 @@ app.use(function commonHeaders(req, res, next) {
   // TODO: Re-enable when OT working correctly
   // res.set('Origin-Trial', OT_TOKEN_UNOPT_IMAGES);
   // res.set('Origin-Trial', OT_TOKEN_UNOPT_IMAGES_LOCALHOST);
+  next();
+});
+
+// Echo the get parameter string as response header.
+const RECOGNIZED_HEADERS = [
+  'Feature-Policy',
+  'Permissions-Policy',
+  'Document-Policy',
+  'Require-Document-Policy',
+];
+app.use(function echoHeader(req, res, next) {
+  const query = req.query;
+  for (const policyName of RECOGNIZED_HEADERS) {
+    if (policyName in query) {
+      res.append(policyName, query[policyName]);
+    }
+  }
   next();
 });
 
