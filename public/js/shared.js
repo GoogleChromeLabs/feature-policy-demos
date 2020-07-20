@@ -98,8 +98,7 @@ function showDetails() {
  */
 function policyValueSelector(policy) {
   const desc = policy.usage_desc ? `<span>${policy.usage_desc}:</span>` : '';
-  const optionButtons = Object.entries(policy.usage).map(entry => {
-    const [policyValue, header] = entry;
+  const optionButtons = Object.entries(policy.usage).map(([policyValue, header]) => {
     const [policyType, policyString] = header.split(':');
     const href = `${policy.url}?${policyType}=${encodeURIComponent(policyString)}`;
 
