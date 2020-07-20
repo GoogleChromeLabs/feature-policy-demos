@@ -65,7 +65,6 @@ app.use(function echoHeader(req, res, next) {
   const query = req.query;
   for (const policyName of RECOGNIZED_HEADERS) {
     if (policyName in query) {
-      console.log(policyName + ': ' + decodeURIComponent(query[policyName]));
       res.append(policyName, decodeURIComponent(query[policyName]));
     }
   }
