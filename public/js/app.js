@@ -133,8 +133,10 @@ const buildImplementedPolicies = () => {
   const categories = Array.from(categoryMapping.entries());
   const markup = repeat(categories, (item) => item[0], ([cat, policies], i) => {
     const items = repeat(policies, (p) => p.id, (p, i) => {
+      const firstUsage = p.usage[0];
+      const [, headerParam] = firstUsage;
       return html`
-        <a href="${p.url}?on" class="policy-name" onclick="updatePage(this, '${p.id}')">
+        <a href="${p.url}?${headerParam}" class="policy-name" onclick="updatePage(this, '${p.id}')">
           ${p.name}
           <img src="/img/flag-24px.svg" class="flag-icon ${p.supported ? 'supported' : ''}"
                title="Requires a flag">
