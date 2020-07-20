@@ -38,7 +38,6 @@ async function loadPage() {
 
   if (url.pathname !== '/') {
     const demoPage = url.pathname.slice(1).split('.')[0];
-    const policyOn = url.searchParams.has('on');
 
     policy = await getPolicy(demoPage);
 
@@ -49,15 +48,26 @@ async function loadPage() {
     }
 
     const contentFrame = document.querySelector('iframe.content-view');
-    // Prefix url.pathname with /demos to get the iframe url.
-    const pagePath = '/demos' + url.pathname;
+    const pagePath = policy.url + url.search;
     contentFrame.src = pagePath;
-    document.body.classList.toggle('on', policyOn);
 
     gtag('config', 'UA-120357238-1', {page_path: pagePath});
   }
 
   return policy;
+}
+
+/**
+ * Updates the iframe content when policy value selector is clicked.
+ *
+ * @param {!HTMLAnchorElement} anchor
+ */
+function updatePolicyValue(anchor) {
+  anchor.parentElement.querySelectorAll('a').forEach(a => a.removeAttribute('active'));
+  anchor.setAttribute('active', '');
+  const href = anchor.getAttribute('href').replace('/demos', '');
+  window.history.pushState(null, null, href);
+  loadPage();
 }
 
 /**
@@ -173,4 +183,5 @@ document.addEventListener('click', e => {
 })();
 
 window.updatePage = updatePage;
+window.updatePolicyValue = updatePolicyValue;
 window.toggleDrawer = toggleDrawer;

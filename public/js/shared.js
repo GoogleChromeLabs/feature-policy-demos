@@ -56,10 +56,14 @@ async function fetchPolicies() {
     policy.usage = Object.entries(policy.usage)
         .sort(([ka, va], [kb, vb]) => ka < kb) // Sort by key.
         .map(([policyValue, header]) => {
-          const [policyType, policyString] = header.split(':');
+          const [policyType, ...frags] = header.split(':');
+          // There might be ':' after initial one that is used to separate
+          // policy header name and policy string. Join the fragments together
+          // to get policy string.
+          const policyString = frags.join('');
           return [
             policyValue,
-            `${policyType}=${encodeURIComponent(policyString)}`,
+            `${policyType}=${encodeURIComponent(policyString).replace(/[!'()*]/g, escape)}`,
           ];
         });
   });
@@ -108,10 +112,15 @@ function showDetails() {
  */
 function policyValueSelector(policy) {
   const desc = policy.usage_desc ? `<span>${policy.usage_desc}:</span>` : '';
-  const optionButtons = policy.usage.map(([policyValue, headerParam]) =>
-    `<a href="${policy.url}?${headerParam}" class="enable-button try-button"
-        onclick="updatePage(this, '${policy.id}')">${policyValue}</a>`
-  );
+  const optionButtons = policy.usage.map(([policyValue, headerParam]) => {
+    const active =
+      headerParam.localeCompare(new URL(location).search.slice(1)) === 0 ?
+        'active' :
+        '';
+
+    return `<a href="${policy.url}?${headerParam}" class="try-button" ${active}
+        onclick="updatePolicyValue(this)">${policyValue}</a>`;
+  });
 
   return `
     <span class="trylinks">
