@@ -49,8 +49,7 @@ async function loadPage() {
     }
 
     const contentFrame = document.querySelector('iframe.content-view');
-    contentFrame.allow = policyOn ? policy.usage.on : policy.usage.off;
-    const pagePath = policyOn ? `${policy.url}?on` : policy.url;
+    const pagePath = location.href;
     contentFrame.src = pagePath;
     document.body.classList.toggle('on', policyOn);
 
