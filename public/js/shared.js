@@ -90,6 +90,32 @@ function showDetails() {
 }
 
 /**
+ * Render the policy value selection bar html string based on policy object
+ * given.
+ *
+ * @param {Object} policy
+ * @return {string}
+ */
+function policyValueSelector(policy) {
+  const desc = policy.usage_desc ? `<span>${policy.usage_desc}:</span>` : '';
+  const optionButtons = Object.entries(policy.usage).map(entry => {
+    const [policyValue, header] = entry;
+    const [policyType, policyString] = header.split(':');
+    const href = `${policy.url}?${policyType}=${encodeURIComponent(policyString)}`;
+
+    return `<a href="${href}" class="enable-button try-button"
+          onclick="updatePage(this, '${policy.id}')">${policyValue}</a>`;
+  });
+
+  return `
+    <span class="trylinks">
+      ${desc}
+      ${optionButtons.join('\n')}
+    </span>
+  `;
+}
+
+/**
  * Updates the UI metadata header when a feature policy is selected.
  * @param {!Object} policy
  */
@@ -103,13 +129,8 @@ function updateDetailsHeader(policy) {
 
   const tmpl = html`
     <summary>
-      <span><span class="policyname">${policy.name}</span> feature policy</span>
-      <span class="trylinks">
-        <a href="${policy.url}?on" class="enable-button try-button"
-           onclick="updatePage(this, '${policy.id}')">On</a>
-        <a href="${policy.url}" class="disable-button try-button"
-           onclick="updatePage(this, '${policy.id}')">Off</a>
-      </span>
+      <span class="policyname">${policy.name}</span>
+      ${unsafeHTML(policyValueSelector(policy))}
       <span class="menu-button" onclick="toggleDrawer()"><img src="/img/menu24px.svg"></span>
     </summary>
     <ul class="details-info">

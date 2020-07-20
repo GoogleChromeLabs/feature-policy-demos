@@ -6,8 +6,8 @@
   "what": "Allows developers to enforce that image/video elements have explicit dimensions. If dimensions aren't specified on the element, the browser sets a default size of 300x150 when this policy is active.",
   "why": "Reduces the layout work the browser has to perform.",
   "usage": {
-    "off": "unsized-media 'self'",
-    "on": "unsized-media 'none'"
+    "off": "Feature-Policy: unsized-media 'self'",
+    "on": "Feature-Policy: unsized-media 'none'"
   },
   "examples": {
     "header": [
@@ -24,8 +24,8 @@
   "what": "Disallows the use of synchronous XMLHttpRequests.",
   "why": "Using synchronous XHRs can cause jank on the main thread and be detrimental to user experience. Although the HTML spec has <a href=\"https://xhr.spec.whatwg.org/#sync-warning\" target=\"_blank\">deprecated sync XHRs</a>, developers are still able to use it for XHR requests where <code>responseType=\"text\"</code>.",
   "usage": {
-    "off": "sync-xhr 'self'",
-    "on": "sync-xhr 'none'"
+    "off": "Feature-Policy: sync-xhr 'self'",
+    "on": "Feature-Policy: sync-xhr 'none'"
   },
   "examples": {
     "header": [
@@ -41,8 +41,8 @@
   "what": "Allows cross-origin videos and movies to autoplay.",
   "why": "By default, Chrome allows the `autoplay` attribute on videos within same-origin iframes. To enable cross-origin videos to autoplay (or disallow same-origin videos from auto playing), sites can use this feature policy.",
   "usage": {
-    "off": "autoplay 'self'",
-    "on": "autoplay 'none'"
+    "off": "Feature-Policy: autoplay 'self'",
+    "on": "Feature-Policy: autoplay 'none'"
   },
   "examples": {
     "header": [
@@ -59,8 +59,8 @@
   "what": "Allows/disables the use of the Geolocation API.",
   "why": "By default, Chrome blocks the usage of geolocation in cross-origin iframes. Developers can control this behavior (or geolocation access in general) using this feature policy.",
   "usage": {
-    "off": "geolocation 'self'",
-    "on": "geolocation https://google-developers.appspot.com"
+    "off": "Feature-Policy: geolocation 'self'",
+    "on": "Feature-Policy: geolocation https://google-developers.appspot.com"
   },
   "examples": {
     "header": [
@@ -80,8 +80,8 @@
   "what": "Controls access to Picture in Picture.",
   "why": "By default, Chrome allows the usage of Picture-in-Picture in cross-origin iframes. Developers can disable it using this feature policy.",
   "usage": {
-    "on": "picture-in-picture 'self'",
-    "off": "picture-in-picture 'none'"
+    "on": "Feature-Policy: picture-in-picture 'self'",
+    "off": "Feature-Policy: picture-in-picture 'none'"
   },
   "examples": {
     "header": [
@@ -97,8 +97,8 @@
   "what": "Restricts the set of CSS properties which can be animated to opacity, transform, and filter.",
   "why": "Ensures smooth animations, by only allowing those properties which can be animated on the GPU using the hardware acceleration.",
   "usage": {
-    "off": "animations 'self'",
-    "on": "animations 'none'"
+    "off": "Feature-Policy: animations 'self'",
+    "on": "Feature-Policy: animations 'none'"
   },
   "examples": {
     "header": [
@@ -115,13 +115,15 @@
   "url": "/demos/oversized-images.html",
   "what": "Ensures instrinsic size of images are not more than X times larger than their container size.",
   "why": "Image bloat is a large problem on the web. Sending unnecessarily large images is bad for performance, UX, and wastes bandwidth.",
+  "usage_desc": "Maximum image_size / container_size ratio",
   "usage": {
-    "off": "oversized-images 'self'(inf)",
-    "on": "oversized-images 'self'(2.0)"
+    "1.0": "Document-Policy: oversized-images=1.0",
+    "2.0": "Document-Policy: oversized-images=2.0",
+    "4.0": "Document-Policy: oversized-images=4.0"
   },
   "examples": {
     "header": [
-      "Feature-Policy: oversized-images 'self'(2.0) *(inf)"
+      "Document-Policy: oversized-images=2.0"
     ]
   }
 }, {
@@ -131,13 +133,17 @@
   "url": "/demos/unoptimized-lossy-images.html",
   "what": "Requires the data size of images (in bytes) to be no more than X times bigger than its rendering area (in pixels). Images violating this policy render as placeholder images.",
   "why": "Ensures optimized performance with images by minimizing file size, reducing image bloat and saving bandwidth.",
+  "usage_desc": "Maximum byte per pixel",
   "usage": {
-    "off": "unoptimized-lossy-images 'self'(inf); unoptimized-lossless-images 'self'(inf); unoptimized-lossless-images-strict 'self'(inf);",
-    "on": "unoptimized-lossy-images 'self'(0.5); unoptimized-lossless-images 'self'(1); unoptimized-lossless-images-strict 'self'(1);"
+    "1.0": "Document-Policy: unoptimized-lossy-images=1.0, unoptimized-lossless-images=1.0, unoptimized-lossless-images-strict=1.0",
+    "2.0": "Document-Policy: unoptimized-lossy-images=2.0, unoptimized-lossless-images=2.0, unoptimized-lossless-images-strict=2.0",
+    "4.0": "Document-Policy: unoptimized-lossy-images=4.0, unoptimized-lossless-images=4.0, unoptimized-lossless-images-strict=4.0"
   },
   "examples": {
     "header": [
-      "Feature-Policy: unoptimized-lossy-images 'self'(0.5) *(inf); unoptimized-lossless-images 'self'(1) *(inf); unoptimized-lossless-images-strict 'self'(1) *(inf);"
+      "Document-Policy: unoptimized-lossy-images=1.0",
+      "Document-Policy: unoptimized-lossless-images=1.0",
+      "Document-Policy: unoptimized-lossless-images-strict=1.0"
     ]
   }
 }, {
@@ -148,8 +154,8 @@
   "what": "Prevents synchronous, parsing blocking scripts from executing.",
   "why": "Inline scripts and <code>&lt;script src></code> without the <code>defer</code>/<code>async</code> attributes block the parser. This can lead to bad performance and poor UX. Instead, use <code>defer</code>/<code>async</code> when loading scripts, dynamically inject them into the page using JS, or use ES Modules (which are defer loaded by default). These solutions will not violate this feature policy.",
   "usage": {
-    "off": "sync-script 'self'",
-    "on": "sync-script 'none'"
+    "off": "Feature-Policy: sync-script 'self'",
+    "on": "Feature-Policy: sync-script 'none'"
   },
   "examples": {
     "header": [
@@ -167,8 +173,8 @@
   "what": "Controls whether embedded content can interfere with vertical scrolling.",
   "why": "By default, iframe content can use <code>touch-action: none</code>, <code>e.preventDefault()</code> in touch events, and the DOM Scroll APIs to prevent and/or alter how content scrolls vertically. This policy ensures vertical scrolling is not blocked by preventing these features from working.",
   "usage": {
-    "off": "vertical-scroll 'self'",
-    "on": "vertical-scroll 'none'"
+    "off": "Feature-Policy: vertical-scroll 'self'",
+    "on": "Feature-Policy: vertical-scroll 'none'"
   },
   "examples": {
     "header": [
