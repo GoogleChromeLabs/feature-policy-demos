@@ -6,13 +6,13 @@
   "what": "Allows developers to enforce that image/video elements have explicit dimensions. If dimensions aren't specified on the element, the browser sets a default size of 300x150 when this policy is active.",
   "why": "Reduces the layout work the browser has to perform.",
   "usage": {
-    "off": "Feature-Policy: unsized-media 'self'",
-    "on": "Feature-Policy: unsized-media 'none'"
+    "off": "Document-Policy: unsized-media",
+    "on": "Document-Policy: unsized-media=?0"
   },
   "examples": {
     "header": [
-      "Feature-Policy: unsized-media 'none'",
-      "Feature-Policy: unsized-media https://img.cdn.com"
+      "Document-Policy: unsized-media",
+      "Document-Policy: unsized-media=?0"
     ]
   }
 }, {
