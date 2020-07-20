@@ -49,9 +49,19 @@ async function fetchPolicies() {
   fetchingPoliciesPromise = fetch('/js/policies.json').then(resp => resp.json());
   policies = await fetchingPoliciesPromise;
 
-  // Determine if policy is supported in browser.
   policies.forEach(policy => {
+    // Determine if policy is supported in browser.
     policy.supported = policySupported(policy.id);
+    // URL encode policy headers so that they are ready to be used in URLs as param.
+    policy.usage = Object.entries(policy.usage)
+        .sort(([ka, va], [kb, vb]) => ka < kb) // Sort by key.
+        .map(([policyValue, header]) => {
+          const [policyType, policyString] = header.split(':');
+          return [
+            policyValue,
+            `${policyType}=${encodeURIComponent(policyString)}`,
+          ];
+        });
   });
 
   return policies;
@@ -98,13 +108,10 @@ function showDetails() {
  */
 function policyValueSelector(policy) {
   const desc = policy.usage_desc ? `<span>${policy.usage_desc}:</span>` : '';
-  const optionButtons = Object.entries(policy.usage).map(([policyValue, header]) => {
-    const [policyType, policyString] = header.split(':');
-    const href = `${policy.url}?${policyType}=${encodeURIComponent(policyString)}`;
-
-    return `<a href="${href}" class="enable-button try-button"
-          onclick="updatePage(this, '${policy.id}')">${policyValue}</a>`;
-  });
+  const optionButtons = policy.usage.map(([policyValue, headerParam]) =>
+    `<a href="${policy.url}?${headerParam}" class="enable-button try-button"
+        onclick="updatePage(this, '${policy.id}')">${policyValue}</a>`
+  );
 
   return `
     <span class="trylinks">
