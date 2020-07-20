@@ -61,7 +61,7 @@ const RECOGNIZED_HEADERS = [
   'Document-Policy',
   'Require-Document-Policy',
 ];
-app.use(function echoHeader(req, res, next) {
+app.use('/demos', function echoHeader(req, res, next) {
   const query = req.query;
   for (const policyName of RECOGNIZED_HEADERS) {
     if (policyName in query) {
