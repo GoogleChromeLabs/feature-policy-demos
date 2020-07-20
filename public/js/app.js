@@ -49,7 +49,8 @@ async function loadPage() {
     }
 
     const contentFrame = document.querySelector('iframe.content-view');
-    const pagePath = location.href;
+    // Prefix url.pathname with /demos to get the iframe url.
+    const pagePath = '/demos' + url.pathname;
     contentFrame.src = pagePath;
     document.body.classList.toggle('on', policyOn);
 
