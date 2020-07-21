@@ -76,10 +76,12 @@ function updatePolicyValue(anchor) {
  * @param {string} id Feature policy id.
  */
 async function updatePage(anchor, id) {
-  updateDetailsHeader(await getPolicy(id));
+  // Update window URL first, so that |updateDetailsHeader| can observe
+  // the latest URL.
   const href = anchor.getAttribute('href').replace('/demos', '');
   window.history.pushState(null, null, href);
 
+  updateDetailsHeader(await getPolicy(id));
   loadPage();
 }
 
