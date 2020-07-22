@@ -19,6 +19,7 @@ import {unsafeHTML} from '/lit-html/directives/unsafe-html.js';
 
 export const policyOn = new URL(location).searchParams.has('on');
 export const currentPolicyId = new URL(location).pathname.split('/').slice(-1)[0].split('.')[0];
+
 export const featurePolicyAPISupported = 'policy' in document || 'featurePolicy' in document;
 
 const featurePolicy = document.policy || document.featurePolicy;
@@ -49,23 +50,9 @@ async function fetchPolicies() {
   fetchingPoliciesPromise = fetch('/js/policies.json').then(resp => resp.json());
   policies = await fetchingPoliciesPromise;
 
+  // Determine if policy is supported in browser.
   policies.forEach(policy => {
-    // Determine if policy is supported in browser.
     policy.supported = policySupported(policy.id);
-    // URL encode policy headers so that they are ready to be used in URLs as param.
-    policy.usage = Object.entries(policy.usage)
-        .sort(([ka, va], [kb, vb]) => ka < kb) // Sort by key.
-        .map(([policyValue, header]) => {
-          const [policyType, ...frags] = header.split(':');
-          // There might be ':' after initial one that is used to separate
-          // policy header name and policy string. Join the fragments together
-          // to get policy string.
-          const policyString = frags.join('');
-          return [
-            policyValue,
-            `${policyType}=${encodeURIComponent(policyString).replace(/[!'()*]/g, escape)}`,
-          ];
-        });
   });
 
   return policies;
@@ -112,15 +99,14 @@ function showDetails() {
  */
 function policyValueSelector(policy) {
   const desc = policy.usage_desc ? `<span>${policy.usage_desc}:</span>` : '';
-  const optionButtons = policy.usage.map(([policyValue, headerParam]) => {
-    const active =
-      headerParam.localeCompare(new URL(location).search.slice(1)) === 0 ?
-        'active' :
-        '';
-
-    return `<a href="${policy.url}?${headerParam}" class="try-button" ${active}
-        onclick="updatePolicyValue(this)">${policyValue}</a>`;
-  });
+  const optionButtons = Object.entries(policy.usage)
+      .sort(([ka, va], [kb, vb]) => ka < kb)
+      .map(([policyValue, _]) => {
+        const currentPolicyValue = new URL(location).search.slice(1);
+        const active = policyValue.localeCompare(currentPolicyValue) === 0 ? 'active' : '';
+        return `<a href="${policy.url}?${policyValue}" class="try-button" ${active}
+            onclick="updatePolicyValue(this)">${policyValue}</a>`;
+      });
 
   return `
     <span class="trylinks">

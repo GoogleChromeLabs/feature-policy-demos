@@ -54,20 +54,24 @@ app.use(function commonHeaders(req, res, next) {
   next();
 });
 
-// Echo the get parameter string as response header.
-const RECOGNIZED_HEADERS = [
-  'Feature-Policy',
-  'Permissions-Policy',
-  'Document-Policy',
-  'Require-Document-Policy',
-];
-app.use('/demos', function echoHeader(req, res, next) {
-  const query = req.query;
-  for (const policyName of RECOGNIZED_HEADERS) {
-    if (policyName in query) {
-      res.append(policyName, decodeURIComponent(query[policyName]));
+app.use('/demos/:demoPage', function attachHeader(req, res, next) {
+  const demoPage = req.params.demoPage;
+  const policies = app.get('policies');
+
+  const targetPolicies = policies.filter(p =>
+    `/demos/${demoPage}`.localeCompare(p.url) === 0);
+  if (targetPolicies.length == 1) {
+    const targetPolicy = targetPolicies[0];
+    const requestParamNames = Object.keys(req.query);
+
+    if (requestParamNames.empty) next();
+    const usageKey = requestParamNames[0];
+
+    if (usageKey in targetPolicy.usage) {
+      res.append(targetPolicy.policyType, targetPolicy.usage[usageKey]);
     }
   }
+
   next();
 });
 
@@ -101,7 +105,12 @@ app.use(express.static('node_modules'));
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`); /* eslint-disable-line */
-  console.log('Press Ctrl+C to quit.'); /* eslint-disable-line */
-});
+fs.promises.readFile('./public/js/policies.json')
+    .then(f => JSON.parse(f))
+    .then(policies => {
+      app.set('policies', policies);
+      app.listen(PORT, () => {
+        console.log(`App listening on port ${PORT}`); /* eslint-disable-line */
+        console.log('Press Ctrl+C to quit.'); /* eslint-disable-line */
+      });
+    });
