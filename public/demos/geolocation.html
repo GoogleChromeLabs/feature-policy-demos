@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,47 +17,61 @@
     }
   </style>
 </head>
+
 <body class="body-padding">
 
-<details class="details">
-  <!-- filled dynamically -->
-</details>
+  <details class="details">
+    <!-- filled dynamically -->
+  </details>
 
-<h2 id="feature-allowed-banner">
-  <span id="allowfeature">...</span>
-</h2>
+  <h2 id="feature-allowed-banner">
+    <span id="allowfeature">...</span>
+  </h2>
 
-<p>This page embeds a Google Map demo from <a href="https://google-developers.appspot.com/maps/documentation/javascript/examples/full/map-geolocation" target="_blank">https://google-developers.appspot.com/</a> (e.g. cross-domain) using the following:</p>
+  <p>
+    The demo attempts to use the
+    <a href="https://www.w3.org/TR/geolocation-API/" target="_blank">Geolocation API</a>
+    to display the user's current location.
+  </p>
 
-<pre class="snippet">&lt;iframe src="https://google-developers.appspot.com/..."
-        allow="geolocation https://google-developers.appspot.com">&lt;/iframe></pre>
+  <pre class="snippet">
+  navigator.geolocation.getCurrentPosition(
+    p => {
+      displayText(`Successfully retrieved geolocation(${p.coords.latitude}, ${p.coords.longitude})`);
+    },
+    err => {
+      displayText(`Failed to retrieve geolocation: ${err.message}`);
+    });</pre>
 
-<p>The iframe's demo attempts to use the <a href="https://developers.google.com/maps/documentation/geolocation/intro" target="_blank">Geolocation API</a> to
-  display the user's current location. However, when the parent page uses a more restrictive feature policy (<code>Feature-Policy: geolocation 'self'</code>), the iframe is blocked
-  from accessing geolocation.</p>
+  <div class="layout center" id="demo"></div>
 
-<div class="layout center">
-  <iframe src="https://google-developers.appspot.com/maps/documentation/javascript/examples/full/map-geolocation"
-          allow="geolocation https://google-developers.appspot.com"></iframe>
-</div>
+  <script type="module">
+    import {initPage} from '/js/shared.js';
+    initPage();
 
-<script type="module">
-import {initPage} from '/js/shared.js';
-initPage();
+    function displayText(text) {
+      document.querySelector('#demo').textContent = text;
+    }
 
-// navigator.geolocation.getCurrentPosition(position => {
-//   console.log(position.coords.latitude, position.coords.longitude);
-// }, err => {
-//   console.error(err.message);
-// });
+    navigator.geolocation.getCurrentPosition(
+      p => {
+        displayText(`Successfully retrieved geolocation(${p.coords.latitude}, ${p.coords.longitude})`);
+      },
+      err => {
+        displayText(`Failed to retrieve geolocation: ${err.message}`);
+      });
 
 </script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120357238-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-120357238-1');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120357238-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-120357238-1');
+  </script>
 </body>
+
 </html>
