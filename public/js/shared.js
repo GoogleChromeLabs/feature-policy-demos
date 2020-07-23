@@ -120,6 +120,30 @@ function policyValueSelector(policy) {
 }
 
 /**
+ * Render the not supported banner html string based on policy object given.
+ * @param {!Object} policy
+ * @return {string}
+ */
+function notSupportedBanner(policy) {
+  if ('Document-Policy'.localeCompare(policy.policyType) === 0) {
+    return `
+    <div class="notsupported show" style="background: orange">
+      <span>This policy is experimental<br>
+      <img src="/img/flag-24px.svg" class="flag-icon">
+      Please make sure you are running Chrome Canary with the
+      <code>--enable-experimental-web-platform-features</code> flag.</span>
+    </div>`;
+  } else {
+    return `
+    <div class="notsupported ${policy.supported ? '' : 'show'}">
+      <span>This policy is not supported in your browser.<br>
+      <img src="/img/flag-24px.svg" class="flag-icon">Try running Chrome Canary with the
+      <code>--enable-experimental-web-platform-features</code> flag.</span>
+    </div>`;
+  }
+}
+
+/**
  * Updates the UI metadata header when a feature policy is selected.
  * @param {!Object} policy
  */
@@ -142,11 +166,7 @@ function updateDetailsHeader(policy) {
       <li><label>Why</label><span>${unsafeHTML(policy.why)}</span></li>
       <li><label>Examples</label><div>${unsafeHTML(examples)}</div></li>
     </ul>
-    <div class="notsupported ${policy.supported ? '' : 'show'}">
-      <span>This policy is not supported in your browser.<br>
-      <img src="/img/flag-24px.svg" class="flag-icon">Try running Chrome Canary with the
-      <code>--enable-experimental-web-platform-features</code> flag.</span>
-    </div>`;
+    ${unsafeHTML(notSupportedBanner(policy))}`;
 
   render(tmpl, document.querySelector('.details'));
 }
