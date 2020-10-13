@@ -19,7 +19,7 @@
 import {html, render} from '/lit-html/lit-html.js';
 import {repeat} from '/lit-html/directives/repeat.js';
 import {until} from '/lit-html/directives/until.js';
-import {fetchPolicies, updateDetailsHeader, getPolicy, featurePolicyAPISupported} from '/js/shared.js';
+import {fetchPolicies, updateDetailsHeader, getPolicy, permissionsPolicyAPISupported} from '/js/shared.js';
 
 const POLICY_TYPE_TO_LABEL = {
   performance: 'Performance',
@@ -102,8 +102,9 @@ function toggleDrawer(forClose = false) {
  * @param {Array<Object>} implementedPolicies
  */
 async function leftOverPolicies(implementedPolicies) {
-  const featurePolicy = document.policy || document.featurePolicy;
-  const allPolicies = featurePolicy.allowedFeatures().sort();
+  const permissionsPolicy =
+    document.policy || document.permissionsPolicy || document.featurePolicy;
+  const allPolicies = permissionsPolicy.allowedFeatures().sort();
 
   const policies = [];
   allPolicies.forEach((item, i) => {
@@ -120,7 +121,7 @@ async function leftOverPolicies(implementedPolicies) {
 
 
 (async () => {
-if (!featurePolicyAPISupported) {
+if (!permissionsPolicyAPISupported) {
   document.querySelector('.notsupported').classList.add('show');
   return;
 }

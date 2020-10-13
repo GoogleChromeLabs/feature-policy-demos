@@ -24,14 +24,14 @@
   "chromeStatusLink": "https://www.chromestatus.com/feature/5154875084111872",
   "what": "Disallows the use of synchronous XMLHttpRequests.",
   "why": "Using synchronous XHRs can cause jank on the main thread and be detrimental to user experience. Although the HTML spec has <a href=\"https://xhr.spec.whatwg.org/#sync-warning\" target=\"_blank\">deprecated sync XHRs</a>, developers are still able to use it for XHR requests where <code>responseType=\"text\"</code>.",
-  "policyType": "Feature-Policy",
+  "policyType": "Permissions-Policy",
   "usage": {
-    "off": "sync-xhr 'self'",
-    "on": "sync-xhr 'none'"
+    "off": "sync-xhr=self",
+    "on": "sync-xhr=()"
   },
   "examples": {
     "header": [
-      "Feature-Policy: sync-xhr 'none'"
+      "Permissions-Policy: sync-xhr=()"
     ]
   }
 }, {
@@ -42,15 +42,15 @@
   "chromeStatusLink": "https://www.chromestatus.com/feature/5100524789563392",
   "what": "Allows cross-origin videos and movies to autoplay.",
   "why": "By default, Chrome allows the `autoplay` attribute on videos within same-origin iframes. To enable cross-origin videos to autoplay (or disallow same-origin videos from auto playing), sites can use this feature policy.",
-  "policyType": "Feature-Policy",
+  "policyType": "Permissions-Policy",
   "usage": {
-    "off": "autoplay 'self'",
-    "on": "autoplay 'none'"
+    "off": "autoplay=self",
+    "on": "autoplay=()"
   },
   "examples": {
     "header": [
-      "Feature-Policy: autoplay 'none'",
-      "Feature-Policy: autoplay 'self'"
+      "Permissions-Policy: autoplay=()",
+      "Permissions-Policy: autoplay=self"
     ]
   }
 }, {
@@ -61,15 +61,15 @@
   "chromeStatusLink": null,
   "what": "Allows/disables the use of the Geolocation API.",
   "why": "By default, Chrome blocks the usage of geolocation in cross-origin iframes. Developers can control this behavior (or geolocation access in general) using this feature policy.",
-  "policyType": "Feature-Policy",
+  "policyType": "Permissions-Policy",
   "usage": {
-    "off": "geolocation 'self'",
-    "on": "geolocation https://google-developers.appspot.com"
+    "off": "geolocation=self",
+    "on": "geolocation=()"
   },
   "examples": {
     "header": [
-      "Feature-Policy: geolocation 'self'",
-      "Feature-Policy: geolocation https://google-developers.appspot.com"
+      "Permissions-Policy: geolocation=self",
+      "Permissions-Policy: geolocation https://google-developers.appspot.com"
     ],
     "iframe": [
       "&lt;iframe src=\"...\" allow=\"geolocation https://google-developers.appspot.com\"><\/iframe>"
@@ -83,15 +83,15 @@
   "chromeStatusLink": "https://www.chromestatus.com/features/5729206566649856",
   "what": "Controls access to Picture in Picture.",
   "why": "By default, Chrome allows the usage of Picture-in-Picture in cross-origin iframes. Developers can disable it using this feature policy.",
-  "policyType": "Feature-Policy",
+  "policyType": "Permissions-Policy",
   "usage": {
-    "on": "picture-in-picture 'self'",
-    "off": "picture-in-picture 'none'"
+    "on": "picture-in-picture=self",
+    "off": "picture-in-picture=()"
   },
   "examples": {
     "header": [
-      "Feature-Policy: picture-in-picture 'self'",
-      "Feature-Policy: picture-in-picture 'none'"
+      "Permissions-Policy: picture-in-picture=self",
+      "Permissions-Policy: picture-in-picture=()"
     ]
   }
 }, {
@@ -101,14 +101,14 @@
   "url": "/demos/animations.html",
   "what": "Restricts the set of CSS properties which can be animated to opacity, transform, and filter.",
   "why": "Ensures smooth animations, by only allowing those properties which can be animated on the GPU using the hardware acceleration.",
-  "policyType": "Feature-Policy",
+  "policyType": "Permissions-Policy",
   "usage": {
-    "off": "animations 'self'",
-    "on": "animations 'none'"
+    "off": "animations=self",
+    "on": "animations=()"
   },
   "examples": {
     "header": [
-      "Feature-Policy: animations 'none'"
+      "Permissions-Policy: animations=()"
     ],
     "iframe": [
       "&lt;iframe allow=\"animations https:\/\/anim8.cdn.com\" src=\"...\"><\/iframe>"
@@ -178,14 +178,14 @@
   "url": "/demos/vertical-scroll.html",
   "what": "Controls whether embedded content can interfere with vertical scrolling.",
   "why": "By default, iframe content can use <code>touch-action: none</code>, <code>e.preventDefault()</code> in touch events, and the DOM Scroll APIs to prevent and/or alter how content scrolls vertically. This policy ensures vertical scrolling is not blocked by preventing these features from working.",
-  "policyType": "Feature-Policy",
+  "policyType": "Permissions-Policy",
   "usage": {
-    "off": "vertical-scroll 'self'",
-    "on": "vertical-scroll 'none'"
+    "off": "vertical-scroll=self",
+    "on": "vertical-scroll=()"
   },
   "examples": {
     "header": [
-      "Feature-Policy: vertical-scroll 'none'"
+      "Permissions-Policy: vertical-scroll=()"
     ],
     "iframe": [
       "&lt;iframe allow=\"vertical-scroll 'none'\" src=\"...\"><\/iframe>"

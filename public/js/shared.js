@@ -21,9 +21,16 @@ import {ifDefined} from '/lit-html/directives/if-defined.js';
 export const policyOn = new URL(location).searchParams.has('on');
 export const currentPolicyId = new URL(location).pathname.split('/').slice(-1)[0].split('.')[0];
 
-export const featurePolicyAPISupported = 'policy' in document || 'featurePolicy' in document;
+export const permissionsPolicyAPISupported =
+  'policy' in document ||
+  'featurePolicy' in document ||
+  'permissionsPolicy' in document;
 
-const featurePolicy = document.policy || document.featurePolicy;
+const permissionsPolicy =
+  document.policy ||
+  document.featurePolicy ||
+  document.permissionsPolicy;
+
 let policies = [];
 let fetchingPoliciesPromise = null;
 
@@ -75,10 +82,10 @@ async function getPolicy(id) {
  * @return {!Boolean}
  */
 function policySupported(id) {
-  if (!featurePolicyAPISupported) {
+  if (!permissionsPolicyAPISupported) {
     return false;
   }
-  return featurePolicy.allowedFeatures().findIndex(el => el === id) !== -1;
+  return permissionsPolicy.allowedFeatures().findIndex(el => el === id) !== -1;
 }
 
 /**
@@ -157,7 +164,7 @@ function updateDetailsHeader(policy) {
  * @return {boolean} True if the current policy is enabled.
  */
 function updateAllowBanner(policyId) {
-  const allowsFeature = featurePolicy.allowsFeature(policyId);
+  const allowsFeature = permissionsPolicy.allowsFeature(policyId);
   const allows = allowsFeature ? 'enables' : 'disables';
   const banner = document.querySelector('#feature-allowed-banner');
   if (!banner) {
