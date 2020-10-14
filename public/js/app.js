@@ -30,7 +30,7 @@ const POLICY_TYPE_TO_LABEL = {
 
 /**
  * Dynamically loads policy demo page based off current (deep link) url.
- * @return {!Object} Feature policy info.
+ * @return {!Object} Permissions policy info.
  */
 async function loadPage() {
   let policy = null;
@@ -73,7 +73,7 @@ function updatePolicyValue(anchor) {
 /**
  * Updates the dynamic portions of the page.
  * @param {!HTMLAnchorElement} anchor
- * @param {string} id Feature policy id.
+ * @param {string} id Permissions policy id.
  */
 async function updatePage(anchor, id) {
   // Update window URL first, so that |updateDetailsHeader| can observe

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Feature Policy Kitchen Sink</title>
+  <title>Permissions Policy Kitchen Sink</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
   <link rel="stylesheet" href="/styles/main.css">
   <link rel="stylesheet" href="/styles/header.css">
@@ -34,7 +34,7 @@
       <img src="/img/sink.svg" title="It's a kitchen sink!" alt="It's a kitchen sink!">
     </div>
     <a href="/" target="_self">
-      <h2 class="drawer-title">Feature Policy</h2>
+      <h2 class="drawer-title">Permissions Policy</h2>
       <h3 class="drawer-subtitle">Demos</h3>
     </a>
   </header>
@@ -59,17 +59,18 @@
 
   <div>
     <div id="intro-summary" class="body-padding">
-      <h2><a href="https://developers.google.com/web/updates/2018/06/feature-policy" target="_blank">Feature Policy</a>
+      <!-- TODO: update documentation link. -->
+      <h2><a href="https://developers.google.com/web/updates/2018/06/feature-policy" target="_blank">Permissions Policy</a>
         allows web developers to selectively enable, disable, and modify the behavior
         of various features and APIs in the browser. This can provide a well-lit path towards good performance
         and prevent common footguns when building and maintaining web apps.</h2>
-      <h3 class="notsupported">Feature policy is not supported in your browser. Try Chrome Canary and enable the <code>--enable-experimental-web-platform-features</code> flag.</h3>
-      <h3 style="margin-top:var(--default-padding-3x);">You control feature policies through an HTTP header:</h3>
+      <h3 class="notsupported">Permissions policy is not supported in your browser. Try Chrome Canary and enable the <code>--enable-experimental-web-platform-features</code> flag.</h3>
+      <h3 style="margin-top:var(--default-padding-3x);">You control permissions policies through an HTTP header:</h3>
       <p>
-        <pre class="snippet">Feature-Policy: geolocation *
-Feature-Policy: geolocation 'none'
-Feature-Policy: geolocation 'self'
-Feature-Policy: geolocation https://google-developers.appspot.com</pre>
+        <pre class="snippet">Permissions-Policy: geolocation=*
+Permissions-Policy: geolocation=()
+Permissions-Policy: geolocation=self
+Permissions-Policy: geolocation="https://google-developers.appspot.com"</pre>
       </p>
       <h3 style="margin-top:var(--default-padding-3x);">or by adding the <code>allow</code> attribute on iframes:</h3>
       <p>

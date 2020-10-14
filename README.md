@@ -1,6 +1,6 @@
-## Feature Policy Demos
+## Permissions Policy Demos
 
-Kitchen sink of [feature policy](https://www.chromestatus.com/feature/5694225681219584) demos.
+Kitchen sink of [permissions policy](https://www.chromestatus.com/feature/5745992911552512) demos.
 
 ### Development
 

@@ -41,7 +41,7 @@
   "url": "/demos/autoplay.html",
   "chromeStatusLink": "https://www.chromestatus.com/feature/5100524789563392",
   "what": "Allows cross-origin videos and movies to autoplay.",
-  "why": "By default, Chrome allows the `autoplay` attribute on videos within same-origin iframes. To enable cross-origin videos to autoplay (or disallow same-origin videos from auto playing), sites can use this feature policy.",
+  "why": "By default, Chrome allows the `autoplay` attribute on videos within same-origin iframes. To enable cross-origin videos to autoplay (or disallow same-origin videos from auto playing), sites can use this permissions policy.",
   "policyType": "Permissions-Policy",
   "usage": {
     "off": "autoplay=self",
@@ -60,7 +60,7 @@
   "url": "/demos/geolocation.html",
   "chromeStatusLink": null,
   "what": "Allows/disables the use of the Geolocation API.",
-  "why": "By default, Chrome blocks the usage of geolocation in cross-origin iframes. Developers can control this behavior (or geolocation access in general) using this feature policy.",
+  "why": "By default, Chrome blocks the usage of geolocation in cross-origin iframes. Developers can control this behavior (or geolocation access in general) using this permissions policy.",
   "policyType": "Permissions-Policy",
   "usage": {
     "off": "geolocation=self",
@@ -82,7 +82,7 @@
   "url": "/demos/picture-in-picture.html",
   "chromeStatusLink": "https://www.chromestatus.com/features/5729206566649856",
   "what": "Controls access to Picture in Picture.",
-  "why": "By default, Chrome allows the usage of Picture-in-Picture in cross-origin iframes. Developers can disable it using this feature policy.",
+  "why": "By default, Chrome allows the usage of Picture-in-Picture in cross-origin iframes. Developers can disable it using this permissions policy.",
   "policyType": "Permissions-Policy",
   "usage": {
     "on": "picture-in-picture=self",
