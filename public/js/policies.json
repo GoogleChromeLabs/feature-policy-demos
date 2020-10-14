@@ -160,18 +160,15 @@
   "type": "performance",
   "url": "/demos/sync-script.html",
   "what": "Prevents synchronous, parsing blocking scripts from executing.",
-  "why": "Inline scripts and <code>&lt;script src></code> without the <code>defer</code>/<code>async</code> attributes block the parser. This can lead to bad performance and poor UX. Instead, use <code>defer</code>/<code>async</code> when loading scripts, dynamically inject them into the page using JS, or use ES Modules (which are defer loaded by default). These solutions will not violate this feature policy.",
-  "policyType": "Feature-Policy",
+  "why": "Inline scripts and <code>&lt;script src></code> without the <code>defer</code>/<code>async</code> attributes block the parser. This can lead to bad performance and poor UX. Instead, use <code>defer</code>/<code>async</code> when loading scripts, dynamically inject them into the page using JS, or use ES Modules (which are defer loaded by default). These solutions will not violate this document policy.",
+  "policyType": "Document-Policy",
   "usage": {
-    "off": "sync-script 'self'",
-    "on": "sync-script 'none'"
+    "off": "sync-script",
+    "on": "sync-script=?0"
   },
   "examples": {
     "header": [
-      "Feature-Policy: sync-script 'none'"
-    ],
-    "iframe": [
-      "&lt;iframe allow=\"sync-script 'none'\" src=\"...\"><\/iframe>"
+      "Document-Policy: sync-script=?0"
     ]
   }
 }, {
