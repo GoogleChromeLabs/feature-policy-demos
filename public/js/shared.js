@@ -98,20 +98,21 @@ function showDetails() {
  * @return {string}
  */
 function policyValueSelector(policy) {
-  const desc = policy.usage_desc ? `<span>${policy.usage_desc}:</span>` : '';
+  const desc = policy.usage_desc ? html `<span>${policy.usage_desc}:</span>` : '';
   const optionButtons = Object.entries(policy.usage)
       .sort(([ka, va], [kb, vb]) => ka < kb)
       .map(([policyValue, _]) => {
         const currentPolicyValue = new URL(location).search.slice(1);
         const active = policyValue.localeCompare(currentPolicyValue) === 0 ? 'active' : '';
-        return `<a href="${policy.url}?${policyValue}" class="try-button" ${active}
-            onclick="updatePolicyValue(this)">${policyValue}</a>`;
+        return html `
+        <a href="${policy.url}?${policyValue}"
+           class="try-button ${active} onclick="updatePolicyValue(this)">${policyValue}</a>`;
       });
 
-  return `
+  return html `
     <span class="trylinks">
       ${desc}
-      ${optionButtons.join('\n')}
+      ${optionButtons}
     </span>
   `;
 }
@@ -131,7 +132,7 @@ function updateDetailsHeader(policy) {
   const tmpl = html`
     <summary>
       <span class="policyname">${policy.name}</span>
-      ${unsafeHTML(policyValueSelector(policy))}
+      ${policyValueSelector(policy)}
       <span class="menu-button" onclick="toggleDrawer()"><img src="/img/menu24px.svg"></span>
     </summary>
     <ul class="details-info">
