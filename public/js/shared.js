@@ -103,10 +103,19 @@ function policyValueSelector(policy) {
       .sort(([ka, va], [kb, vb]) => ka < kb)
       .map(([policyValue, _]) => {
         const currentPolicyValue = new URL(location).search.slice(1);
-        const active = policyValue.localeCompare(currentPolicyValue) === 0 ? 'active' : '';
-        return html `
-        <a href="${policy.url}?${policyValue}"
-           class="try-button ${active} onclick="updatePolicyValue(this)">${policyValue}</a>`;
+        // Note: inline 'active' attribute as a template argument
+        // will result in lithtml not correctly render the element.
+        if (policyValue.localeCompare(currentPolicyValue) === 0) {
+          return html `
+          <a href="${policy.url}?${policyValue}"
+            class="try-button" onclick=updatePolicyValue(this) active
+          >${policyValue}</a>`;
+        } else {
+          return html `
+          <a href="${policy.url}?${policyValue}"
+            class="try-button" onclick=updatePolicyValue(this)
+          >${policyValue}</a>`;
+        }
       });
 
   return html `
