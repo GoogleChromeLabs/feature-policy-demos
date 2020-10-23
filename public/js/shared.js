@@ -16,6 +16,7 @@
 
 import {html, render} from '/lit-html/lit-html.js';
 import {unsafeHTML} from '/lit-html/directives/unsafe-html.js';
+import {ifDefined} from '/lit-html/directives/if-defined.js';
 
 export const policyOn = new URL(location).searchParams.has('on');
 export const currentPolicyId = new URL(location).pathname.split('/').slice(-1)[0].split('.')[0];
@@ -103,19 +104,11 @@ function policyValueSelector(policy) {
       .sort(([ka, va], [kb, vb]) => ka < kb)
       .map(([policyValue, _]) => {
         const currentPolicyValue = new URL(location).search.slice(1);
-        // Note: inline 'active' attribute as a template argument
-        // will result in lithtml not correctly render the element.
-        if (policyValue.localeCompare(currentPolicyValue) === 0) {
-          return html `
-          <a href="${policy.url}?${policyValue}"
-            class="try-button" onclick=updatePolicyValue(this) active
-          >${policyValue}</a>`;
-        } else {
-          return html `
-          <a href="${policy.url}?${policyValue}"
-            class="try-button" onclick=updatePolicyValue(this)
-          >${policyValue}</a>`;
-        }
+        const active = policyValue.localeCompare(currentPolicyValue) === 0 ? 'active' : undefined;
+        return html `
+        <a href="${policy.url}?${policyValue}"
+          class="try-button" onclick=updatePolicyValue(this) active="${ifDefined(active)}"
+        >${policyValue}</a>`;
       });
 
   return html `
