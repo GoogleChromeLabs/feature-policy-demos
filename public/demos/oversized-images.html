@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Feature Policy: oversized-images example</title>
+  <title>Document Policy: oversized-images example</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans">
   <link rel="stylesheet" href="/styles/main.css">
   <link rel="stylesheet" href="/styles/header.css">
@@ -19,9 +19,9 @@
   <span id="allowfeature">...</span>
 </h2>
 
-<p>Click the disallow/allow buttons above to see how the page loads with the policy on and off.
-  When the policy is on, you will see images that have intrinsic dimentions which are much larger
-  than their container size render as placeholder images.</p>
+<p>Click the buttons above to see how the page loads with different policy values.
+ Images where the ratio of intrinsic dimensions to container size exceeds the given
+ threshold should render as placeholder images.</p>
 
 <!--
 For optimized images:

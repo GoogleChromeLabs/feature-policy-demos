@@ -18,6 +18,7 @@
 
 import fs from 'fs';
 import express from 'express';
+import bodyParser from 'body-parser';
 
 const OT_TOKEN_UNOPT_IMAGES = 'AiGYzl8A17mcET9ObZ6QbC5vmOlCWk+4jZwZptDwKw8Iguu3jX2e6WVzUbHZpW0zPgqZdq/WSSUysH2chjMtCA4AAAByeyJvcmlnaW4iOiJodHRwczovL2ZlYXR1cmUtcG9saWN5LWRlbW9zLmFwcHNwb3QuY29tOjQ0MyIsImZlYXR1cmUiOiJVbm9wdGltaXplZEltYWdlUG9saWNpZXMiLCJleHBpcnkiOjE1NjQ2Nzg1NjF9';
 const OT_TOKEN_UNOPT_IMAGES_LOCALHOST = 'AuqelXxw7r91rz8mkV5fJnMkjNXY6vtmpd8lzATN2KGpwd0D6akFg7GBtigifHHuqk7zAnOvo2NlUnmAQTmSTQkAAABbeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJmZWF0dXJlIjoiVW5vcHRpbWl6ZWRJbWFnZVBvbGljaWVzIiwiZXhwaXJ5IjoxNTY0Njc4MzU1fQ==';
@@ -33,6 +34,9 @@ function errorHandler(err, req, res, next) {
 /* eslint-enable */
 
 const app = express();
+app.use(bodyParser.urlencoded({
+  extended: false,
+}));
 
 app.use(function forceSSL(req, res, next) {
   const fromCron = req.get('X-Appengine-Cron');
@@ -50,9 +54,29 @@ app.use(function commonHeaders(req, res, next) {
   next();
 });
 
+app.use('/demos/:demoPage', function attachHeader(req, res, next) {
+  const demoPage = req.params.demoPage;
+  const policies = app.get('policies');
+
+  const targetPolicies = policies.filter(p =>
+    `/demos/${demoPage}`.localeCompare(p.url) === 0);
+  if (targetPolicies.length == 1) {
+    const targetPolicy = targetPolicies[0];
+    const requestParamNames = Object.keys(req.query);
+
+    if (requestParamNames.empty) next();
+    const usageKey = requestParamNames[0];
+
+    if (usageKey in targetPolicy.usage) {
+      res.append(targetPolicy.policyType, targetPolicy.usage[usageKey]);
+    }
+  }
+
+  next();
+});
+
 app.get('/test', (req, res, next) => {
   const on = 'on' in req.query;
-  // res.append('Feature-Policy', `geolocation 'self' https://example.com`);
   if (on) {
     res.append('Feature-Policy', `max-downscaling-image 'none'`);
     res.append('Feature-Policy', `image-compression 'none'`);
@@ -72,29 +96,8 @@ app.get('/test', (req, res, next) => {
 });
 
 app.get('/:demoPage', (req, res, next) => {
-  // const demoPage = req.params.demoPage;
-  // console.log(demoPage)
   res.send(fs.readFileSync('./public/index.html', {encoding: 'utf-8'}));
 });
-
-// // Enable/disable policies on demo pages.
-// app.use('/demos', (req, res, next) => {
-//   const unsizedMedia = 'on' in req.query;
-//   // res.append('Feature-Policy', "camera 'none'; microphone 'none'");
-//   // res.append('Feature-Policy', "autoplay 'self' https://clips.vorwaerts-gmbh.de");
-//   // res.append('Feature-Policy', "fullscreen 'none'");
-//   // res.append('Feature-Policy', "geolocation 'self' https://example.com");
-//   // res.append('Feature-Policy', "midi 'none'");
-//   // res.append('Feature-Policy', "sync-xhr 'none'");
-//   // res.append('Feature-Policy', "vr 'none'");
-//   // res.append('Feature-Policy', "usb 'none'");
-//   // res.append('Feature-Policy', "payment 'none'");
-//   // res.append('Feature-Policy', "vibrate 'none'");
-//   if (unsizedMedia) {
-//     // res.set('Feature-Policy', `unsized-media 'none'`);
-//   }
-//   next();
-// });
 
 app.use(express.static('public', {extensions: ['html', 'htm']}));
 app.use(express.static('node_modules'));
@@ -102,7 +105,12 @@ app.use(express.static('node_modules'));
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`); /* eslint-disable-line */
-  console.log('Press Ctrl+C to quit.'); /* eslint-disable-line */
-});
+fs.promises.readFile('./public/js/policies.json')
+    .then(f => JSON.parse(f))
+    .then(policies => {
+      app.set('policies', policies);
+      app.listen(PORT, () => {
+        console.log(`App listening on port ${PORT}`); /* eslint-disable-line */
+        console.log('Press Ctrl+C to quit.'); /* eslint-disable-line */
+      });
+    });

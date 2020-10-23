@@ -38,7 +38,6 @@ async function loadPage() {
 
   if (url.pathname !== '/') {
     const demoPage = url.pathname.slice(1).split('.')[0];
-    const policyOn = url.searchParams.has('on');
 
     policy = await getPolicy(demoPage);
 
@@ -49,10 +48,8 @@ async function loadPage() {
     }
 
     const contentFrame = document.querySelector('iframe.content-view');
-    contentFrame.allow = policyOn ? policy.usage.on : policy.usage.off;
-    const pagePath = policyOn ? `${policy.url}?on` : policy.url;
+    const pagePath = policy.url + url.search;
     contentFrame.src = pagePath;
-    document.body.classList.toggle('on', policyOn);
 
     gtag('config', 'UA-120357238-1', {page_path: pagePath});
   }
@@ -61,15 +58,30 @@ async function loadPage() {
 }
 
 /**
+ * Updates the iframe content when policy value selector is clicked.
+ *
+ * @param {!HTMLAnchorElement} anchor
+ */
+function updatePolicyValue(anchor) {
+  anchor.parentElement.querySelectorAll('a').forEach(a => a.removeAttribute('active'));
+  anchor.setAttribute('active', '');
+  const href = anchor.getAttribute('href').replace('/demos', '');
+  window.history.pushState(null, null, href);
+  loadPage();
+}
+
+/**
  * Updates the dynamic portions of the page.
  * @param {!HTMLAnchorElement} anchor
  * @param {string} id Feature policy id.
  */
 async function updatePage(anchor, id) {
-  updateDetailsHeader(await getPolicy(id));
+  // Update window URL first, so that |updateDetailsHeader| can observe
+  // the latest URL.
   const href = anchor.getAttribute('href').replace('/demos', '');
   window.history.pushState(null, null, href);
 
+  updateDetailsHeader(await getPolicy(id));
   loadPage();
 }
 
@@ -134,8 +146,9 @@ const buildImplementedPolicies = () => {
   const categories = Array.from(categoryMapping.entries());
   const markup = repeat(categories, (item) => item[0], ([cat, policies], i) => {
     const items = repeat(policies, (p) => p.id, (p, i) => {
+      const firstUsage = Object.keys(p.usage).sort()[0];
       return html`
-        <a href="${p.url}?on" class="policy-name" onclick="updatePage(this, '${p.id}')">
+        <a href="${p.url}?${firstUsage}" class="policy-name" onclick="updatePage(this, '${p.id}')">
           ${p.name}
           <img src="/img/flag-24px.svg" class="flag-icon ${p.supported ? 'supported' : ''}"
                title="Requires a flag">
@@ -171,4 +184,5 @@ document.addEventListener('click', e => {
 })();
 
 window.updatePage = updatePage;
+window.updatePolicyValue = updatePolicyValue;
 window.toggleDrawer = toggleDrawer;

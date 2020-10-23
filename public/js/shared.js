@@ -16,9 +16,11 @@
 
 import {html, render} from '/lit-html/lit-html.js';
 import {unsafeHTML} from '/lit-html/directives/unsafe-html.js';
+import {ifDefined} from '/lit-html/directives/if-defined.js';
 
 export const policyOn = new URL(location).searchParams.has('on');
 export const currentPolicyId = new URL(location).pathname.split('/').slice(-1)[0].split('.')[0];
+
 export const featurePolicyAPISupported = 'policy' in document || 'featurePolicy' in document;
 
 const featurePolicy = document.policy || document.featurePolicy;
@@ -90,6 +92,34 @@ function showDetails() {
 }
 
 /**
+ * Render the policy value selection bar html string based on policy object
+ * given.
+ *
+ * @param {Object} policy
+ * @return {string}
+ */
+function policyValueSelector(policy) {
+  const desc = policy.usage_desc ? html `<span>${policy.usage_desc}:</span>` : '';
+  const optionButtons = Object.entries(policy.usage)
+      .sort(([ka, va], [kb, vb]) => ka < kb)
+      .map(([policyValue, _]) => {
+        const currentPolicyValue = new URL(location).search.slice(1);
+        const active = policyValue.localeCompare(currentPolicyValue) === 0 ? 'active' : undefined;
+        return html `
+        <a href="${policy.url}?${policyValue}"
+          class="try-button" onclick=updatePolicyValue(this) active="${ifDefined(active)}"
+        >${policyValue}</a>`;
+      });
+
+  return html `
+    <span class="trylinks">
+      ${desc}
+      ${optionButtons}
+    </span>
+  `;
+}
+
+/**
  * Updates the UI metadata header when a feature policy is selected.
  * @param {!Object} policy
  */
@@ -103,13 +133,8 @@ function updateDetailsHeader(policy) {
 
   const tmpl = html`
     <summary>
-      <span><span class="policyname">${policy.name}</span> feature policy</span>
-      <span class="trylinks">
-        <a href="${policy.url}?on" class="enable-button try-button"
-           onclick="updatePage(this, '${policy.id}')">On</a>
-        <a href="${policy.url}" class="disable-button try-button"
-           onclick="updatePage(this, '${policy.id}')">Off</a>
-      </span>
+      <span class="policyname">${policy.name}</span>
+      ${policyValueSelector(policy)}
       <span class="menu-button" onclick="toggleDrawer()"><img src="/img/menu24px.svg"></span>
     </summary>
     <ul class="details-info">

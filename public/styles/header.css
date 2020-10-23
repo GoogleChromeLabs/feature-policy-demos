@@ -28,19 +28,12 @@ details.details {
 .details .trylinks .try-button:hover {
   border-bottom: 4px solid var(--enable-color) !important;
 }
-body.on .details .trylinks .enable-button {
+.details .trylinks a[active] {
   border-bottom: 4px solid var(--enable-color);
   font-weight: 600;
 }
-body.on .details .trylinks .disable-button {
+.details .trylinks a:not([active]) {
   border-bottom: 4px solid var(--disable-color);
-}
-body:not(.on) .details .trylinks .enable-button {
-  border-bottom: 4px solid var(--disable-color);
-}
-body:not(.on) .details .trylinks .disable-button {
-  border-bottom: 4px solid var(--enable-color);
-  font-weight: 600;
 }
 .details summary {
   position: relative;
