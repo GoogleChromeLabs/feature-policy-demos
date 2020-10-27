@@ -30,7 +30,7 @@ const POLICY_TYPE_TO_LABEL = {
 
 /**
  * Dynamically loads policy demo page based off current (deep link) url.
- * @return {!Object} Permissions policy info.
+ * @return {!Object} Policy info.
  */
 async function loadPage() {
   let policy = null;
@@ -103,7 +103,7 @@ function toggleDrawer(forClose = false) {
  */
 async function leftOverPolicies(implementedPolicies) {
   const permissionsPolicy =
-    document.policy || document.permissionsPolicy || document.featurePolicy;
+    document.permissionsPolicy || document.featurePolicy;
   const allPolicies = permissionsPolicy.allowedFeatures().sort();
 
   const policies = [];

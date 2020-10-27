@@ -22,12 +22,10 @@ export const policyOn = new URL(location).searchParams.has('on');
 export const currentPolicyId = new URL(location).pathname.split('/').slice(-1)[0].split('.')[0];
 
 export const permissionsPolicyAPISupported =
-  'policy' in document ||
   'featurePolicy' in document ||
   'permissionsPolicy' in document;
 
 const permissionsPolicy =
-  document.policy ||
   document.featurePolicy ||
   document.permissionsPolicy;
 

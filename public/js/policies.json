@@ -101,17 +101,14 @@
   "url": "/demos/animations.html",
   "what": "Restricts the set of CSS properties which can be animated to opacity, transform, and filter.",
   "why": "Ensures smooth animations, by only allowing those properties which can be animated on the GPU using the hardware acceleration.",
-  "policyType": "Permissions-Policy",
+  "policyType": "Document-Policy",
   "usage": {
-    "off": "animations=self",
-    "on": "animations=()"
+    "off": "animations",
+    "on": "animations=?0"
   },
   "examples": {
     "header": [
-      "Permissions-Policy: animations=()"
-    ],
-    "iframe": [
-      "&lt;iframe allow=\"animations https:\/\/anim8.cdn.com\" src=\"...\"><\/iframe>"
+      "Document-Policy: animations=?0"
     ]
   }
 }, {
