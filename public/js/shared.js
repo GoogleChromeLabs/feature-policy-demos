@@ -126,7 +126,7 @@ function policyValueSelector(policy) {
  */
 function notSupportedBanner(policy) {
   if ('Document-Policy'.localeCompare(policy.policyType) === 0) {
-    return `
+    return html `
     <div class="notsupported show" style="background: orange">
       <span>This policy is experimental<br>
       <img src="/img/flag-24px.svg" class="flag-icon">
@@ -134,7 +134,7 @@ function notSupportedBanner(policy) {
       <code>--enable-experimental-web-platform-features</code> flag.</span>
     </div>`;
   } else {
-    return `
+    return html `
     <div class="notsupported ${policy.supported ? '' : 'show'}">
       <span>This policy is not supported in your browser.<br>
       <img src="/img/flag-24px.svg" class="flag-icon">Try running Chrome Canary with the
@@ -166,7 +166,7 @@ function updateDetailsHeader(policy) {
       <li><label>Why</label><span>${unsafeHTML(policy.why)}</span></li>
       <li><label>Examples</label><div>${unsafeHTML(examples)}</div></li>
     </ul>
-    ${unsafeHTML(notSupportedBanner(policy))}`;
+    ${notSupportedBanner(policy)}`;
 
   render(tmpl, document.querySelector('.details'));
 }
@@ -181,8 +181,6 @@ function updateAllowBanner(policyId) {
   const allows = allowsFeature ? 'enables' : 'disables';
   const banner = document.querySelector('#feature-allowed-banner');
   if (!banner) {
-    /* eslint-disable-next-line */
-    console.warn('No #feature-allowed-banner element found.');
     return;
   }
   banner.classList.toggle('allows', allowsFeature);
