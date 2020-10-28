@@ -111,7 +111,7 @@ export class PermissionsPolicyHeader {
         case "":
           return "'none'";
         default:
-          // Remove leading and tailing '"' in permissions header syntax.
+          // Remove leading and trailing '"' in permissions header syntax.
           return item.slice(1, -1);
       }
     }

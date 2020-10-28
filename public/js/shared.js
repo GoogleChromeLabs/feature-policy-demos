@@ -125,7 +125,7 @@ function policyValueSelector(policy) {
 }
 
 /**
- * Updates the UI metadata header when a permissions policy is selected.
+ * Updates the UI metadata header when a policy is selected.
  * @param {!Object} policy
  */
 function updateDetailsHeader(policy) {

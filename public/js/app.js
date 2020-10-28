@@ -73,7 +73,7 @@ function updatePolicyValue(anchor) {
 /**
  * Updates the dynamic portions of the page.
  * @param {!HTMLAnchorElement} anchor
- * @param {string} id Permissions policy id.
+ * @param {string} id Policy id.
  */
 async function updatePage(anchor, id) {
   // Update window URL first, so that |updateDetailsHeader| can observe
