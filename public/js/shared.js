@@ -125,6 +125,31 @@ function policyValueSelector(policy) {
 }
 
 /**
+ * Render the not supported banner html string based on policy object given.
+ * @param {!Object} policy
+ * @return {string}
+ */
+function notSupportedBanner(policy) {
+  if ('Document-Policy'.localeCompare(policy.policyType) === 0) {
+    return html `
+    <div class="notsupported show" style="background: orange">
+      <span>This policy is experimental<br>
+      <img src="/img/flag-24px.svg" class="flag-icon">
+      Please make sure you are running Chrome Canary with the
+      <code>--enable-experimental-web-platform-features</code> flag.</span>
+    </div>`;
+  } else {
+    return html `
+    <div class="notsupported ${policy.supported ? '' : 'show'}">
+      <span>This policy is not supported in your browser.<br>
+      <img src="/img/flag-24px.svg" class="flag-icon">Try running Chrome Canary with the
+      <code>--enable-experimental-web-platform-features</code> flag.</span>
+    </div>`;
+  }
+}
+
+
+/**
  * Updates the UI metadata header when a policy is selected.
  * @param {!Object} policy
  */
@@ -147,11 +172,7 @@ function updateDetailsHeader(policy) {
       <li><label>Why</label><span>${unsafeHTML(policy.why)}</span></li>
       <li><label>Examples</label><div>${unsafeHTML(examples)}</div></li>
     </ul>
-    <div class="notsupported ${policy.supported ? '' : 'show'}">
-      <span>This policy is not supported in your browser.<br>
-      <img src="/img/flag-24px.svg" class="flag-icon">Try running Chrome Canary with the
-      <code>--enable-experimental-web-platform-features</code> flag.</span>
-    </div>`;
+    ${notSupportedBanner(policy)}`;
 
   render(tmpl, document.querySelector('.details'));
 }
@@ -166,18 +187,11 @@ function updateAllowBanner(policyId) {
   const allows = allowsFeature ? 'enables' : 'disables';
   const banner = document.querySelector('#feature-allowed-banner');
   if (!banner) {
-    /* eslint-disable-next-line */
-    console.warn('No #feature-allowed-banner element found.');
     return;
   }
   banner.classList.toggle('allows', allowsFeature);
   banner.classList.add('show');
-  /* override banner description for unoptimized-images */
-  if (policyId == 'unoptimized-lossy-images') {
-    document.querySelector('#allowfeature').textContent = `Page ${allows} unoptimized-\{lossy,lossless\}-images.`;
-  } else {
-    document.querySelector('#allowfeature').textContent = `Page ${allows} ${currentPolicyId}.`;
-  }
+  document.querySelector('#allowfeature').textContent = `Page ${allows} ${currentPolicyId}.`;
 
   return allowsFeature;
 }
