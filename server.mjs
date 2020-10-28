@@ -20,6 +20,8 @@ import fs from 'fs';
 import express from 'express';
 import bodyParser from 'body-parser';
 
+import {PermissionsPolicyHeader} from './permissions-policy-header.mjs';
+
 const OT_TOKEN_UNOPT_IMAGES = 'AiGYzl8A17mcET9ObZ6QbC5vmOlCWk+4jZwZptDwKw8Iguu3jX2e6WVzUbHZpW0zPgqZdq/WSSUysH2chjMtCA4AAAByeyJvcmlnaW4iOiJodHRwczovL2ZlYXR1cmUtcG9saWN5LWRlbW9zLmFwcHNwb3QuY29tOjQ0MyIsImZlYXR1cmUiOiJVbm9wdGltaXplZEltYWdlUG9saWNpZXMiLCJleHBpcnkiOjE1NjQ2Nzg1NjF9';
 const OT_TOKEN_UNOPT_IMAGES_LOCALHOST = 'AuqelXxw7r91rz8mkV5fJnMkjNXY6vtmpd8lzATN2KGpwd0D6akFg7GBtigifHHuqk7zAnOvo2NlUnmAQTmSTQkAAABbeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJmZWF0dXJlIjoiVW5vcHRpbWl6ZWRJbWFnZVBvbGljaWVzIiwiZXhwaXJ5IjoxNTY0Njc4MzU1fQ==';
 
@@ -68,7 +70,17 @@ app.use('/demos/:demoPage', function attachHeader(req, res, next) {
     const usageKey = requestParamNames[0];
 
     if (usageKey in targetPolicy.usage) {
-      res.append(targetPolicy.policyType, targetPolicy.usage[usageKey]);
+      const policyType = targetPolicy.policyType;
+      const policyValue = targetPolicy.usage[usageKey];
+
+      res.append(policyType, policyValue);
+
+      // Attach 'Feature-Policy' header as well for backward compatibility.
+      if (policyType === 'Permissions-Policy') {
+        const featurePolicyValue =
+          PermissionsPolicyHeader.parse(policyValue).toFeaturePolicy().serialize();
+        res.append('Feature-Policy', featurePolicyValue);
+      }
     }
   }
 

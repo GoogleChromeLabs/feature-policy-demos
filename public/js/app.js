@@ -19,7 +19,7 @@
 import {html, render} from '/lit-html/lit-html.js';
 import {repeat} from '/lit-html/directives/repeat.js';
 import {until} from '/lit-html/directives/until.js';
-import {fetchPolicies, updateDetailsHeader, getPolicy, featurePolicyAPISupported} from '/js/shared.js';
+import {fetchPolicies, updateDetailsHeader, getPolicy, permissionsPolicyAPISupported} from '/js/shared.js';
 
 const POLICY_TYPE_TO_LABEL = {
   performance: 'Performance',
@@ -30,7 +30,7 @@ const POLICY_TYPE_TO_LABEL = {
 
 /**
  * Dynamically loads policy demo page based off current (deep link) url.
- * @return {!Object} Feature policy info.
+ * @return {!Object} Policy info.
  */
 async function loadPage() {
   let policy = null;
@@ -73,7 +73,7 @@ function updatePolicyValue(anchor) {
 /**
  * Updates the dynamic portions of the page.
  * @param {!HTMLAnchorElement} anchor
- * @param {string} id Feature policy id.
+ * @param {string} id Policy id.
  */
 async function updatePage(anchor, id) {
   // Update window URL first, so that |updateDetailsHeader| can observe
@@ -102,8 +102,9 @@ function toggleDrawer(forClose = false) {
  * @param {Array<Object>} implementedPolicies
  */
 async function leftOverPolicies(implementedPolicies) {
-  const featurePolicy = document.policy || document.featurePolicy;
-  const allPolicies = featurePolicy.allowedFeatures().sort();
+  const permissionsPolicy =
+    document.permissionsPolicy || document.featurePolicy;
+  const allPolicies = permissionsPolicy.allowedFeatures().sort();
 
   const policies = [];
   allPolicies.forEach((item, i) => {
@@ -120,7 +121,7 @@ async function leftOverPolicies(implementedPolicies) {
 
 
 (async () => {
-if (!featurePolicyAPISupported) {
+if (!permissionsPolicyAPISupported) {
   document.querySelector('.notsupported').classList.add('show');
   return;
 }
