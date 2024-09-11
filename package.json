@@ -8,7 +8,7 @@
     "node": ">=8"
   },
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.20.0",
     "lit-html": "^0.14.0"
   },
   "scripts": {
